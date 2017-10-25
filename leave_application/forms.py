@@ -44,21 +44,21 @@ class LeaveForm(forms.Form):
         end_date = self.cleaned_data.get('end_date')
 
         if not (start_date or end_date):
-            raise forms.ValidationError('Fill Date carefully')
+            raise forms.ValidationError({'start_date': ['Dates must not be empty']})
 
         today = datetime.date.today()
 
         if start_date > end_date or start_date < today or end_date < today \
            or [start_date.year, end_date.year] != [today.year, today.year]:
 
-            raise forms.ValidationError('Invalid Dates')
+            raise forms.ValidationError({'start_date': ['Invalid Dates',]})
         valid_dates = self.not_dates_valid(self.user)
         if valid_dates:
             valid_dates[0] = valid_dates[0].strftime('%d/%m/%Y')
             valid_dates[1] = valid_dates[1].strftime('%d/%m/%Y')
-            raise forms.ValidationError('You already have a leave from {} to {}, overlapping '
+            raise forms.ValidationError({'start_date': ['You already have a leave from {} to {}, overlapping '
                                         'with the requested leave dates' \
-                                        .format(valid_dates[0], valid_dates[1]))
+                                        .format(valid_dates[0], valid_dates[1])]})
 
 
     # def get_date_format(self, )
@@ -71,10 +71,10 @@ class LeaveForm(forms.Form):
             if valid_dates:
                 valid_dates[0] = valid_dates[0].strftime('%d/%m/%Y')
                 valid_dates[1] = valid_dates[1].strftime('%d/%m/%Y')
-                raise forms.ValidationError('Mr/Mrs/Ms {} {} is on leave from {} to {}' \
+                raise forms.ValidationError({'admin_rep': ['Mr/Mrs/Ms {} {} is on leave from {} to {}' \
                                              .format(rep_user.first_name,
                                                      rep_user.last_name,
-                                                     valid_dates[0], valid_dates[1]))
+                                                     valid_dates[0], valid_dates[1])]})
 
 
 class FacultyLeaveForm(LeaveForm):
@@ -93,8 +93,7 @@ class FacultyLeaveForm(LeaveForm):
             USER_CHOICES = list((user.username, '{} {}'.format(user.first_name, user.last_name)) \
                                  for user in ALL_USERS \
                                  if user.extrainfo.user_type == 'faculty' \
-                                 and user != self.user \
-                                 and user.extrainfo.department == self.user.extrainfo.department)
+                                 and user != self.user)
         except Exception as e:
             print(e)
             USER_CHOICES = []
@@ -117,12 +116,9 @@ class FacultyLeaveForm(LeaveForm):
         self.user_on_leave(admin_rep)
         self.user_on_leave(acad_rep)
 
-        if self.user.username in [acad_rep, admin_rep]:
-            raise forms.ValidationError('You can not choose yourself as replacement')
-
         type_of_leave = self.cleaned_data.get('type_of_leave')
         if not type_of_leave:
-            raise forms.ValidationError('Please Provide the type of leave.')
+            raise forms.ValidationError({'type_of_leave': ['Please Provide the type of leave.']})
         start_date = self.cleaned_data.get('start_date')
         end_date = self.cleaned_data.get('end_date')
 
@@ -136,7 +132,7 @@ class FacultyLeaveForm(LeaveForm):
             vac_end_date = datetime.date(today.year, 7, 30)
 
             if not (start_date >= vac_start_date and end_date <= vac_end_date):
-                raise forms.ValidationError('Vacation Leave can only be taken in vacation time')
+                raise forms.ValidationError({'start_date': ['Vacation Leave can only be taken in vacation time']})
 
         leave_object = LeavesCount.objects.filter(user=self.user).first()
 
@@ -144,11 +140,11 @@ class FacultyLeaveForm(LeaveForm):
         # TODO: User must not have leaves in between start_date and end_date
 
         if remaining_leaves < request_leaves:
-            raise forms.ValidationError('You have {} remaining {} leaves'.format(remaining_leaves,
-                                                                                 type_of_leave))
+            raise forms.ValidationError({'type_of_leave': ['You have {} remaining {} leaves'.format(remaining_leaves,
+                                                                                                    type_of_leave)]})
 
         if self.cleaned_data['station_leave'] and not self.cleaned_data['leave_address']:
-            raise forms.ValidationError('Fill Leave Address, if going Out of station')
+            raise forms.ValidationError({'station_leave': ['Fill Leave Address, if going Out of station']})
 
         return self.cleaned_data
 
@@ -191,8 +187,6 @@ class StaffLeaveForm(LeaveForm):
         # if start_date > end_date or start_date < today or end_date < today:
         #     raise forms.ValidationError('Invalid Dates')
 
-        if admin_rep == self.user:
-            raise forms.ValidationError('Can\'t use yourself as replacement user')
 
         if self.cleaned_data['station_leave'] and not self.cleaned_data['leave_address']:
             raise forms.ValidationError('Fill Leave Address, if going Out of station')

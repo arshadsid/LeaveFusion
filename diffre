@@ -1,0 +1,86 @@
+351c351
+<                                 csrfmiddlewaretoken: '8f38L8HQF3AmJWrMHbVzKrCZL45qTBLpGDfvZJYNcYnCrGRp7Nj2jQKWMJhRr7Wm',
+---
+>                                 csrfmiddlewaretoken: 'cY08BJHxra1OIyn9TlhmMqGeqZncyVuWKmcvPkYuY5O4qiNMjXFPlPObrEzD6rFT',
+427,429c427
+<                     <div class="ui active tab segment" id="main_active" data-tab="first">
+< 
+<                             <div class="ui container">
+---
+>                     <div class="ui active tab segment" id="main_active" data-tab="first"><div class="ui container">
+441c439
+<                 <input name="csrfmiddlewaretoken" value="8f38L8HQF3AmJWrMHbVzKrCZL45qTBLpGDfvZJYNcYnCrGRp7Nj2jQKWMJhRr7Wm" type="hidden">
+---
+>                 <input name="csrfmiddlewaretoken" value="6D8qS81EzrzspGRAABedAanvO50vP7EnE1kN6JiB6mmI7qhd0dCG9zvsPKcWnDPk" type="hidden">
+449c447
+<                                 <div class="ui input left icon"><div class="ui popup calendar"><table class="ui celled center aligned unstackable table seven column day"><thead><tr><th colspan="7"><span class="link">October 2017</span><span class="prev link"><i class="chevron left icon"></i></span><span class="next link"><i class="chevron right icon"></i></span></th></tr><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr></thead><tbody><tr><td class="link">1</td><td class="link">2</td><td class="link">3</td><td class="link">4</td><td class="link">5</td><td class="link">6</td><td class="link">7</td></tr><tr><td class="link">8</td><td class="link">9</td><td class="link">10</td><td class="link">11</td><td class="link">12</td><td class="link">13</td><td class="link">14</td></tr><tr><td class="link">15</td><td class="link">16</td><td class="link">17</td><td class="link">18</td><td class="link">19</td><td class="link">20</td><td class="link">21</td></tr><tr><td class="link">22</td><td class="link">23</td><td class="link">24</td><td class="link today focus">25</td><td class="link">26</td><td class="link">27</td><td class="link">28</td></tr><tr><td class="link">29</td><td class="link">30</td><td class="link">31</td><td class="link disabled">1</td><td class="link disabled">2</td><td class="link disabled">3</td><td class="link disabled">4</td></tr><tr><td class="link disabled">5</td><td class="link disabled">6</td><td class="link disabled">7</td><td class="link disabled">8</td><td class="link disabled">9</td><td class="link disabled">10</td><td class="link disabled">11</td></tr></tbody></table></div>
+---
+>                                 <div class="ui input left icon">
+460c458
+<                                 <div class="ui input left icon"><div class="ui popup calendar"><table class="ui celled center aligned unstackable table seven column day"><thead><tr><th colspan="7"><span class="link">October 2017</span><span class="prev link"><i class="chevron left icon"></i></span><span class="next link"><i class="chevron right icon"></i></span></th></tr><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr></thead><tbody><tr><td class="link">1</td><td class="link">2</td><td class="link">3</td><td class="link">4</td><td class="link">5</td><td class="link">6</td><td class="link">7</td></tr><tr><td class="link">8</td><td class="link">9</td><td class="link">10</td><td class="link">11</td><td class="link">12</td><td class="link">13</td><td class="link">14</td></tr><tr><td class="link">15</td><td class="link">16</td><td class="link">17</td><td class="link">18</td><td class="link">19</td><td class="link">20</td><td class="link">21</td></tr><tr><td class="link">22</td><td class="link">23</td><td class="link">24</td><td class="link today focus">25</td><td class="link">26</td><td class="link">27</td><td class="link">28</td></tr><tr><td class="link">29</td><td class="link">30</td><td class="link">31</td><td class="link disabled">1</td><td class="link disabled">2</td><td class="link disabled">3</td><td class="link disabled">4</td></tr><tr><td class="link disabled">5</td><td class="link disabled">6</td><td class="link disabled">7</td><td class="link disabled">8</td><td class="link disabled">9</td><td class="link disabled">10</td><td class="link disabled">11</td></tr></tbody></table></div>
+---
+>                                 <div class="ui input left icon">
+477c475
+<                                 <i class="dropdown icon" tabindex="0"><div class="menu" tabindex="-1"></div></i>
+---
+>                                 <i class="dropdown icon"></i>
+479c477
+<                                 <input class="search" tabindex="0"><div class="default text">Select Leave</div>
+---
+>                                 <div class="default text">Select Leave</div>
+481c479
+<                                 <div class="menu" tabindex="-1">
+---
+>                                 <div class="menu">
+521,522c519,520
+< 
+<                                 <input tabindex="0" class="hidden" name="station_leave" id="id_station_leave" onchange="ShowHideDiv()" type="checkbox"><label>Required</label>
+---
+>                                 <label>Required</label>
+>                                 <input tabindex="0" class="hidden" name="station_leave" id="id_station_leave" onchange="ShowHideDiv()" type="checkbox">
+544c542
+<                                         <i class="dropdown icon" tabindex="0"><div class="menu" tabindex="-1"></div></i>
+---
+>                                         <i class="dropdown icon"></i>
+546c544
+<                                         <input class="search" tabindex="0"><div class="default text">Select</div>
+---
+>                                         <div class="default text">Select</div>
+548c546
+<                                         <div class="menu" tabindex="-1">
+---
+>                                         <div class="menu">
+809c807
+<                                         <i class="dropdown icon" tabindex="0"><div class="menu" tabindex="-1"></div></i>
+---
+>                                         <i class="dropdown icon"></i>
+811c809
+<                                         <input class="search" tabindex="0"><div class="default text">Select</div>
+---
+>                                         <div class="default text">Select</div>
+813c811
+<                                         <div class="menu" tabindex="-1">
+---
+>                                         <div class="menu">
+1182,1184c1180
+< 
+< 
+<                     </div>
+---
+> </div>
+1225c1221
+<     </div><div id="djDebug" class="djdt-hidden" dir="ltr" data-store-id="f97cf93c6d6146548e38b6c56327bc24" data-render-panel-url="/__debug__/render_panel/" style="display: block;">
+---
+>     </div><div id="djDebug" class="djdt-hidden" dir="ltr" data-store-id="6e082313929a417da51acec837367357" data-render-panel-url="/__debug__/render_panel/" style="display: block;">
+1256c1252
+< 						<br><small>CPU: 952.00ms (911.10ms)</small>
+---
+> 						<br><small>CPU: 932.00ms (930.60ms)</small>
+1320c1316
+< 						<br><small>119 queries in 11.07ms</small>
+---
+> 						<br><small>119 queries in 9.69ms</small>
+1422c1418
+< 	<div class="djdt-hidden" id="djDebugToolbarHandle" style="display: block; top: 497px;">
+---
+> 	<div class="djdt-hidden" id="djDebugToolbarHandle" style="display: block; top: 706px;">

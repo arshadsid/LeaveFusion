@@ -13,6 +13,48 @@ from django.contrib.auth.models import User
 from leave_application.helpers import FormData, get_object_or_none
 from django.db.models import Q
 
+class LeaveView(View):
+
+    def get(self, request):
+        cake = request.GET.get('cake')
+
+        if not cake:
+            form = ApplyLeave.get_form(request)
+            leaves_count = LeavesCount.objects.get(user=request.user)
+            context = {
+                'form': form,
+                'leaves_count': leaves_count,
+            }
+            return render(request, 'fusion/leaveModule0/leave.html', context)
+
+        elif cake == 'form':
+            form = ApplyLeave.get_form(request)
+            leaves_count = LeavesCount.objects.get(user=request.user)
+            context = {
+                'form': form,
+                'leaves_count': leaves_count,
+            }
+            return render(request, 'fusion/leaveModule0/leaveapplicationform.html', context)
+
+        elif cake == 'status':
+            user_leaves = Leave.objects.filter(applicant=request.user)
+            context = {
+                'user_leaves': user_leaves
+            }
+
+            return render(request, 'fusion/leaveModule0/leavestatus.html', context)
+
+        elif cake == 'approve':
+            applications = GetApplications.get(request)
+            context = {
+                'applications': applications,
+            }
+
+            return render(request, 'fusion/leaveModule0/leaveapprove.html', context)
+
+        else:
+            return HttpResponse('Are you a dick?')
+
 class ApplyLeave(View):
     """
         A Class Based View which handles user applying for leave
@@ -35,25 +77,25 @@ class ApplyLeave(View):
         #     else:
         #         form = StudentLeaveForm(leave)
         #     return render(request, 'leave_application/apply_for_leave.html', {'form': form, 'title': 'Leave', 'action':'Edit'})
-        form = self.get_form(request)
-        user_leaves = Leave.objects.filter(applicant=request.user)
+        form = ApplyLeave.get_form(request)
+        # user_leaves = Leave.objects.filter(applicant=request.user)
         leaves_count = LeavesCount.objects.get(user=request.user)
         context ={
             'form': form,
-            'user_leaves': user_leaves,
+            # 'user_leaves': user_leaves,
             'leaves_count': leaves_count,
         }
 
-        applications = GetApplications.get(request)
-        context.update(applications)
+        # applications = GetApplications.get(request)
+        # context.update(applications)
         # return render(request, 'leave_application/apply_for_leave.html', {'form': form, 'title': 'Leave', 'action':'Apply'})
-        return render(request, 'fusion/leaveModule0/leave.html', context)
+        return render(request, 'fusion/leaveModule0/leaveapplicationform.html', context)
 
     def post(self, request):
         """
             view to handle post request to /leave/apply
         """
-        form = self.get_form(request)
+        form = ApplyLeave.get_form(request)
 
         if form.is_valid():
             type_of_leave = form.cleaned_data.get('type_of_leave', 'casual')
@@ -85,34 +127,26 @@ class ApplyLeave(View):
         else:
             return render(request, 'fusion/leaveModule0/leave.html', {'form': form, 'title': 'Leave', 'action':'Apply'})
 
-    # def delete(self, request):
-    #     id = request.DELETE.get('id', None)
-    #
-    #     leave = get_object_or_none(Leave, id=id)
-    #     today = datetime.date.today()
-    #     if not id or not leave or leave.applicant != request.user or leave.start_date < today:
-    #         return JsonResponse({'message': 'Deletion Faild', 'type': 'error'}, status=200)
-    #
-    #     leave.delete()
-    #     return JsonResponse({'message': 'Successfully Deleted', 'type': 'success'}, status=200)
-
-    def get_user_type(self, request):
+    @classmethod
+    def get_user_type(cls, request):
         return request.user.extrainfo.user_type
 
-    def get_form(self, request):
+    @classmethod
+    def get_form(cls, request):
 
-        user_type = self.get_user_type(request)
+        user_type = cls.get_user_type(request)
 
         if user_type == 'faculty':
-            form = self.get_form_object(FacultyLeaveForm, request)
+            form = cls.get_form_object(FacultyLeaveForm, request)
         elif user_type == 'staff':
-            form = self.get_form_object(StaffLeaveForm, request)
+            form = cls.get_form_object(StaffLeaveForm, request)
         else:
-            form = self.get_form_object(StudentLeaveForm, request)
+            form = cls.get_form_object(StudentLeaveForm, request)
 
         return form
 
-    def get_form_object(self, cls, request):
+    @classmethod
+    def get_form_object(ccls, cls, request):
 
         if request.method == 'GET':
             return cls(initial={}, user=request.user)
