@@ -421,7 +421,10 @@ def phd_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_mtechphd_thesis()
+    if (request.POST.get('phd_id')==None or request.POST.get('phd_id')==""):
+        eis = emp_mtechphd_thesis()
+    else:
+        eis = get_object_or_404(emp_mtechphd_thesis, id=request.POST.get('phd_id'))
     eis.pf_no = pf
     eis.degree_type = 2
     print(eis.pf_no)

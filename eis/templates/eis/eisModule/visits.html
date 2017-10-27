@@ -25,7 +25,7 @@
                     <div class="field">
                         <label>Country</label>
                         <div class="ui fluid search selection dropdown">
-                            <input name="country" value="af" type="hidden" required>
+                            <input name="country" value="hidden" type="hidden" id="fvisitsA" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Country</div>
                             <div class="menu">
@@ -277,7 +277,7 @@
 
                     <div class="field">
                         <label>Place</label>
-                        <input placeholder="Place" type="text" name="place" required>
+                        <input placeholder="Place" type="text" name="place" id="fvisitsB" required>
                     </div>
                 </div>
             </div>
@@ -289,7 +289,7 @@
                             <div class="ui calendar" id="rangestart3">
                               <div class="ui input left icon">
                                 <i class="calendar icon"></i>
-                                <input type="text" placeholder="Start" name="start" required>
+                                <input type="text" placeholder="Start" name="start" id="fvisitsC" required>
                               </div>
                         </div>
                     </div>
@@ -299,7 +299,7 @@
                            <div class="ui calendar" id="rangeend3">
                               <div class="ui input left icon">
                                 <i class="calendar icon"></i>
-                                <input type="text" placeholder="End" name="end" required>
+                                <input type="text" placeholder="End" name="end" id="fvisitsE" required>
                               </div>
                             </div>
                     </div>
@@ -309,7 +309,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Purpose</label>
-                            <input placeholder="Purpose" type="text" name="purpose" required>
+                            <input placeholder="Purpose" type="text" name="purpose" id="fvisitsD" required>
                         </div>
                     </div>
 
@@ -347,15 +347,15 @@
 
             <tbody>
             {% for fvisit in fvisits %}
-            <tr>
+            <tr id="r1">
                 <td>{{ forloop.counter }}.</td>
-                <td>
+                <td id="fvisits{{ forloop.counter }}A">
                     <i class="{{ fvisit.country.lower }} flag"></i>{{ fvisit.countryfull }}
                 </td>
-                <td>{{ fvisit.place }}</td>
-                <td>{{ fvisit.start_date }} - {{ fvisit.end_date }}</td>
-                <td>{{ fvisit.purpose }}</td>
-                 <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' fvisit.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
+                <td id="fvisits{{ forloop.counter }}B">{{ fvisit.place }}</td>
+                <td id="fvisits{{ forloop.counter }}C">{{ fvisit.start_date }} - {{ fvisit.end_date }}</td>
+                <td id="fvisits{{ forloop.counter }}D">{{ fvisit.purpose }}</td>
+                 <td><a onclick="updateFVISITS({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' fvisit.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
             </tr>  {% endfor %}
 
             </tbody>
@@ -397,7 +397,7 @@
 
                     <div class="field">
                         <label>Place</label>
-                        <input placeholder="Place" type="text" name="place" required>
+                        <input placeholder="Place" type="text" name="place"  id="ivisitsA" required>
                     </div>
                 </div>
             </div>
@@ -409,7 +409,7 @@
                            <div class="ui calendar" id="rangestart4">
                               <div class="ui input left icon">
                                 <i class="calendar icon"></i>
-                                <input type="text" placeholder="Start" name="start" required>
+                                <input type="text" placeholder="Start" name="start"  id="ivisitsB" required>
                               </div>
                         </div>
 
@@ -420,7 +420,7 @@
                           <div class="ui calendar" id="rangeend4">
                               <div class="ui input left icon">
                                 <i class="calendar icon"></i>
-                                <input type="text" placeholder="End" name="end" required>
+                                <input type="text" placeholder="End" name="end" id="ivisitsD"  required>
                               </div>
                             </div>
                     </div>
@@ -430,7 +430,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Purpose</label>
-                            <input placeholder="Purpose" type="text" name="purpose" required>
+                            <input placeholder="Purpose" type="text" name="purpose" id="ivisitsC" required>
                         </div>
                     </div>
 
@@ -450,11 +450,7 @@
         <table class="ui fixed sortable celled table">
             <thead>
             <tr>
-                <!--<th class="sorted ascending">Sr.</th>
-                <th class="">Place</th>
-                <th class="">From - To</th>
-                <th class="">Purpose</th>
-                <th class="">Action</th>-->
+               
                    <th class="sorted ascending" style="width: 7%;">Sr.</th>
                
                 <th class="" style="width: 28%;">Place </th>
@@ -466,12 +462,13 @@
 
             <tbody>
             {% for ivisit in ivisits %}
-            <tr>
+            <tr id="r1">
                 <td>{{ forloop.counter }}.</td>
-                <td>{{ ivisit.place }}</td>
-                <td>{{ ivisit.start_date }} - {{ ivisit.end_date }}</td>
-                <td>{{ ivisit.purpose }}</td>
-               <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' ivisit.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+                <td id="ivisits{{ forloop.counter }}A">{{ ivisit.place }}</td>
+                <td id="ivisits{{ forloop.counter }}B">{{ ivisit.start_date }} - {{ ivisit.end_date }}</td>
+                <td id="ivisits{{ forloop.counter }}C">{{ ivisit.purpose }}</td>
+
+               <td><a onclick="updateIVISITS({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' ivisit.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
             </tr>
 {% endfor %}
 

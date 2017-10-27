@@ -137,6 +137,7 @@
         <h4 class="ui dividing header">Add a Thesis</h4>
         <form class="ui form"  method="post" action="{% url 'eis:phd_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="phdZ" name="phd_id"></div>
             <div class="field">
                  <div class="One field">
                     <div class="field">
@@ -224,7 +225,7 @@
             <tbody>
             {% for phd in phds %}
             <tr id="r2">
-                <td>{{ forloop.counter }}.</td>
+                <td id="phd{{ forloop.counter }}Z"><div style="display: none;">{{ phd.id }}</div>{{ forloop.counter }}.</td>
                 <td id="phd{{ forloop.counter }}A"><b>Name: </b>{{ phd.s_name }}<br/><b>Roll No.: </b>{{ phd.rollno }}</td>
                 <td id="phd{{ forloop.counter }}B">{{ phd.title }}</td>
                 <td id="phd{{ forloop.counter }}C">{{ phd.s_year }}</td>

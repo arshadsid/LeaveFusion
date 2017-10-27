@@ -488,6 +488,9 @@
 
 
               function updatePHD(_row){
+              var p = document.getElementById("phd"+_row+"Z").innerHTML.search(">");
+                var pend = document.getElementById("phd"+_row+"Z").innerHTML.indexOf("<",5);
+                document.getElementById("phdZ").value=document.getElementById("phd"+_row+"Z").innerHTML.slice(p+1,pend);
                   for(var i=0;i<cols.length;i++)  {
                     var _temp=document.getElementById("phd"+_row+cols[i]).innerHTML;
                     if (_temp.search("<b>Name: </b>")==0){
@@ -501,7 +504,36 @@
                     }
                     
                                                  }
-                                     }                       
+                                     }
+
+                                     function updateFVISITS(_row){
+                                for(var i=0;i<cols.length;i++)  {
+                                  var _temp=document.getElementById("fvisits"+_row+cols[i]).innerHTML;
+                                  if(i==2){
+                                   var pos = _temp.search(" - ");
+                                   document.getElementById("fvisits"+cols[i]).value=_temp.slice(0, pos);
+                                   document.getElementById("fvisitsE").value=_temp.slice(pos+3, _temp.length);
+                                  }else{
+                                    document.getElementById("fvisits"+cols[i]).value=_temp;
+                                  }
+
+                                }
+                              }
+
+
+                        function updateIVISITS(_row){
+                                for(var i=0;i<cols.length;i++)  {
+                                  var _temp=document.getElementById("ivisits"+_row+cols[i]).innerHTML;
+                                  if(i==1){
+                                   var pos = _temp.search(" - ");
+                                   document.getElementById("ivisits"+cols[i]).value=_temp.slice(0, pos);
+                                   document.getElementById("ivisitsD").value=_temp.slice(pos+3, _temp.length);
+                                  }else{
+                                    document.getElementById("ivisits"+cols[i]).value=_temp;
+                                  }
+
+                                }
+                              }
     </script>
 
 
