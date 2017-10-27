@@ -617,12 +617,28 @@
 
 
                        function updateACH(_row){
-                        for(var i=0;i<cols.length;i++)  {
-                          var _temp=document.getElementById("ach"+_row+cols[i]).innerHTML;
-
-                         document.getElementById("ach"+cols[i]).value=_temp;
-                        }
-                      }         
+                       var p = document.getElementById("ach"+_row+"Z").innerHTML.search(">");
+                                var pend = document.getElementById("ach"+_row+"Z").innerHTML.indexOf("<",5);
+                                document.getElementById("achZ").value=document.getElementById("ach"+_row+"Z").innerHTML.slice(p+1,pend);
+                           for(var i=0;i<cols.length;i++)  {
+                               var _temp=document.getElementById("ach"+_row+cols[i]).innerHTML;
+                               if(i == 2){
+                                   document.getElementById("achE").value=_temp.slice(_temp.length-4,_temp.length);
+                                   if(_temp.search("/")>0){
+                                           if(_temp.lastIndexOf("/") != _temp.indexOf("/")){
+                                               document.getElementById("achC").value=_temp.slice(0,_temp.indexOf("/")-1);
+                                               document.getElementById("achF").value=_temp.slice(_temp.indexOf("/")+2,_temp.lastIndexOf("/")-1);
+                                           }
+                                           else{
+                                                document.getElementById("achF").value=_temp.slice(0,_temp.indexOf("/")-1);
+                                           }
+                                   }
+                               }
+                               else{
+                                    document.getElementById("ach"+cols[i]).value=_temp;
+                              }
+                          }
+                      }
     </script>
 
 

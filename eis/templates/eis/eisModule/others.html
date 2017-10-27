@@ -26,7 +26,7 @@
             <form class="ui form"  method="post" action="{% url 'eis:award_insert' %}">
             {% csrf_token %}
            
-
+            <div style="display: none;"> <input type="text" id="achZ" name="ach_id"></div>
             <div class="field">
                 <label>Year/Month/Day</label>
                 <div class=" four fields">
@@ -46,7 +46,7 @@
                      <div class=" field">
                         <!-- <input placeholder="Year/Month/Day" type="text"> -->
                              <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="a_month">
+                            <input type="hidden" name="a_month" id="achF">
                             <i class="dropdown icon"></i>
                             <div class="default text">Month</div>
                             <div class="menu">
@@ -60,7 +60,7 @@
                      <div class=" field">
                         <!-- <input placeholder="Year/Month/Day" type="text"> -->
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="a_year" required>
+                            <input type="hidden" name="a_year" id="achE" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Year</div>
                             <div class="menu">
@@ -134,7 +134,7 @@
             <tbody>
             {% for award in awards %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
+                <td id="ach{{ forloop.counter }}Z"><div style="display: none;">{{ award.id }}</div>{{ forloop.counter }}.</td>
                 <td id="ach{{ forloop.counter }}A">{{ award.a_type }}</td>
                 <td id="ach{{ forloop.counter }}B">{{ award.details }}</td>
                 <td id="ach{{ forloop.counter }}C">{% if award.a_day %}{{ award.a_day }} / {% endif %}{% if award.a_month %}{{ award.a_month }} / {% endif %}{% if award.a_year %}{{ award.a_year }}{% endif %}</td>

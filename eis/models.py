@@ -295,7 +295,7 @@ class emp_achievement(models.Model):
         ('Prize', 'Prize'),
         ('Other', 'Other'),
     )
-    a_type = models.CharField(max_length=18, choices=A_TYPE_CHOICES)
+    a_type = models.CharField(max_length=18, choices=A_TYPE_CHOICES, default="Other")
     details = models.TextField(max_length=1550, default=" ")
     DAY_CHOICES = []
     for r in range(1, 32):

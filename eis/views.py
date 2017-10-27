@@ -699,13 +699,19 @@ def award_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_achievement()
+    if (request.POST.get('ach_id')==None or request.POST.get('ach_id')==""):
+        eis = emp_achievement()
+    else:
+        eis = get_object_or_404(emp_achievement, id=request.POST.get('ach_id'))
     eis.pf_no = pf
     print(eis.pf_no)
     eis.a_type = request.POST.get('type')
-    eis.a_day = request.POST.get('a_day')
-    eis.a_month = request.POST.get('a_month')
-    eis.a_year = request.POST.get('a_year')
+    if(request.POST.get('a_day') != None and request.POST.get('a_day') != ""):
+        eis.a_day = request.POST.get('a_day')
+    if(request.POST.get('a_month') != None and request.POST.get('a_month') != ""):
+        eis.a_month = request.POST.get('a_month')
+    if(request.POST.get('a_year') != None and request.POST.get('a_year') != ""):
+        eis.a_year = request.POST.get('a_year')
     eis.details = request.POST.get('details')
 
     eis.save()
