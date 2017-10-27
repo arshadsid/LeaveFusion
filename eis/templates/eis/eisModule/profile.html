@@ -564,6 +564,9 @@
                       }
 
                          function updateEVENT(_row){
+                         var p = document.getElementById("event"+_row+"Z").innerHTML.search(">");
+                                var pend = document.getElementById("event"+_row+"Z").innerHTML.indexOf("<",5);
+                                document.getElementById("eventZ").value=document.getElementById("event"+_row+"Z").innerHTML.slice(p+1,pend);
                         for(var i=0;i<cols.length;i++)  {
                           var _temp=document.getElementById("event"+_row+cols[i]).innerHTML;
 
