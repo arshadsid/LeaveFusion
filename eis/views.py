@@ -716,6 +716,30 @@ def keynote_insert(request):
     eis.save()
     return redirect('eis:profile')
 
+def project_insert(request):
+    user = get_object_or_404(ExtraInfo, user=request.user)
+    print(user)
+    pf = user.unique_id
+
+    eis = emp_research_projects()
+    eis.pf_no = pf
+    print(eis.pf_no)
+    eis.pi = request.POST.get('pi')
+    eis.co_pi = request.POST.get('co_pi')
+    eis.title = request.POST.get('title')
+    eis.financial_outlay = request.POST.get('financial_outlay')
+    eis.funding_agency = request.POST.get('funding_agency')
+    eis.status = request.POST.get('status')
+    eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
+    print(eis.start_date)
+    if (request.POST.get('end') != None and request.POST.get('end') != ''):
+        eis.finish_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
+    if (request.POST.get('sub') != None and request.POST.get('sub') != ''):
+        eis.date_submission = datetime.datetime.strptime(request.POST.get('sub'), "%B %d, %Y")
+
+    eis.save()
+    return redirect('eis:profile')
+
 def achievement(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
