@@ -665,20 +665,31 @@ def event_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_event_organized()
+    if (request.POST.get('event_id')==None or request.POST.get('event_id')==""):
+        eis = emp_event_organized()
+    else:
+        eis = get_object_or_404(emp_event_organized, id=request.POST.get('event_id'))
     eis.pf_no = pf
     print(eis.pf_no)
     eis.type = request.POST.get('type')
     if(eis.type == 'Any Other'):
-        eis.type = request.POST.get('other')
+        if(request.POST.get('other')!= None or request.POST.get('other') != ""):
+            eis.type = request.POST.get('other')
     eis.sponsoring_agency = request.POST.get('sponsoring_agency')
     eis.name = request.POST.get('name')
     eis.venue = request.POST.get('venue')
     eis.role = request.POST.get('role')
-    eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-    print(eis.start_date)
-    eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-    print(eis.end_date)
+    try:
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
+        print(eis.start_date)
+    except:
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
+        print(eis.start_date)
+    try:
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
+        print(eis.end_date)
+    except:
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
 
     eis.save()
     return redirect('eis:profile')

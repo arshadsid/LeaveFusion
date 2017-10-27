@@ -579,6 +579,50 @@
                                   }
                         }
                       }
+
+                      function updateLEC(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("lec"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("lec"+cols[i]).value=_temp;
+                        }
+                      }
+
+
+                       function updateSESSION(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("session"+_row+cols[i]).innerHTML;
+
+
+
+                          if(i==2){
+                                   var pos = _temp.search(" - ");
+                                   document.getElementById("session"+cols[i]).value=_temp.slice(0, pos);
+                                   document.getElementById("sessionD").value=_temp.slice(pos+3, _temp.length);
+                                  }else{
+                                    document.getElementById("session"+cols[i]).value=_temp;
+                                  }
+
+                        }
+                      }
+
+
+                         function updateKEY(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("key"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("key"+cols[i]).value=_temp;
+                        }
+                      }
+
+
+                       function updateACH(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("ach"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("ach"+cols[i]).value=_temp;
+                        }
+                      }         
     </script>
 
 

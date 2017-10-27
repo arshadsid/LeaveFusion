@@ -22,7 +22,7 @@
 
     {% comment %}The  Achievement segment starts here!{% endcomment %}
     <div class="ui active tab segment" data-tab="research projects">
-        <h4 class="ui dividing header">Add a Research Project</h4>
+        <h4 class="ui dividing header">Add an Achievement</h4>
             <form class="ui form"  method="post" action="{% url 'eis:award_insert' %}">
             {% csrf_token %}
            
@@ -33,7 +33,7 @@
                     <div class=" field">
                         <!-- <input placeholder="Year/Month/Day" type="text"> -->
                              <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="a_day">
+                            <input type="hidden" name="a_day"  id="achC"  >
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Day</div>
                             <div class="menu">
@@ -73,7 +73,7 @@
 
                     <div class=" field">
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="type" required>
+                            <input type="hidden" name="type"  id="achA" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Achievement Type</div>
                             <div class="menu">
@@ -95,7 +95,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Details</label>
-                            <input placeholder="Title" type="text" name="details" required>
+                            <input placeholder="Title" type="text"   id="achB" name="details" required>
                         </div>
                     </div>
 
@@ -135,10 +135,10 @@
             {% for award in awards %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td>{{ award.a_type }}</td>
-                <td>{{ award.details }}</td>
-                <td>{% if award.a_day %}{{ award.a_day }} / {% endif %}{% if award.a_month %}{{ award.a_month }} / {% endif %}{% if award.a_year %}{{ award.a_year }}{% endif %}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i> <br><a class="centered raised item" href="{% url 'eis:achievement_delete' award.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
+                <td id="ach{{ forloop.counter }}A">{{ award.a_type }}</td>
+                <td id="ach{{ forloop.counter }}B">{{ award.details }}</td>
+                <td id="ach{{ forloop.counter }}C">{% if award.a_day %}{{ award.a_day }} / {% endif %}{% if award.a_month %}{{ award.a_month }} / {% endif %}{% if award.a_year %}{{ award.a_year }}{% endif %}</td>
+                <td><a onclick="updateACH({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i> </a><br><a class="centered raised item" href="{% url 'eis:achievement_delete' award.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
 
             </tr>
             {% endfor %}
@@ -178,9 +178,9 @@
                 <!-- code change starts -->
                     <div class="field">
                         <label>Presentation Type</label>
-                         <!-- <input placeholder="Presentation Type" type="text"> -->
+                        
                           <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="type" required>
+                            <input type="hidden" name="type"  id="lecA" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Presentation Type</div>
                             <div class="menu">
@@ -197,7 +197,7 @@
 
                     <div class="field">
                         <label>Place</label>
-                        <input placeholder="Place" type="text" name="place" required>
+                        <input placeholder="Place" type="text" name="place" id="lecC" required>
                     </div>
                       <div class="field">
                         <label>Date</label>
@@ -206,7 +206,7 @@
                              <div class="ui calendar" id="example2g">
                                 <div class="ui input left icon">
                                   <i class="calendar icon"></i>
-                                  <input type="text" placeholder="Date/Time" name="l_date" required>
+                                  <input type="text" placeholder="Date/Time" name="l_date" id="lecD" required>
                                 </div>
                               </div>
                           <!-- code change ends -->
@@ -222,7 +222,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" name="title" required>
+                            <input placeholder="Title" type="text" name="title"  id="lecB" required>
                         </div>
                     </div>
 
@@ -242,12 +242,7 @@
         <table class="ui fixed sortable celled table">
             <thead>
             <tr>
-               <!-- <th class="sorted ascending">Sr.</th>
-                <th class="">Presentation Type</th>
-                <th class="">Title</th>
-                <th class="">Place</th>
-                <th class="">Date</th>
-                <th class="">Action</th>-->
+              
 
                 <th class="sorted ascending" style="width: 7%;">Sr.</th>
                 <th class="" style="width: 15%;" >Presented</th>
@@ -260,13 +255,13 @@
 
             <tbody>
              {% for talk in talks %}
-            <tr>
+            <tr id="r1">
                 <td>{{ forloop.counter }}.</td>
-                <td>{{ talk.l_type }}</td>
-                <td>{{ talk.title }}</td>
-                <td>{{ talk.place }}</td>
-                <td>{{ talk.l_date }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_expert_lecturesDelete' talk.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
+                <td id="lec{{ forloop.counter }}A">{{ talk.l_type }}</td>
+                <td id="lec{{ forloop.counter }}B">{{ talk.title }}</td>
+                <td id="lec{{ forloop.counter }}C">{{ talk.place }}</td>
+                <td id="lec{{ forloop.counter }}D">{{ talk.l_date }}</td>
+                <td><a onclick="updateLEC({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_expert_lecturesDelete' talk.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
 
             </tr>
             {% endfor %}
@@ -312,7 +307,7 @@
                 <label>Event</label>
                 <div class=" three fields">
                     <div class=" field">
-                        <input placeholder="Event" type="text" name="event" required>
+                        <input placeholder="Event" type="text" name="event"  id="sessionB" required>
                     </div>
                   <!-- code change starts -->  
                     <div class=" field">
@@ -321,7 +316,7 @@
                            <div class="ui calendar" id="rangestart6">
                                           <div class="ui input left icon">
                                             <i class="calendar icon"></i>
-                                            <input type="text" placeholder="Start" name="start" required>
+                                            <input type="text" placeholder="Start" name="start" id="sessionC" required>
                                           </div>
                                 </div>                  
                     </div>
@@ -331,7 +326,7 @@
                          <div class="ui calendar" id="rangeend6">
                                       <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="End" name="end" required>
+                                        <input type="text" placeholder="End" name="end" id="sessionD" required>
                                       </div>
                                     </div>
                     </div>
@@ -342,7 +337,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Name</label>
-                            <input placeholder="Name" type="text" name="name" required>
+                            <input placeholder="Name" type="text" name="name" id="sessionA" required>
                         </div>
                     </div>
 
@@ -370,7 +365,7 @@
 
 
                    <th class="sorted ascending" style="width: 7%;">Sr.</th>
-                <th class="" style="width: 20%;" >Namet</th>
+                <th class="" style="width: 20%;" >Name</th>
                 <th class="" style="width: 38%;">Event </th>
                 <th class="" style="width: 25%;">Duration</th>
 
@@ -382,10 +377,10 @@
              {% for chair in chairs %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td class="" >{{ chair.name }}</td>
-                <td class="" >{{ chair.event }}</td>
-                <td>{{ chair.start_date }} - {{ chair.end_date }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_session_chairDelete' chair.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
+                <td class=""  id="session{{ forloop.counter }}A">{{ chair.name }}</td>
+                <td class="" id="session{{ forloop.counter }}B">{{ chair.event }}</td>
+                <td id="session{{ forloop.counter }}C">{{ chair.start_date }} - {{ chair.end_date }}</td>
+                <td><a onclick="updateSESSION({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_session_chairDelete' chair.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
 
             </tr>
             {% endfor %}
@@ -435,7 +430,7 @@
                     <div class=" field">
                       <!--   <input placeholder="Event" type="text"> -->
                            <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="type" required>
+                            <input type="hidden" name="type"  id="keyA" required>
                             <i class="dropdown icon"></i>
                             <div class="default text"> Presentation Type</div>
                             <div class="menu">
@@ -451,7 +446,7 @@
                               <div class="ui calendar" id="example2h">
                                     <div class="ui input left icon">
                                       <i class="calendar icon"></i>
-                                      <input type="text" placeholder="Date/Time" name="start" required>
+                                      <input type="text" placeholder="Date/Time" name="start" id="keyD"  required>
                                     </div>
                                   </div>
                         <!-- code change ends -->
@@ -463,7 +458,7 @@
                     <div class=" field">
                       <!--   <input placeholder="Event" type="text"> -->
                       <label>Page No.</label>
-                            <input placeholder="Page No." type="text" name="page_no">
+                            <input placeholder="Page No." type="text" id="keyC"  name="page_no">
                           
                     </div>
                     <div class=" field">
@@ -486,7 +481,7 @@
     </div>
     <div class="eight wide field">
         <div class="field">
-                            <label>Confrence Venue</label>
+                            <label>Conference Venue</label>
                             <input placeholder="Confrence Venue" type="text" name="venue" required>
                         </div>
     </div>
@@ -495,7 +490,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" name="title" required>
+                            <input placeholder="Title" type="text" name="title" id="keyB" required>
                         </div>
                     </div>
 
@@ -538,15 +533,16 @@
              {% for keynote in keynotes %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td >{{ keynote.type }}</td>
-                <td >{{ keynote.title }}</td>
-                <td ><b>Name:</b>{{ keynote.name }}<br/><b>Venue:</b>{{ keynote.venue }}<br/><b>Page No:</b>{{ keynote.page_no }}<br/><b>ISBN No.:</b>{{ keynote.isbn_no }}</td>
-                <td>{{ keynote.start_date }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_keynote_addressDelete' keynote.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+                <td id="key{{ forloop.counter }}A" >{{ keynote.type }}</td>
+                <td id="key{{ forloop.counter }}B" >{{ keynote.title }}</td>
+                <td id="key{{ forloop.counter }}C" ><b>Name:</b>{{ keynote.name }}<br/><b>Venue:</b>{{ keynote.venue }}<br/><b>Page No:</b>{{ keynote.page_no }}<br/><b>ISBN No.:</b>{{ keynote.isbn_no }}</td>
+                <td id="key{{ forloop.counter }}D" >{{ keynote.start_date }}</td>
+                <td><a onclick="updateKEY({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_keynote_addressDelete' keynote.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
 
             </tr>
             {% endfor %}
             </tbody>
+
 
             <tfoot>
             <tr>
