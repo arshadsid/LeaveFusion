@@ -626,7 +626,10 @@ def consym_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_confrence_organised()
+    if (request.POST.get('fvisit_id')==None or request.POST.get('conf_id')==""):
+        eis = emp_confrence_organised()
+    else:
+        eis = get_object_or_404(emp_confrence_organised, id=request.POST.get('conf_id'))
     eis.pf_no = pf
     print(eis.pf_no)
     eis.name = request.POST.get('name')
@@ -639,11 +642,21 @@ def consym_insert(request):
             eis.role2 = request.POST.get('other')
         else:
             eis.role2 = request.POST.get('role2')
-    eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-    print(eis.start_date)
-    eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-    print(eis.end_date)
-
+    if (eis.role1 == "" or eis.role1==None):
+        eis.role1 = "Any Other"
+        eis.role2 = "Any Other"
+    try:
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
+        print(eis.start_date)
+    except:
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
+        print(eis.start_date)
+    try:
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
+        print(eis.end_date)
+    except:
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
+    print("role: "+ eis.role1)
     eis.save()
     return redirect('eis:profile')
 

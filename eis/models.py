@@ -280,7 +280,7 @@ class emp_confrence_organised(models.Model):
         ('Conference Chair', 'Conference Chair'),
         ('Any Other', 'Any Other'),
     )
-    role1 = models.CharField(max_length=20, choices=ROLE1_TYPE_CHOICES, null=True, blank=True)
+    role1 = models.CharField(max_length=20, choices=ROLE1_TYPE_CHOICES, null=True, blank=True, default="Any Other")
     role2 = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
