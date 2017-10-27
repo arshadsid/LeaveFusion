@@ -24,6 +24,7 @@
         <h4 class="ui dividing header">Add a Workshop /Training Program</h4>
         <form class="ui form"  method="post" action="{% url 'eis:event_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="eventZ" name="event_id"></div>
             <div class="field">
                  <div class="two fields">
                     <div class="field">
@@ -148,7 +149,7 @@
             <tbody>
             {% for event in events %}
             <tr id="r1">
-            <td>{{ forloop.counter }}.</td>
+                <td id="event{{ forloop.counter }}Z"><div style="display: none;">{{ event.id }}</div>{{ forloop.counter }}.</td>
                 <td id="event{{ forloop.counter }}A">{{ event.role }}</td>
                 <td id="event{{ forloop.counter }}B">{{ event.sponsoring_agency }}</td>
                 <td id="event{{ forloop.counter }}C">{{ event.venue }}</td>
