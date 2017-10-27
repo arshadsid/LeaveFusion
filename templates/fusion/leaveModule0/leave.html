@@ -39,22 +39,22 @@
                 <div class="ui huge fluid vertical pointing menu"
                      style="min-width: 240px;
                             max-width: 320px;">
-                    <a class="active item" id="leave_application" data-tab="first">
+                    <a class="active item" data-tab="first">
                         Leave Application
                         <i class="right floated chevron right icon"></i>
                     </a>
 
-                    <a class="item" id="leave_status" data-tab="second">
+                    <a class="item" data-tab="second">
                         Leave Status
                         <i class="right floated chevron right icon"></i>
                     </a>
 
                     <a class="item" data-tab="third">
-                        Leave Balance (Inactive)
+                        Leave Balance
                         <i class="right floated chevron right icon"></i>
                     </a>
 
-                    <a class="item" id="leave_approve" data-tab="fourth">
+                    <a class="item" data-tab="fourth">
                         Approve
                         <i class="right floated chevron right icon"></i>
                     </a>
@@ -210,14 +210,41 @@
 
 
                 {% comment %} MODALS CODE ENDS {% endcomment %}
-                {% comment %}
-                    {% comment %}The Leave Application Form starts here!{% endcomment %}
-                    <div class="ui active tab segment" id="main_active" data-tab="first">
-                        {% block leaveapplicationform %}
-                            {% include 'fusion/leaveModule0/leaveapplicationform.html' %}
-                        {% endblock %}
-                    </div>
-                    {% comment %}The Leave Application Form ends here!{% endcomment %}
+
+                {% comment %}The Leave Application Form starts here!{% endcomment %}
+                <div class="ui active tab segment" data-tab="first">
+                    {% block leaveapplicationform %}
+                        {% include 'fusion/leaveModule0/leaveapplicationform.html' %}
+                    {% endblock %}
+                </div>
+                {% comment %}The Leave Application Form ends here!{% endcomment %}
+
+                {% comment %}The Leave Status starts here!{% endcomment %}
+                <div class="ui tab segment" data-tab="second">
+                    {% block leavestatus %}
+                        {% include 'fusion/leaveModule0/leavestatus.html' %}
+                    {% endblock %}
+                </div>
+                {% comment %}The Leave Status ends here!{% endcomment %}
+
+
+                {% comment %}The Leave Balance starts here!{% endcomment %}
+                <div class="ui tab segment" data-tab="third">
+                    {% block leavebalance %}
+                        {% include 'fusion/leaveModule0/leavebalance.html' %}
+                    {% endblock %}
+                </div>
+                {% comment %}The Leave Balance ends here!{% endcomment %}
+
+
+                {% comment %}The Approve Leave starts here!{% endcomment %}
+                <div class="ui tab segment" data-tab="fourth">
+                    {% block approveleave %}
+                        {% include 'fusion/leaveModule0/leaveapprove.html'%}
+                    {% endblock %}
+                </div>
+                {% comment %}The Approve Leave ends here!{% endcomment %}
+
 
             </div>
         </div>
@@ -252,6 +279,8 @@
 {% endblock %}
 
 {% block javascript %}
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
     <script type="text/javascript" src="{% static 'fusion/js/chartjs/src/chart.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'fusion/js/checkbox.js' %}"></script>
@@ -272,86 +301,61 @@
         }
     </script>
 
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+
+            data: {
+                labels: ["Casual Leave", "Commuted Leave", "Earned Leave", "Restricted Holiday", "Sp. Casual Leave", "Vacation Leave"],
+                datasets: [{
+                    label: 'Leave Balance',
+                    data: [8, 20, 30, 2, 2, 60],
+                    {%comment%} TODO: Add vars {%endcomment%}
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
     <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 
     <script>
         // Script for the Date Picker!
-        function addAttr(){
-            $('#rangestart').calendar({
-                type: 'date',
-                endCalendar: $('#rangeend'),
-            });
-            $('#rangeend').calendar({
-                type: 'date',
-                startCalendar: $('#rangestart'),
-            });
-            $('.ui.checkbox')
-                .checkbox()
-            ;
 
-            $('.menu .item')
-                .tab();
-                $('.dropdown')
-                    .dropdown({
-                        on: 'hover'
-                    });
-        }
-        addAttr();
-    </script>
-    <!-- This is for ajax requests -->
-    <script type="text/javascript">
-
-        $('#leave_application').on('click', function(e){
-            // $('#main_active').html('Loading');
-            e.preventDefault();
-            $.ajax({
-                type: 'get',
-                url: '/leave/?cake=form',
-                success: function(data){
-                    // alert(data);
-                    $('#main_active').html(data);
-                    addAttr();
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            });
+        $('#rangestart').calendar({
+            type: 'date',
+            endCalendar: $('#rangeend')
         });
-
-        $('#leave_status').on('click', function(e){
-            // $('#main_active').html('Loading');
-            e.preventDefault();
-            $.ajax({
-                type: 'get',
-                url: '/leave/?cake=status',
-                success: function(data){
-                    // alert(data);
-                    $('#main_active').html(data);
-                    addAttr();
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            });
+        $('#rangeend').calendar({
+            type: 'date',
+            startCalendar: $('#rangestart')
         });
-
-        $('#leave_approve').on('click', function(e){
-            // $('#main_active').html('Loading');
-            e.preventDefault();
-            $.ajax({
-                type: 'get',
-                url: '/leave/?cake=approve',
-                success: function(data){
-                    // alert(data);
-                    $('#main_active').html(data);
-                    addAttr();
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            });
-        });
-
-
     </script>
 {% endblock %}
