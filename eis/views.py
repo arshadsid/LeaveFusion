@@ -447,7 +447,18 @@ def fvisit_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_visits()
+    if (request.POST.get('fvisit_id')==None or request.POST.get('fvisit_id')==""):
+        eis = emp_visits()
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
+        print(eis.start_date)
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
+        print(eis.end_date)
+    else:
+        eis = get_object_or_404(emp_visits, id=request.POST.get('fvisit_id'))
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
+        print(eis.start_date)
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
+        print(eis.end_date)
     eis.pf_no = pf
     eis.v_type = 2
     print(eis.pf_no)
@@ -457,10 +468,7 @@ def fvisit_insert(request):
     print(eis.place)
     eis.purpose = request.POST.get('purpose')
     print(eis.purpose)
-    eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-    print(eis.start_date)
-    eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-    print(eis.end_date)
+
 
     eis.save()
     return redirect('eis:profile')

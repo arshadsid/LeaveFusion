@@ -19,6 +19,7 @@
     <div class="ui active tab segment" data-tab="foreign">
         <h4 class="ui dividing header">Add a Foreign Visit</h4>
         <form class="ui form" method="post" action="{% url 'eis:fvisit_insert' %}">
+            <div style="display: none;"> <input type="text" id="fvisitsZ" name="fvisit_id"></div>
             {% csrf_token %}
             <div class="field">
                 <div class="two fields">
@@ -348,7 +349,7 @@
             <tbody>
             {% for fvisit in fvisits %}
             <tr id="r1">
-                <td>{{ forloop.counter }}.</td>
+                <td id="fvisits{{ forloop.counter }}Z"><div style="display: none;">{{ fvisit.id }}</div>{{ forloop.counter }}.</td>
                 <td id="fvisits{{ forloop.counter }}A">
                     <i class="{{ fvisit.country.lower }} flag"></i>{{ fvisit.countryfull }}
                 </td>
@@ -388,6 +389,7 @@
         <h4 class="ui dividing header">Add an Indian University Visit</h4>
         <form class="ui form" method="post" action="{% url 'eis:ivisit_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="ivisitZ" name="ivisit_id"></div>
             <div class="field">
                 <div class="two fields">
                     <div class="field">
@@ -462,8 +464,8 @@
 
             <tbody>
             {% for ivisit in ivisits %}
-            <tr id="r1">
-                <td>{{ forloop.counter }}.</td>
+            <tr id="r2">
+                <td id="ivisits{{ forloop.counter }}Z"><div style="display: none;">{{ ivisit.id }}</div>{{ forloop.counter }}.</td>
                 <td id="ivisits{{ forloop.counter }}A">{{ ivisit.place }}</td>
                 <td id="ivisits{{ forloop.counter }}B">{{ ivisit.start_date }} - {{ ivisit.end_date }}</td>
                 <td id="ivisits{{ forloop.counter }}C">{{ ivisit.purpose }}</td>
