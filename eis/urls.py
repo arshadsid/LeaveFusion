@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^project/$', views.project_insert, name='project_insert'),
     url(r'^consult_insert/$', views.consult_insert, name='consult_insert'),
     url(r'^patent_insert/$', views.patent_insert, name='patent_insert'),
-    url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
+    url(r'^transfer_insert/$', views.transfer_insert, name='transfer_insert'),
 
 
 ]
