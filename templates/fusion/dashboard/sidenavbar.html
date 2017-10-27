@@ -13,7 +13,7 @@
                 <br>
 
                 <div class="ui bottom attached inverted" style="text-align: center;">
-                    <h2 class="ui inverted header">Dr. Atul Gupta</h2>
+                    <h2 class="ui inverted header">{{ request.user.first_name }}</h2>
                     <span class="ui inverted meta">Associate Professor</span>
                 </div>
 
@@ -54,7 +54,7 @@
             {% comment %}The Modules Accordian ends here!{% endcomment %}
 
             {% comment %}The Profile Item starts here!{% endcomment %}
-            <a class="centered raised item" href="/profile/">
+            <a class="centered raised item" href="{% url 'eis:profile' %}">
                 <span class="inverted header">Profile</span>
                 <i class="large inverted user icon right floated"></i>
             </a>

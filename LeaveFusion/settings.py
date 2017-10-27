@@ -86,6 +86,7 @@ SOCIALACCOUNT_ADAPTER = 'user_app.adapters.MySocialAccountAdapter'
 INSTALLED_APPS = [
     'user_app.apps.UserAppConfig',
     'leave_application.apps.LeaveApplicationConfig',
+    'eis.apps.EisConfig',
     'calender.apps.CalenderConfig',
     'django.contrib.admin',
     'django.contrib.auth',

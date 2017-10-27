@@ -13,16 +13,16 @@
         <div class="content">
             {% comment %}http://web.iiitdmj.ac.in/~vkjain{% endcomment %}
             <div class="ui large header" href="">
-                {{ userFirstName }}
-                {{ userLastName }}
+                {{ request.user.first_name }}
+                {{ request.user.last_name }}
                 <span class="right floated meta">
-                    {{ userDepartment.upper }}
+                    {{ request.user.extrainfo.department }}
                 </span>
             </div>
 
             <div class="meta">
                 <span>
-                    {{ userDesignation }}
+                    {{ request.user.extrainfo.designation }}
                 </span>
             </div>
         </div>

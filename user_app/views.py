@@ -59,6 +59,7 @@ def profile_view(request, id):
     #TODO: raise an http404 exception so to reach the 404 page
     user = get_object_or_404(User, id=id)
     name = user.first_name+" "+user.last_name
+    print(user.first_name)
     return render(request, 'user_app/profile.html', {'title':name, 'user': user})
 
 
