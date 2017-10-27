@@ -327,12 +327,13 @@
     {% comment %}The Patent segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="patents">
         <h4 class="ui dividing header">Add a  Patent</h4>
-        <form class="ui form">
+        <form class="ui form"  method="post" action="{% url 'eis:patent_insert' %}">
+            {% csrf_token %}
             <div class="field">
                 <div class="two fields">
                     <div class="field">
-                        <label>Patent </label>
-                        <input placeholder="Published" type="text">
+                        <label>Patent Number</label>
+                        <input placeholder="Patent Number" type="text" name="p_no" required>
                     </div>
 
                     <div class="field">
@@ -348,7 +349,7 @@
                         </div></label> -->
                         <label><br></label>
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden">
+                            <input type="hidden" name="status" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Status</div>
                             <div class="menu">
@@ -367,19 +368,33 @@
                 <label>Earning(in Rs.)</label>
                 <div class="fields">
                     <div class="twelve wide field">
-                        <input placeholder="Publisher" type="text">
+                        <input placeholder="Publisher" type="number" name="earnings" required>
                     </div>
 
                     <div class="four wide field">
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden">
-                            <i class="dropdown icon"></i>
+                            <input type="hidden" name="year" required>
+                            <i class="dropdown icon" ></i>
                             <div class="default text">Year</div>
                             <div class="menu">
-                                <div class="item" data-value="Published">Published</div>
-                                <div class="item" data-value="Accepted">Accepted</div>
-                                <div class="item" data-value="Communicated">Communicated</div>
-
+                                <div class="item" data-value="2017">2017</div>
+                                <div class="item" data-value="2016">2016</div>
+                                <div class="item" data-value="2015">2015</div>
+                                <div class="item" data-value="2014">2014</div>
+                                <div class="item" data-value="2013">2013</div>
+                                <div class="item" data-value="2012">2012</div>
+                                <div class="item" data-value="2011">2011</div>
+                                <div class="item" data-value="2010">2010</div>
+                                <div class="item" data-value="2009">2009</div>
+                                <div class="item" data-value="2008">2008</div>
+                                <div class="item" data-value="2007">2007</div>
+                                <div class="item" data-value="2006">2006</div>
+                                <div class="item" data-value="2005">2005</div>
+                                <div class="item" data-value="2004">2004</div>
+                                <div class="item" data-value="2003">2003</div>
+                                <div class="item" data-value="2002">2002</div>
+                                <div class="item" data-value="2001">2001</div>
+                                <div class="item" data-value="2000">2000</div>
                             </div>
                         </div>
                     </div>
@@ -389,16 +404,15 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text">
+                            <input placeholder="Title" type="text" name="title" required>
                         </div>
                     </div>
 
                     <div class="two wide field">
                         <label><br></label>
-                        <div class="ui primary button">
-                            Save
-                            <i class="ui save icon right floated"></i>
-                        </div>
+                        <button class="ui primary button" type="submit">
+                            Save<i class="ui save icon right floated"></i>
+                        </button>
                     </div>
                 </div>
 
