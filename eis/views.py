@@ -774,6 +774,18 @@ def patent_insert(request):
     eis.save()
     return redirect('eis:profile')
 
+def transfer_insert(request):
+    user = get_object_or_404(ExtraInfo, user=request.user)
+    print(user)
+    pf = user.unique_id
+
+    eis = emp_techtransfer()
+    eis.pf_no = pf
+    print(eis.pf_no)
+    eis.details = request.POST.get('details')
+    eis.save()
+    return redirect('eis:profile')
+
 def achievement(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
