@@ -30,7 +30,7 @@
                         <label>Role </label>
                        <!--  <input placeholder="Published" type="text"> -->
                          <div class="ui fluid search selection dropdown">
-                                    <input type="hidden" name="role" required>
+                                    <input type="hidden" name="role" id="eventA" required>
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Role</div>
                                     <div class="menu">
@@ -46,7 +46,7 @@
 
                     <div class="field">
                         <label>Sponsoring Agency</label>
-                        <input placeholder="Sponsoring Agency" type="text" name="sponsoring_agency" required>
+                        <input placeholder="Sponsoring Agency" type="text" name="sponsoring_agency" id="eventB" required>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                                     <div class="ui calendar" id="rangestart2">
                                           <div class="ui input left icon">
                                             <i class="calendar icon"></i>
-                                            <input type="text" placeholder="Start" name="start" required>
+                                            <input type="text" placeholder="Start" name="start" id="eventD" required>
                                           </div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                        <div class="ui calendar" id="rangeend2">
                                       <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="End"  name="end" required>
+                                        <input type="text" placeholder="End"  name="end" id="eventE" required>
                                       </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                      <div class="six wide field">
                             <div class="field">
                                     <label>Venue</label>
-                                    <input placeholder="Venue" type="text"  name="venue" required>
+                                    <input placeholder="Venue" type="text"  name="venue"  id="eventC" required>
                                 </div>
                         </div>  
 
@@ -115,12 +115,7 @@
                 </div>
 
                 <div class="fields">
-                    <div class="fourteen  wide field">
-                        <div class="field">
-                            <label>Name</label>
-                            <input placeholder="Name of Event" type="text"  name="name" required>
-                        </div>
-                    </div>
+                  
                     
 
                     <div class="two wide field">
@@ -152,14 +147,14 @@
 
             <tbody>
             {% for event in events %}
-            <tr>
+            <tr id="r1">
             <td>{{ forloop.counter }}.</td>
-                <td>{{ event.role }}</td>
-                <td>{{ event.sponsoring_agency }}</td>
-                <td>{{ event.venue }}</td>
-                <td>{{ event.start_date }} - {{ event.end_date }}</td>
+                <td id="event{{ forloop.counter }}A">{{ event.role }}</td>
+                <td id="event{{ forloop.counter }}B">{{ event.sponsoring_agency }}</td>
+                <td id="event{{ forloop.counter }}C">{{ event.venue }}</td>
+                <td id="event{{ forloop.counter }}D">{{ event.start_date }} - {{ event.end_date }}</td>
                 <td>{{ event.type }}</td>
-            <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i> <br><a class="centered raised item" href="{% url 'eis:emp_event_organizedDelete' event.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i>
+            <td><a onclick="updateEVENT({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a> <br><a class="centered raised item" href="{% url 'eis:emp_event_organizedDelete' event.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i>
             </a> </td>
             </tr>
             {% endfor %}

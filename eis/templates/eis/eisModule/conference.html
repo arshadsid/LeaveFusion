@@ -72,7 +72,7 @@
                           
                             <div class="field">
                                      <label>Venue</label>
-                                     <input placeholder="Venue" type="text" name="venue" required>
+                                     <input placeholder="Venue" type="text" name="venue" id="confB"   required>
                                 </div>
                         
                        
@@ -83,7 +83,7 @@
                                  <div class="ui calendar" id="rangestart5">
                                       <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="Start" name="start" required>
+                                        <input type="text" placeholder="Start" name="start" id="confC"   required>
                                       </div>
                                 </div>
                                 <!-- code change ends -->
@@ -97,7 +97,7 @@
                                          <div class="ui calendar" id="rangeend5">
                                               <div class="ui input left icon">
                                                 <i class="calendar icon"></i>
-                                                <input type="text" placeholder="End" name="end" required>
+                                                <input type="text" placeholder="End" name="end" id="confD"   required>
                                               </div>
                                         </div>
                                 <!-- code change ends -->
@@ -109,7 +109,7 @@
                <!-- code change starts --> 
                  <div class="fourteen wide field">
                         <label>Conference Name</label>
-                        <input placeholder="Conference Name" type="text" name="name" required>
+                        <input placeholder="Conference Name" type="text" name="name" id="confA"  required>
                     </div>
             <!-- code change ends-->    
 
@@ -157,11 +157,10 @@
                 {% else %}
                 <td>{{ consymp.role1 }}</td>
                 {% endif %}
-                <td>{{ consymp.name }}</td>
-                <td>{{ consymp.venue }}</td>
-                <td>{{ consymp.start_date }} - {{ consymp.end_date }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_confrence_organisedDelete' consymp.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
-
+                <td id="conf{{ forloop.counter }}A">{{ consymp.name }}</td>
+                <td id="conf{{ forloop.counter }}B">{{ consymp.venue }}</td>
+                <td id="conf{{ forloop.counter }}C">{{ consymp.start_date }} - {{ consymp.end_date }}</td>
+                <td ><a onclick="updateCONF({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_confrence_organisedDelete' consymp.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
             </tr>
             {% endfor %}
             </tbody>
