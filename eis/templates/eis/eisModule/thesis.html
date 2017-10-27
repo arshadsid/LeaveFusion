@@ -18,17 +18,15 @@
         <h4 class="ui dividing header">Add a Thesis</h4>
         <form class="ui form" method="post" action="{% url 'eis:pg_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="fZ" name="pg_id"></div>
             <div class="field">
                <div class="One field">
                     <div class="field">
                         <label> Name</label>
-                        <input placeholder="Name" type="text" name="name" id="name" required>
+                        <input placeholder="Name" type="text"   id="fA" type=text name="name" required>
                     </div>
 
-                   <!--  <div class="field">
-                        <label>Last Name</label>
-                        <input placeholder="Last Name" type="text">
-                    </div> -->
+                  
                 </div>
             </div>
 
@@ -36,23 +34,23 @@
                 <div class="fields">
                     <div class="six wide field">
                         <label>Roll Number</label>
-                        <input placeholder="Roll Number" type="text" name="roll" id="roll" required>
+                        <input placeholder="Roll Number" type="text" name="roll" id="fE" required>
                     </div>
 
                     <div class="six wide field">
                         <label>Supervisor</label>
-                        <input placeholder="Supervisor" type="text" name="sup" id="sup" required>
+                        <input placeholder="Supervisor"   id="fD" type=text name="sup" required>
                     </div>
 
                     <div class="four wide field">
                         <label>Year</label>
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="s_year" id="s_year">
+                            <input type="hidden" id="fC" name="s_year" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Year</div>
                             <div class="menu">
                                 {% for r in year_range %}
-                                <div class="item" data-value="{{ r }}">{{ r }}</div>
+                                <div class="item" data-value="{{ r }}"  >{{ r }}</div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -63,7 +61,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" name="title" id="title" required>
+                            <input placeholder="Title" type="text"  id="fB" name="title"  required>
                         </div>
                     </div>
 
@@ -88,7 +86,7 @@
                 <th class="" style="width: 30%;">Title </th>
                 <th class="" style="width: 10%;">Year</th>
 
-                <th style="width:23%">Other Details</th>
+                <th style="width:23%">Supervisor</th>
 
 
                 <th class="" style="width: 10 %;">Action</th>
@@ -97,13 +95,14 @@
 
             <tbody>
             {% for mtech in mtechs %}
-            <tr>
-                <td>{{ forloop.counter }}.</td>
-                <td><b>Name: </b>{{ mtech.s_name }}<br/><b>Roll No.: </b>{{ mtech.rollno }}</td>
-                <td>{{ mtech.title }}</td>
-                <td>{{ mtech.s_year }}</td>
-                <td>{{ mtech.supervisors }}</td>
-                 <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' mtech.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+            <tr id="r1">
+                <td id="s{{ forloop.counter }}Z"><div style="display: none;">{{ mtech.id }}</div> {{ forloop.counter }}.</td>
+                <td id="s{{ forloop.counter }}A"><b>Name: </b>{{ mtech.s_name }}<br/><b>Roll No.: </b>{{ mtech.rollno }}</td>
+                <td id="s{{ forloop.counter }}B">{{ mtech.title }}</td>
+                <td id="s{{ forloop.counter }}C">{{ mtech.s_year }}</td>
+                <td id="s{{ forloop.counter }}D">{{ mtech.supervisors }}</td>
+
+                 <td><a onclick="getData({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' mtech.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
             </tr>
 
             {% endfor %}
@@ -142,7 +141,7 @@
                  <div class="One field">
                     <div class="field">
                         <label> Name</label>
-                        <input placeholder="Name" type="text" name="name" required>
+                        <input placeholder="Name" type="text" name="name"  id="phdA" required>
                     </div>
 
                    <!--  <div class="field">
@@ -156,18 +155,18 @@
                 <div class="fields">
                     <div class="six wide field">
                         <label>Roll Number</label>
-                        <input placeholder="Roll Number" type="text"  name="roll" required>
+                        <input placeholder="Roll Number" type="text"  name="roll" id="phdE" required>
                     </div>
 
                     <div class="six wide field">
                         <label>Supervisor</label>
-                        <input placeholder="Supervisor" type="text"  name="sup" required>
+                        <input placeholder="Supervisor" type="text"  name="sup" id="phdD" required>
                     </div>
 
                     <div class="four wide field">
                         <label>Year</label>
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden"  name="s_year" required>
+                            <input type="hidden"  name="s_year" id="phdC" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Year</div>
                             <div class="menu">
@@ -183,7 +182,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text"  name="title" required>
+                            <input placeholder="Title" type="text"  name="title" id="phdB" required>
                         </div>
                     </div>
 
@@ -224,13 +223,13 @@
 
             <tbody>
             {% for phd in phds %}
-            <tr>
+            <tr id="r2">
                 <td>{{ forloop.counter }}.</td>
-                <td><b>Name: </b>{{ phd.s_name }}<br/><b>Roll No.: </b>{{ phd.rollno }}</td>
-                <td>{{ phd.title }}</td>
-                <td>{{ phd.s_year }}</td>
-                <td>{{ phd.supervisors }}</td>
-                 <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' phd.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+                <td id="phd{{ forloop.counter }}A"><b>Name: </b>{{ phd.s_name }}<br/><b>Roll No.: </b>{{ phd.rollno }}</td>
+                <td id="phd{{ forloop.counter }}B">{{ phd.title }}</td>
+                <td id="phd{{ forloop.counter }}C">{{ phd.s_year }}</td>
+                <td id="phd{{ forloop.counter }}D">{{ phd.supervisors }}</td>
+                 <td><a onclick="updatePHD({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' phd.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
             </tr>
 
             {% endfor %}

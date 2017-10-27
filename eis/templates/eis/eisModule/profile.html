@@ -452,7 +452,58 @@
                 x.style.display = "none";
             }
            }
+
+
+
+
+           var cols=new Array();
+                cols[0]="A";
+                cols[1]="B";
+                cols[2]="C";
+                cols[3]="D";
+                cols[4]="F";
+                cols[5]="G";
+                cols[6]="H";
+                cols[7]="I";
+
+                function getData(_row){
+                var p = document.getElementById("s"+_row+"Z").innerHTML.search(">");
+                var pend = document.getElementById("s"+_row+"Z").innerHTML.indexOf("<",5);
+                document.getElementById("fZ").value=document.getElementById("s"+_row+"Z").innerHTML.slice(p+1,pend);
+                  for(var i=0;i<cols.length;i++)  {
+                    var _temp=document.getElementById("s"+_row+cols[i]).innerHTML;
+                    if (_temp.search("<b>Name: </b>")==0){
+                      var pos = _temp.search("<br>");
+                      document.getElementById("f"+cols[i]).value=_temp.slice(13, pos);
+                      pos = _temp.lastIndexOf("</b>");
+                      document.getElementById("fE").value=_temp.slice(pos+4, _temp.length);
+                    }
+                    else{
+                      document.getElementById("f"+cols[i]).value=_temp;
+                    }
+                    
+                                                 }
+                                     }
+              
+
+
+              function updatePHD(_row){
+                  for(var i=0;i<cols.length;i++)  {
+                    var _temp=document.getElementById("phd"+_row+cols[i]).innerHTML;
+                    if (_temp.search("<b>Name: </b>")==0){
+                      var pos = _temp.search("<br>");
+                      document.getElementById("phd"+cols[i]).value=_temp.slice(13, pos);
+                      pos = _temp.lastIndexOf("</b>");
+                      document.getElementById("phdE").value=_temp.slice(pos+4, _temp.length);
+                    }
+                    else{
+                      document.getElementById("phd"+cols[i]).value=_temp;
+                    }
+                    
+                                                 }
+                                     }                       
     </script>
+
 
     <script>
         function toggleContent() {

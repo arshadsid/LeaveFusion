@@ -395,9 +395,13 @@ def pg_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_mtechphd_thesis()
+    if (request.POST.get('pg_id')==None or request.POST.get('pg_id')==""):
+        eis = emp_mtechphd_thesis()
+    else:
+        eis = get_object_or_404(emp_mtechphd_thesis, id=request.POST.get('pg_id'))
     eis.pf_no = pf
     print(eis.pf_no)
+    print("--------------ID-----------: "+request.POST.get('pg_id'))
     eis.title = request.POST.get('title')
     print(eis.title)
     eis.s_year = request.POST.get('s_year')
