@@ -740,6 +740,24 @@ def project_insert(request):
     eis.save()
     return redirect('eis:profile')
 
+def consult_insert(request):
+    user = get_object_or_404(ExtraInfo, user=request.user)
+    print(user)
+    pf = user.unique_id
+
+    eis = emp_consultancy_projects()
+    eis.pf_no = pf
+    print(eis.pf_no)
+    eis.consultants = request.POST.get('consultants')
+    eis.client = request.POST.get('client')
+    eis.title = request.POST.get('title')
+    eis.financial_outlay = request.POST.get('financial_outlay')
+    eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
+    print(eis.start_date)
+    eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
+    eis.save()
+    return redirect('eis:profile')
+
 def achievement(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
