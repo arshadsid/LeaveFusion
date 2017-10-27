@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^chaired/$', views.chaired_insert, name='chaired_insert'),
     url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
     url(r'^project/$', views.project_insert, name='project_insert'),
-    url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
+    url(r'^consult_insert/$', views.consult_insert, name='consult_insert'),
     url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
     url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
 
