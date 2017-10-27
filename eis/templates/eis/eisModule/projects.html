@@ -195,17 +195,18 @@
     {% comment %}The Consultancy Project segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="Consultancy project">
         <h4 class="ui dividing header">Add a Consultancy Project</h4>
-        <form class="ui form">
+        <form class="ui form"  method="post" action="{% url 'eis:consult_insert' %}">
+            {% csrf_token %}
             <div class="field">
                 <div class="two fields">
                     <div class="field">
                         <label>Consultant</label>
-                        <input placeholder="Published" type="text">
+                        <input placeholder="Consultant" type="text" required name="consultants">
                     </div>
 
                     <div class="field">
                         <label>Client</label>
-                        <input placeholder="Co-author" type="text">
+                        <input placeholder="Client" type="text" name="client" required>
                     </div>
                 </div>
             </div>
@@ -214,32 +215,28 @@
                 <label>Financial Outlay</label>
                 <div class="fields">
                     <div class="six wide field">
-                        <input placeholder="Publisher" type="text">
+                        <input placeholder="Publisher" type="number" name="financial_outlay" required>
                     </div>
 
                     <div class="four wide field">
-                       
-                           <!--  <label>Period Of Consultancy</label> -->
-                              <div class="ui calendar" id="rangestart1">
-                                <div class="ui input left icon">
-                                    <i class="calendar icon"></i>
-                                  <!--   <input type="date" placeholder="Period Of COnsultancy"> --> 
-                                   {{ form.start_date }}
+                        <div class="field">
+                             <div class="ui calendar" id="rangestart1">
+                                      <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="Start" name="start" required>
+                                      </div>
                                 </div>
-                            </div>
-
-                        
+                        </div>
                     </div>
 
                     <div class="four wide field">
 
                            <!--  <label>Period Of Consultancy</label> -->
                               <div class="ui calendar" id="rangeend1">
-                                <div class="ui input left icon">
-                                    <i class="calendar icon"></i>
-                                  <!--   <input type="date" placeholder="Period Of COnsultancy"> -->
-                                   {{ form.end_date }}
-                                </div>
+                                 <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="End" name="end" required>
+                                      </div>
                             </div>
 
 
@@ -250,16 +247,15 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text">
+                            <input placeholder="Title" type="text" required name="title">
                         </div>
                     </div>
 
                     <div class="two wide field">
                         <label><br></label>
-                        <div class="ui primary button">
-                            Save
-                            <i class="ui save icon right floated"></i>
-                        </div>
+                        <button class="ui primary button" type="submit">
+                            Save<i class="ui save icon right floated"></i>
+                        </button>
                     </div>
                 </div>
 
