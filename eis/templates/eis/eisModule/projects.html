@@ -484,21 +484,21 @@
 
     <div class="ui tab segment" data-tab="technology transfer">
         <h4 class="ui dividing header">Add a Technology Transfer</h4>
-        <form class="ui form">
+        <form class="ui form"  method="post" action="{% url 'eis:transfer_insert' %}">
+            {% csrf_token %}
             <div class="field">
                 <div class="fourteen wide field">
                     <div class="field">
                         <label>Details</label>
-                        <input placeholder="Details" type="text">
+                        <input placeholder="Details" type="text" name="details" required>
                     </div>
                 </div>
 
                 <div class="two wide field">
                     <label><br></label>
-                    <div class="ui primary button">
-                        Save
-                        <i class="ui save icon right floated"></i>
-                    </div>
+                    <button class="ui primary button" type="submit">
+                            Save<i class="ui save icon right floated"></i>
+                        </button>
                 </div>
             </div>
         </form>
