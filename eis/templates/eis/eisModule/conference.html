@@ -13,6 +13,7 @@
        <h4 class="ui dividing header">Add a Conference/Symposium</h4>
           <form class="ui form"  method="post" action="{% url 'eis:consym_insert' %}">
             {% csrf_token %}
+              <div style="display: none;"> <input type="text" id="confZ" name="conf_id"></div>
             <div class="field">
                  <div class="three fields">
                     <div class="field">
@@ -149,7 +150,7 @@
             <tbody>
              {% for consymp in consymps %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
+                <td id="conf{{ forloop.counter }}Z"><div style="display: none;">{{ consymp.id }}</div>{{ forloop.counter }}.</td>
                 {% if consymp.role1 == 'Any Other' %}
                     <td>{{ consymp.role2 }}</td>
                 {% elif consymp.role1 == 'Organised' %}
