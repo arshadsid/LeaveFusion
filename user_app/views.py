@@ -9,6 +9,8 @@ from PIL import Image
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 
+from django.contrib.auth import logout as logout_func
+
 from datetime import date
 import datetime
 from user_app.models import Replacement
@@ -53,6 +55,13 @@ def index(request):
         make_migrations()
         return render(request, 'fusion/dashboard/dashboard.html', {'title':'Home'})
     return render(request, 'fusion/general/index1.html')
+
+
+def logout(request):
+    if request.user.is_authenticated():
+        logout_func(request)
+
+    return redirect('/')
 
 @login_required(login_url='/accounts/login/')
 def profile_view(request, id):
