@@ -23,7 +23,7 @@
     {% comment %}The  Research Project segment starts here!{% endcomment %}
     <div class="ui active tab segment" data-tab="research projects">
         <h4 class="ui dividing header">Add a Research Project</h4>
-        <form class="ui form"  method="post" action="{% url 'eis:journal_insert' %}">
+        <form class="ui form"  method="post" action="{% url 'eis:project_insert' %}">
             {% csrf_token %}
             <div class="field">
                 <div class="two fields">

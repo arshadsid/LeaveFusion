@@ -39,4 +39,10 @@ urlpatterns = [
     url(r'^talk/$', views.talk_insert, name='talk_insert'),
     url(r'^chaired/$', views.chaired_insert, name='chaired_insert'),
     url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
+    url(r'^project/$', views.project_insert, name='project_insert'),
+    url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
+    url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
+    url(r'^keynote/$', views.keynote_insert, name='keynote_insert'),
+
+
 ]
