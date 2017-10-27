@@ -758,6 +758,22 @@ def consult_insert(request):
     eis.save()
     return redirect('eis:profile')
 
+def patent_insert(request):
+    user = get_object_or_404(ExtraInfo, user=request.user)
+    print(user)
+    pf = user.unique_id
+
+    eis = emp_patents()
+    eis.pf_no = pf
+    print(eis.pf_no)
+    eis.p_no = request.POST.get('p_no')
+    eis.earnings = request.POST.get('earnings')
+    eis.title = request.POST.get('title')
+    eis.p_year = request.POST.get('year')
+    eis.status = request.POST.get('status')
+    eis.save()
+    return redirect('eis:profile')
+
 def achievement(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
