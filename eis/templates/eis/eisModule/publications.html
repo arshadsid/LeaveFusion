@@ -322,7 +322,7 @@
                         <div class=" four fields">
                                <div class="field">
                                 <label>Venue/Host Institute</label>
-                                <input placeholder="Venue." type="text" name="venue">
+                                <input placeholder="Venue." type="text" name="venue"  id="conE">
                                </div>
                              <div class="  field">
                                 <label>Date of Submission(DOS)</label>
@@ -330,27 +330,27 @@
                                         <div class="ui calendar" id="example2d">
                                             <div class="ui input left icon">
                                               <i class="calendar icon"></i>
-                                              <input type="text" placeholder="Date/Time"  name="dos">
+                                              <input type="text" placeholder="Date/Time"  name="dos"  id="conF">
                                             </div>
                                       </div>
                             </div>
                              <div class=" field">
-                                <label>Date of Acceptance(DOA)</label>
+                                <label>Confrence Start Date:</label>
                                  <!--<input placeholder="Paper Reference No." type="text">-->
                                        <div class="ui calendar" id="example2e">
                                         <div class="ui input left icon">
                                           <i class="calendar icon"></i>
-                                          <input type="text" placeholder="Date/Time"  name="doa">
+                                          <input type="text" placeholder="Date/Time"  name="doa"  id="conG">
                                         </div>
                                       </div>
                             </div>
                              <div class="field">
-                                <label>Date of Publication(DOP)</label>
+                                <label>Confrence End Date:</label>
                                  <!-- <input placeholder="Date of Submission" type="text">-->
                                     <div class="ui calendar" id="example2f">
                                     <div class="ui input left icon">
                                       <i class="calendar icon"></i>
-                                      <input type="text" placeholder="Date/Time" name="dop">
+                                      <input type="text" placeholder="Date/Time" name="dop"  id="conH">
                                     </div>
                                   </div>
                             </div>
@@ -358,13 +358,13 @@
                             <div class=" four fields">
                                <div class="field">
                                 <label>Page No.</label>
-                                <input placeholder="Date of Publication" type="text"  name="page">
+                                <input placeholder="Date of Publication" type="text"  name="page"  id="conI">
                                </div>
                              <div class="  field">
                                 <label>Status</label>
                                 <!--<input placeholder="Status" type="text">-->
                                        <div class="ui fluid search selection dropdown">
-                                    <input type="hidden"  name="status">
+                                    <input type="hidden"  name="status"  id="conJ">
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Status</div>
                                         <div class="menu">
@@ -378,7 +378,7 @@
                              <div class=" field">
                                 <label>SCI/SCIE</label>
                                      <div class="ui fluid search selection dropdown">
-                                            <input type="hidden"  name="sci"  id="pubK">
+                                            <input type="hidden"  name="sci" id="conK">
                                             <i class="dropdown icon"></i>
                                             <div class="default text">SCI/SCIE</div>
                                                 <div class="menu">
@@ -390,7 +390,7 @@
                               </div>
                              <div class="field">
                                 <label>ISBN No</label>
-                                <input placeholder="Date of Issuance" type="text" name="isbn">
+                                <input placeholder="Date of Issuance" type="text" name="isbn"  id="conL">
                             </div>
                       </div>
 
@@ -434,9 +434,9 @@
                     <b>Venue/Host Institute:</b> {{ c.venue }}  <br>
                     <b>Page No.:  </b>   {{ c.page_no }}         <br>
                     <b>Date of Submission :</b>  {{ c.date_submission }}<br>
-                    <b>Date Of Acceptance :</b>  {{ c.date_acceptance }} <br>
-                    <b>Date of Publication : </b> {{ c.date_publication }} <br>
-                    <b>Status              :</b>  {{ c.status }} <br>
+                    <b>Start Date :</b>  {{ c.date_acceptance }} <br>
+                    <b>End Date : </b> {{ c.date_publication }} <br>
+                    <b>Status :</b>{{ c.status }} <br>
                     <b>Conference Date(s)   : </b> {{ c.start_date }} to {{ c.end_date }}<br>
                     <b>ISBN No.     :   </b> {{ c.issn_no }}
 
@@ -476,6 +476,7 @@
         <h4 class="ui dividing header">Add a Book/Book Chapter</h4>
         <form class="ui form"  method="post" action="{% url 'eis:book_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="booksZ" name="book_id"></div>
             <div class="field">
                 <div class="two fields">
                     <div class="field">
@@ -574,7 +575,7 @@
             <tbody>
             {% for b in books %}
             <tr>
-                <td >{{ forloop.counter }}.</td>
+                <td id="books{{ forloop.counter }}Z"><div style="display: none;">{{ b.id }}</div>{{ forloop.counter }}.</td>
                 <td id="books{{ forloop.counter }}A">{{ b.p_type }}</td>
                 <td id="books{{ forloop.counter }}B">{{ b.title }}</td>
                 <td id="books{{ forloop.counter }}C">{{ b.publisher }}</td>

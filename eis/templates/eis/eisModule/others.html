@@ -417,6 +417,7 @@
         <h4 class="ui dividing header">Add a Keynote/Planery Address</h4>
           <form class="ui form"  method="post" action="{% url 'eis:keynote_insert' %}">
             {% csrf_token %}
+              <div style="display: none;"> <input type="text" id="keyZ" name="keyid"></div>
             <div class="field">
                 <div class="two fields">
                     
@@ -467,7 +468,7 @@
                         <!-- <input placeholder="Date" type="text"> -->
                         <!-- code change starts -->
                         <label>ISBN No.</label>
-                            <input placeholder="ISBN No." type="text" name="isbn_no">
+                            <input placeholder="ISBN No." type="text" name="isbn_no" id="keyE">
                              
                         <!-- code change ends -->
                     </div>
@@ -478,13 +479,13 @@
     <div class="eight wide field">
         <div class="field">
                             <label>Confrence Name</label>
-                            <input placeholder="Confrence Name" type="text" name="name" required>
+                            <input placeholder="Confrence Name" type="text" name="name" required  id="keyF">
                         </div>
     </div>
     <div class="eight wide field">
         <div class="field">
                             <label>Conference Venue</label>
-                            <input placeholder="Confrence Venue" type="text" name="venue" required>
+                            <input placeholder="Confrence Venue" type="text" name="venue" required  id="keyG">
                         </div>
     </div>
 </div>
@@ -534,7 +535,7 @@
             <tbody>
              {% for keynote in keynotes %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
+                <td id="key{{ forloop.counter }}Z"><div style="display: none;">{{ keynote.id }}</div>{{ forloop.counter }}.</td>
                 <td id="key{{ forloop.counter }}A" >{{ keynote.type }}</td>
                 <td id="key{{ forloop.counter }}B" >{{ keynote.title }}</td>
                 <td id="key{{ forloop.counter }}C" ><b>Name:</b>{{ keynote.name }}<br/><b>Venue:</b>{{ keynote.venue }}<br/><b>Page No:</b>{{ keynote.page_no }}<br/><b>ISBN No.:</b>{{ keynote.isbn_no }}</td>

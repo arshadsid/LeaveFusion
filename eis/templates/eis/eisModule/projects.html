@@ -17,6 +17,7 @@
         <a class="item" data-tab="technology transfer">
             Technology Transfers
         </a>
+
     </div>
 
 
@@ -25,16 +26,17 @@
         <h4 class="ui dividing header">Add a Research Project</h4>
         <form class="ui form"  method="post" action="{% url 'eis:project_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="researchZ" name="project_id"></div>
             <div class="field">
                 <div class="two fields">
                     <div class="field">
                         <label>Project Incharge(PI)</label>
-                        <input placeholder="(PI)" type="text" name="pi" required>
+                        <input placeholder="(PI)" type="text" id="researchA" name="pi" required>
                     </div>
 
                     <div class="field">
                         <label>Co-Project Incharge(CO-PI)</label>
-                        <input placeholder="(CO-PI)" type="text" name="co_pi" required>
+                        <input placeholder="(CO-PI)" type="text" name="co_pi" id="researchE" required>
                     </div>
                 </div>
             </div>
@@ -43,12 +45,12 @@
                 <label>Funding Agency</label>
                 <div class="fields">
                     <div class="twelve wide field">
-                        <input placeholder="Publisher" type="text" name="funding_agency" required>
+                        <input placeholder="Publisher" id="researchC" type="text" name="funding_agency" required>
                     </div>
 
                     <div class="four wide field">
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="status" required>
+                            <input type="hidden" name="status" id="researchF" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Status</div>
                             <div class="menu">
@@ -63,10 +65,10 @@
                     <div class="four wide field">
                         <div class="field">
                             <label>Submission Date</label>
-                             <div class="ui calendar" id="rangesub">
+                             <div class="ui calendar" id="rangestart2">
                                       <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="Submission" name="sub">
+                                        <input type="text" placeholder="Submission" id="researchD" name="sub">
                                       </div>
                                 </div>
                         </div>
@@ -77,7 +79,7 @@
                              <div class="ui calendar" id="rangestart">
                                       <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="Start" name="start" required>
+                                        <input type="text" placeholder="Start" name="start" id="researchG" required>
                                       </div>
                                 </div>
                         </div>
@@ -88,7 +90,7 @@
                              <div class="ui calendar" id="rangeend">
                                       <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="End" name="end">
+                                        <input type="text" placeholder="End" name="end" id="researchH">
                                       </div>
                                 </div>
                         </div>
@@ -96,7 +98,7 @@
                     <div class="four wide field">
                         <div class="field">
                             <label>Financial Outlay</label>
-                            <input placeholder="" type="text" name="financial_outlay" required>
+                            <input placeholder="" type="text" name="financial_outlay" id="researchI" required>
                         </div>
                     </div>
 
@@ -107,7 +109,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title of Project</label>
-                            <input placeholder="Title" type="text" name="title" required>
+                            <input placeholder="Title" id="researchB" type="text" name="title" required>
                         </div>
                     </div>
 
@@ -150,19 +152,19 @@
             <tbody>
             {% for project in projects %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
-                <td><b>PI: </b>{{ project.pi }}<br/><b>Co-PI: </b>{{ project.co_pi }}</td>
-                <td>{{ project.title }}</td>
-                <td>{{ project.funding_agency }}</td>
-                <td >
+                <td id="research{{ forloop.counter }}Z"><div style="display: none;">{{ project.id }}</div>{{ forloop.counter }}.</td>
+                <td id="research{{ forloop.counter }}A"><b>PI: </b>{{ project.pi }}<br><b>Co-PI: </b>{{ project.co_pi }}</td>
+                <td id="research{{ forloop.counter }}B">{{ project.title }}</td>
+                <td id="research{{ forloop.counter }}C">{{ project.funding_agency }}</td>
+                <td id="research{{ forloop.counter }}D">
                     <b>Submission Date:</b> {{ project.date_submission }}  <br>
                     <b>Start Date:</b> {{ project.start_date }}  <br>
-                    <b>Expected Finish Date:  </b>   {{ project.finish_date }}         <br>
-                    <b>Financial Outlay :</b>  {{ project.financial_outlay }}<br>
+                    <b>Expected Finish Date: </b>{{ project.finish_date }}<br>
+                    <b>Financial Outlay :</b>{{ project.financial_outlay }}<br>
                     <b>Status :</b>  {{ project.status }}
 
                 </td>
-                <td> <i class="edit icon" style="font-size:1.3vw ; color:blue;"></i><br><a class="centered raised item" href="{% url 'eis:emp_research_projectsDelete' project.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i><br>
+                <td> <a onclick="updateRESEARCH({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_projectsDelete' project.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i><br>
                 </a>  </td>
             </tr>
             {% endfor %}
@@ -197,16 +199,17 @@
         <h4 class="ui dividing header">Add a Consultancy Project</h4>
         <form class="ui form"  method="post" action="{% url 'eis:consult_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="consultancyZ" name="consultancy_id"></div>
             <div class="field">
                 <div class="two fields">
                     <div class="field">
                         <label>Consultant</label>
-                        <input placeholder="Consultant" type="text" required name="consultants">
+                        <input placeholder="Consultant" type="text"   name="consultants"  id="consultancyA" required>
                     </div>
 
                     <div class="field">
                         <label>Client</label>
-                        <input placeholder="Client" type="text" name="client" required>
+                        <input placeholder="Client" type="text"  name="client" id="consultancyC" required>
                     </div>
                 </div>
             </div>
@@ -215,7 +218,7 @@
                 <label>Financial Outlay</label>
                 <div class="fields">
                     <div class="six wide field">
-                        <input placeholder="Publisher" type="number" name="financial_outlay" required>
+                        <input placeholder="Publisher" type="number"   name="financial_outlay"  id="consultancyD" required>
                     </div>
 
                     <div class="four wide field">
@@ -223,7 +226,7 @@
                              <div class="ui calendar" id="rangestart1">
                                       <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="Start" name="start" required>
+                                        <input type="text" placeholder="Start" name="start" id="consultancyE" required>
                                       </div>
                                 </div>
                         </div>
@@ -235,7 +238,7 @@
                               <div class="ui calendar" id="rangeend1">
                                  <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="End" name="end" required>
+                                        <input type="text" placeholder="End" name="end" id="consultancyF" required>
                                       </div>
                             </div>
 
@@ -247,7 +250,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" required name="title">
+                            <input placeholder="Title" type="text"   name="title" id="consultancyB" required>
                         </div>
                     </div>
 
@@ -289,14 +292,14 @@
 
             <tbody>
             {% for consult in consultancy %}
-            <tr>
-                  <td>{{ forloop.counter }}.</td>
-                 <td>{{ consult.consultants }}</td>
-                 <td>{{ consult.title }}</td>
-                 <td>{{ consult.client }}</td>
-                 <td>{{ consult.financial_outlay }}</td>
-                 <td>From: {{ consult.start_date }}<br/>To: {{ consult.end_date }}</td>
-                 <td><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i><br><a class="centered raised item" href="{% url 'eis:emp_consultancy_projectsDelete' consult.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
+            <tr id="r1">
+                 <td id="consultancy{{ forloop.counter }}Z"><div style="display: none;">{{ consult.id }}</div>{{ forloop.counter }}.</td>
+                 <td id="consultancy{{ forloop.counter }}A">{{ consult.consultants }}</td>
+                 <td id="consultancy{{ forloop.counter }}B">{{ consult.title }}</td>
+                 <td id="consultancy{{ forloop.counter }}C">{{ consult.client }}</td>
+                 <td id="consultancy{{ forloop.counter }}D">{{ consult.financial_outlay }}</td>
+                 <td id="consultancy{{ forloop.counter }}E">From: {{ consult.start_date }}<br/>To: {{ consult.end_date }}</td>
+                <td><a onclick="updateCONSULTANCY({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_consultancy_projectsDelete' consult.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
             </tr>
             {% endfor %}
 
@@ -329,11 +332,12 @@
         <h4 class="ui dividing header">Add a  Patent</h4>
         <form class="ui form"  method="post" action="{% url 'eis:patent_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="patentZ" name="patent_id"></div>
             <div class="field">
                 <div class="two fields">
                     <div class="field">
                         <label>Patent Number</label>
-                        <input placeholder="Patent Number" type="text" name="p_no" required>
+                        <input placeholder="Patent Number" id="patentA" type="text" name="p_no" required>
                     </div>
 
                     <div class="field">
@@ -349,7 +353,7 @@
                         </div></label> -->
                         <label><br></label>
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="status" required>
+                            <input type="hidden" name="status"  id="patentC" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Status</div>
                             <div class="menu">
@@ -368,12 +372,12 @@
                 <label>Earning(in Rs.)</label>
                 <div class="fields">
                     <div class="twelve wide field">
-                        <input placeholder="Publisher" type="number" name="earnings" required>
+                        <input placeholder="Publisher" id="patentE" type="number" name="earnings" required>
                     </div>
 
                     <div class="four wide field">
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="year" required>
+                            <input type="hidden" name="year" id="patentD" required>
                             <i class="dropdown icon" ></i>
                             <div class="default text">Year</div>
                             <div class="menu">
@@ -404,7 +408,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" name="title" required>
+                            <input placeholder="Title" id="patentB" type="text" name="title" required>
                         </div>
                     </div>
 
@@ -446,13 +450,13 @@
 
             <tbody>{% for patent in patents %}
             <tr>
-                 <td>{{ forloop.counter }}.</td>
-                 <td>{{ patent.p_no }}</td>
-                 <td>{{ patent.title }}</td>
-                 <td>{{ patent.status }}</td>
-                 <td>{{ patent.p_year }}</td>
-                 <td>{{ patent.earnings }}</td>
-                 <td><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i><br><a class="centered raised item" href="{% url 'eis:emp_patentsDelete' patent.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </a></td>
+                 <td id="patent{{ forloop.counter }}Z"><div style="display: none;">{{ patent.id }}</div>{{ forloop.counter }}.</td>
+                 <td id="patent{{ forloop.counter }}A">{{ patent.p_no }}</td>
+                 <td id="patent{{ forloop.counter }}B">{{ patent.title }}</td>
+                 <td id="patent{{ forloop.counter }}C">{{ patent.status }}</td>
+                 <td id="patent{{ forloop.counter }}D">{{ patent.p_year }}</td>
+                 <td id="patent{{ forloop.counter }}E">{{ patent.earnings }}</td>
+                <td><a onclick="updatePATENT({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_patentsDelete' patent.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
             </tr>
             {% endfor %}
             </tbody>
@@ -486,11 +490,12 @@
         <h4 class="ui dividing header">Add a Technology Transfer</h4>
         <form class="ui form"  method="post" action="{% url 'eis:transfer_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="techZ" name="tech_id"></div>
             <div class="field">
                 <div class="fourteen wide field">
                     <div class="field">
                         <label>Details</label>
-                        <input placeholder="Details" type="text" name="details" required>
+                        <input placeholder="Details" type="text" id="techA" name="details" required>
                     </div>
                 </div>
 
@@ -523,9 +528,9 @@
             <tbody>
            {% for techtransfer in techtransfers %}
             <tr>
-                   <td>{{ forloop.counter }}.</td>
-                <td class="" colspan="4">{{ techtransfer.details }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i><br><a class="centered raised item" href="{% url 'eis:emp_techtransferDelete' techtransfer.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
+                <td id="tech{{ forloop.counter }}Z"><div style="display: none;">{{ techtransfer.id }}</div>{{ forloop.counter }}.</td>
+                <td class="" colspan="4" id="tech{{ forloop.counter }}A">{{ techtransfer.details }}</td>
+                <td><a onclick="updateTECH({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_techtransferDelete' techtransfer.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
             </tr>
             {% endfor %}
             </tbody>
