@@ -722,13 +722,20 @@ def talk_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_expert_lectures()
+    if (request.POST.get('lec_id')==None or request.POST.get('lec_id')==""):
+        eis = emp_expert_lectures()
+    else:
+        eis = get_object_or_404(emp_expert_lectures, id=request.POST.get('lec_id'))
     eis.pf_no = pf
     print(eis.pf_no)
     eis.l_type = request.POST.get('type')
     eis.place = request.POST.get('place')
     eis.title = request.POST.get('title')
-    eis.l_date = datetime.datetime.strptime(request.POST.get('l_date'), "%B %d, %Y")
+    try:
+        eis.l_date = datetime.datetime.strptime(request.POST.get('l_date'), "%B %d, %Y")
+        print(eis.l_date)
+    except:
+        eis.l_date = datetime.datetime.strptime(request.POST.get('l_date'), "%b. %d, %Y")
 
     eis.save()
     return redirect('eis:profile')

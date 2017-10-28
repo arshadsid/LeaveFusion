@@ -581,6 +581,9 @@
                       }
 
                       function updateLEC(_row){
+                      var p = document.getElementById("lec"+_row+"Z").innerHTML.search(">");
+                                var pend = document.getElementById("lec"+_row+"Z").innerHTML.indexOf("<",5);
+                                document.getElementById("lecZ").value=document.getElementById("lec"+_row+"Z").innerHTML.slice(p+1,pend);
                         for(var i=0;i<cols.length;i++)  {
                           var _temp=document.getElementById("lec"+_row+cols[i]).innerHTML;
 
