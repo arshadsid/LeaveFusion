@@ -60,9 +60,9 @@
         <option value="$PROJECT_DIR$/eis/models.py" />
         <option value="$PROJECT_DIR$/eis/templates/eis/eisModule/others.html" />
         <option value="$PROJECT_DIR$/eis/templates/eis/eisModule/eventorganized.html" />
-        <option value="$PROJECT_DIR$/eis/views.py" />
         <option value="$PROJECT_DIR$/eis/templates/eis/eisModule/profile.html" />
         <option value="$PROJECT_DIR$/eis/templates/eis/eisModule/publications.html" />
+        <option value="$PROJECT_DIR$/eis/views.py" />
       </list>
     </option>
   </component>
