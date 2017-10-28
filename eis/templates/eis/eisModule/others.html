@@ -295,6 +295,7 @@
         <h4 class="ui dividing header">Add a  Session Chaired</h4>
               <form class="ui form"  method="post" action="{% url 'eis:chaired_insert' %}">
             {% csrf_token %}
+                              <div style="display: none;"> <input type="text" id="sessionZ" name="ses_id"></div>
             <div class="field">
                 <div class="two fields">
                     
@@ -377,7 +378,7 @@
             <tbody>
              {% for chair in chairs %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
+                <td id="session{{ forloop.counter }}Z"><div style="display: none;">{{ chair.id }}</div>{{ forloop.counter }}.</td>
                 <td class=""  id="session{{ forloop.counter }}A">{{ chair.name }}</td>
                 <td class="" id="session{{ forloop.counter }}B">{{ chair.event }}</td>
                 <td id="session{{ forloop.counter }}C">{{ chair.start_date }} - {{ chair.end_date }}</td>

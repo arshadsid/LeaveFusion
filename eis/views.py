@@ -745,16 +745,26 @@ def chaired_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_session_chair()
+    if (request.POST.get('ses_id')==None or request.POST.get('ses_id')==""):
+        eis = emp_session_chair()
+    else:
+        eis = get_object_or_404(emp_session_chair, id=request.POST.get('ses_id'))
     eis.pf_no = pf
     print(eis.pf_no)
     eis.event = request.POST.get('event')
     eis.name = request.POST.get('name')
     eis.s_year = request.POST.get('s_year')
-    eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-    print(eis.start_date)
-    eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-    print(eis.end_date)
+    try:
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
+        print(eis.start_date)
+    except:
+        eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
+        print(eis.start_date)
+    try:
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
+        print(eis.end_date)
+    except:
+        eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
 
     eis.save()
     return redirect('eis:profile')

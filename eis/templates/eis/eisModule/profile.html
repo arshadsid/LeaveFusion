@@ -593,6 +593,9 @@
 
 
                        function updateSESSION(_row){
+                       var p = document.getElementById("session"+_row+"Z").innerHTML.search(">");
+                                var pend = document.getElementById("session"+_row+"Z").innerHTML.indexOf("<",5);
+                                document.getElementById("sessionZ").value=document.getElementById("session"+_row+"Z").innerHTML.slice(p+1,pend);
                         for(var i=0;i<cols.length;i++)  {
                           var _temp=document.getElementById("session"+_row+cols[i]).innerHTML;
 
