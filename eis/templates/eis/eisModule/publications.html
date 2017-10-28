@@ -24,6 +24,7 @@
         <h4 class="ui dividing header">Add a Journal</h4>
         <form class="ui form"  method="post" action="{% url 'eis:journal_insert' %}">
             {% csrf_token %}
+            <div style="display: none;"> <input type="text" id="pubZ" name="pub_id"></div>
             <div class="field">
                 <div class="two fields">
                     <div class="field">
@@ -94,22 +95,22 @@
                         <div class=" four fields">
                                <div class="field">
                                 <label>Volume No./Issue No.</label>
-                                <input placeholder="Volume No./Issue No." type="text" name="volume">
+                                <input placeholder="Volume No./Issue No." type="text" name="volume" id="pubE">
                                </div>
                              <div class="  field">
                                 <label>Page No.</label>
-                                <input placeholder="Page No." type="text" name="page">
+                                <input placeholder="Page No." type="text" name="page" id="pubF">
                             </div>
                              <div class=" field">
                                 <label>Paper Reference No.</label>
-                                <input placeholder="Paper Reference No." type="text" name="ref">
+                                <input placeholder="Paper Reference No." type="text" name="ref" id="pubG">
                             </div>
                              <div class="field">
                                 <label>Date of Submission</label>
                                   <div class="ui calendar" id="example2">
                                     <div class="ui input left icon">
                                       <i class="calendar icon"></i>
-                                      <input type="text" placeholder="DOS" name="dos">
+                                      <input type="text" placeholder="DOS" name="dos"  id="pubH">
                                     </div>
                                   </div>
                                 </div>
@@ -123,7 +124,7 @@
                                   <div class="ui calendar" id="example2a">
                                     <div class="ui input left icon">
                                       <i class="calendar icon"></i>
-                                      <input type="text" placeholder="DOP" name="dop">
+                                      <input type="text" placeholder="DOP" name="dop"  id="pubI">
                                     </div>
                                   </div>
                                 </div>
@@ -132,7 +133,7 @@
                                         <label>Status</label>
                                         <!--<input placeholder="Status" type="text">-->
                                            <div class="ui fluid search selection dropdown">
-                                            <input type="hidden"  name="status">
+                                            <input type="hidden"  name="status" id="pubJ">
                                             <i class="dropdown icon"></i>
                                             <div class="default text">Status</div>
                                                 <div class="menu">
@@ -147,7 +148,7 @@
                                  <div class=" field">
                                 <label>SCI/SCIE</label>
                                      <div class="ui fluid search selection dropdown">
-                                            <input type="hidden"  name="sci">
+                                            <input type="hidden"  name="sci"  id="pubK">
                                             <i class="dropdown icon"></i>
                                             <div class="default text">SCI/SCIE</div>
                                                 <div class="menu">
@@ -163,7 +164,7 @@
                                            <div class="ui calendar" id="example2b">
                                             <div class="ui input left icon">
                                               <i class="calendar icon"></i>
-                                              <input type="text" placeholder="DOI"  name="doi">
+                                              <input type="text" placeholder="DOI"  name="doi" id="pubL">
                                             </div>
                                           </div>   
                                   </div>
@@ -194,16 +195,16 @@
             <tbody>
             {% for j in journal %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
+                <td id="pub{{ forloop.counter }}Z"><div style="display: none;">{{ j.id }}</div>{{ forloop.counter }}.</td>
                 <td id="pub{{ forloop.counter }}A">{{ j.authors }}</td>
                 <td id="pub{{ forloop.counter }}B">{{ j.title_paper }}</td>
-                <td id="pub{{ forloop.counter }}C"><b>Name of the Journal:</b> {{ j.name_journal }}
-                    <b>Volume No./Issue No.:</b> {{ j.volume_no }} <br>
+                <td id="pub{{ forloop.counter }}C"><b>Name of the Journal: </b>{{ j.name_journal }}<br>
+                    <b>Volume No./Issue No.: </b>{{ j.volume_no }} <br>
                                     <b>Page No.:</b> {{ j.page_no }}    <br>
                                     <b>Paper Reference No. :</b> {{ j.reference_number }} <br>
                                     <b>Date Of Submission :</b> {{ j.date_submission }}  <br>
                                     <b>Date of Publication :</b> {{ j.date_publication }}  <br>
-                                    <b>Status             :</b> {{ j.status }}  <br>
+                                    <b>Status:</b> {{ j.status }}  <br>
                                     <b>SCI/SCIE        : </b>{{ j.is_sci }} <br>
                                     <b>Date of Issuance :</b>  {{ j.doi }}
 
@@ -248,6 +249,7 @@
         <h4 class="ui dividing header">Add a Conference</h4>
        <form class="ui form"  method="post" action="{% url 'eis:confrence_insert' %}">
             {% csrf_token %}
+           <div style="display: none;"> <input type="text" id="conZ" name="con_id"></div>
             <div class="field">
                 <div class="two fields">
                     <div class="field">
@@ -374,9 +376,18 @@
                         </div>
                             </div>
                              <div class=" field">
-                                <label>Conference Date(s)</label>
-                                <input placeholder="SCI/SCIE" type="text"  name="sci">
-                            </div>
+                                <label>SCI/SCIE</label>
+                                     <div class="ui fluid search selection dropdown">
+                                            <input type="hidden"  name="sci"  id="pubK">
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text">SCI/SCIE</div>
+                                                <div class="menu">
+                                                    <div class="item" data-value="Yes">Yes</div>
+                                                    <div class="item" data-value="No">No</div>
+
+                                                </div>
+                                        </div>
+                              </div>
                              <div class="field">
                                 <label>ISBN No</label>
                                 <input placeholder="Date of Issuance" type="text" name="isbn">
@@ -415,7 +426,7 @@
             <tbody>
             {% for c in conference %}
             <tr>
-                   <td>{{ forloop.counter }}.</td>
+                <td id="con{{ forloop.counter }}Z"><div style="display: none;">{{ c.id }}</div>{{ forloop.counter }}.</td>
                 <td id="con{{ forloop.counter }}A">{{ c.authors }}</td>
                 <td id="con{{ forloop.counter }}B">{{ c.title_paper }}</td>
                 <td id="con{{ forloop.counter }}C">

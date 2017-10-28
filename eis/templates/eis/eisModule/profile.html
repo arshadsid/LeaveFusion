@@ -630,47 +630,77 @@
                       }
 
 
-                       function updateACH(_row){
-                       var p = document.getElementById("ach"+_row+"Z").innerHTML.search(">");
-                                var pend = document.getElementById("ach"+_row+"Z").innerHTML.indexOf("<",5);
-                                document.getElementById("achZ").value=document.getElementById("ach"+_row+"Z").innerHTML.slice(p+1,pend);
-                           for(var i=0;i<cols.length;i++)  {
-                               var _temp=document.getElementById("ach"+_row+cols[i]).innerHTML;
-                               if(i == 2){
-                                   document.getElementById("achE").value=_temp.slice(_temp.length-4,_temp.length);
-                                   if(_temp.search("/")>0){
-                                           if(_temp.lastIndexOf("/") != _temp.indexOf("/")){
-                                               document.getElementById("achC").value=_temp.slice(0,_temp.indexOf("/")-1);
-                                               document.getElementById("achF").value=_temp.slice(_temp.indexOf("/")+2,_temp.lastIndexOf("/")-1);
-                                           }
-                                           else{
-                                                document.getElementById("achF").value=_temp.slice(0,_temp.indexOf("/")-1);
-                                           }
-                                   }
-                               }
-                               else{
-                                    document.getElementById("ach"+cols[i]).value=_temp;
-                              }
-                          }
-                      }
+function updateACH(_row){
+    var p = document.getElementById("ach"+_row+"Z").innerHTML.search(">");
+    var pend = document.getElementById("ach"+_row+"Z").innerHTML.indexOf("<",5);
+    document.getElementById("achZ").value=document.getElementById("ach"+_row+"Z").innerHTML.slice(p+1,pend);
+    for(var i=0;i<cols.length;i++)  {
+        var _temp=document.getElementById("ach"+_row+cols[i]).innerHTML;
+        if(i == 2){
+            document.getElementById("achE").value=_temp.slice(_temp.length-4,_temp.length);
+            if(_temp.search("/")>0){
+                if(_temp.lastIndexOf("/") != _temp.indexOf("/")){
+                    document.getElementById("achC").value=_temp.slice(0,_temp.indexOf("/")-1);
+                    document.getElementById("achF").value=_temp.slice(_temp.indexOf("/")+2,_temp.lastIndexOf("/")-1);
+                }
+                else{
+                    document.getElementById("achF").value=_temp.slice(0,_temp.indexOf("/")-1);
+                }
+            }
+        }
+        else{
+            document.getElementById("ach"+cols[i]).value=_temp;
+        }
+    }
+}
 
-                      function updatePUB(_row){
-                        for(var i=0;i<cols.length;i++)  {
-                          var _temp=document.getElementById("pub"+_row+cols[i]).innerHTML;
+function updatePUB(_row){
+    var p = document.getElementById("pub"+_row+"Z").innerHTML.search(">");
+    var pend = document.getElementById("pub"+_row+"Z").innerHTML.indexOf("<",5);
+    document.getElementById("pubZ").value=document.getElementById("pub"+_row+"Z").innerHTML.slice(p+1,pend);
+    for(var i=0;i<cols.length;i++)  {
+        var _temp=document.getElementById("pub"+_row+cols[i]).innerHTML;
+        if(i == 2){
+            document.getElementById("pubC").value = _temp.slice(_temp.indexOf("Journal")+13,_temp.indexOf("<br>",_temp.indexOf("Journal"))).trim();
+            document.getElementById("pubE").value = _temp.slice(_temp.indexOf("Volume No./Issue No.: </b>")+26,_temp.indexOf("<br>",_temp.indexOf("Volume No./Issue No.: </b>"))).trim();
+            document.getElementById("pubF").value = _temp.slice(_temp.indexOf("Page")+14,_temp.indexOf("<br>",_temp.indexOf("Page"))).trim();
+            document.getElementById("pubG").value = _temp.slice(_temp.indexOf("Reference ")+20,_temp.indexOf("<br>",_temp.indexOf("Reference "))).trim();
+            document.getElementById("pubH").value = _temp.slice(_temp.indexOf("Submission ")+17,_temp.indexOf("<br>",_temp.indexOf("Submission "))).trim();
+            document.getElementById("pubI").value = _temp.slice(_temp.indexOf("Publication")+18,_temp.indexOf("<br>",_temp.indexOf("Publication"))).trim();
+            document.getElementById("pubJ").value = _temp.slice(_temp.indexOf("Status")+12,_temp.indexOf("<br>",_temp.indexOf("Status"))).trim();
+            document.getElementById("pubK").value = _temp.slice(_temp.indexOf("SCIE ")+18,_temp.indexOf("<br>",_temp.indexOf("SCIE "))).trim();
+            document.getElementById("pubL").value = _temp.slice(_temp.indexOf("Issuance")+16,_temp.indexOf("<br>",_temp.indexOf("Issuance"))).trim();
+        }
+        else{
+            document.getElementById("pub"+cols[i]).value=_temp;
+        }
+    }
+}
 
-                         document.getElementById("pub"+cols[i]).value=_temp;
-                        }
-                      }
 
 
-
-                       function updateCON(_row){
-                        for(var i=0;i<cols.length;i++)  {
-                          var _temp=document.getElementById("con"+_row+cols[i]).innerHTML;
-
-                         document.getElementById("con"+cols[i]).value=_temp;
-                        }
-                      }
+function updateCON(_row){
+    var p = document.getElementById("con"+_row+"Z").innerHTML.search(">");
+    var pend = document.getElementById("con"+_row+"Z").innerHTML.indexOf("<",5);
+    document.getElementById("conZ").value=document.getElementById("con"+_row+"Z").innerHTML.slice(p+1,pend);
+    for(var i=0;i<cols.length;i++)  {
+        var _temp=document.getElementById("con"+_row+cols[i]).innerHTML;
+        if(i == 2){
+            document.getElementById("conC").value = _temp.slice(_temp.indexOf("Confrence")+13,_temp.indexOf("<br>",_temp.indexOf("Confrence"))).trim();
+            document.getElementById("conE").value = _temp.slice(_temp.indexOf("Institute")+16,_temp.indexOf("<br>",_temp.indexOf("Institute"))).trim();
+            document.getElementById("conF").value = _temp.slice(_temp.indexOf("Submission(DOS)")+14,_temp.indexOf("<br>",_temp.indexOf("Submission(DOS)"))).trim();
+            document.getElementById("conG").value = _temp.slice(_temp.indexOf("Acceptance(DOA)")+20,_temp.indexOf("<br>",_temp.indexOf("Acceptance(DOA)"))).trim();
+            document.getElementById("conH").value = _temp.slice(_temp.indexOf("Publication(DOP)")+17,_temp.indexOf("<br>",_temp.indexOf("Publication(DOP)"))).trim();
+            document.getElementById("conI").value = _temp.slice(_temp.indexOf("Page ")+18,_temp.indexOf("<br>",_temp.indexOf("Page "))).trim();
+            document.getElementById("conJ").value = _temp.slice(_temp.indexOf("Status")+12,_temp.indexOf("<br>",_temp.indexOf("Status"))).trim();
+            document.getElementById("conK").value = _temp.slice(_temp.indexOf("SCIE ")+18,_temp.indexOf("<br>",_temp.indexOf("SCIE "))).trim();
+            document.getElementById("conL").value = _temp.slice(_temp.indexOf("ISBN ")+16,_temp.indexOf("<br>",_temp.indexOf("ISBN "))).trim();
+        }
+        else{
+            document.getElementById("con"+cols[i]).value=_temp;
+        }
+    }
+}
 
 
 

@@ -513,7 +513,10 @@ def journal_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_research_papers()
+    if (request.POST.get('pub_id')==None or request.POST.get('pub_id')==""):
+        eis = emp_research_papers()
+    else:
+        eis = get_object_or_404(emp_research_papers, id=request.POST.get('pub_id'))
     eis.pf_no = pf
     eis.rtype = 'Journal'
     print(eis.pf_no)
@@ -540,14 +543,26 @@ def journal_insert(request):
     eis.reference_number = request.POST.get('ref')
     print('Refrence: '+eis.reference_number)
 
-    if(request.POST.get('doi') != None and request.POST.get('doi') != ''):
-        eis.doi = datetime.datetime.strptime(request.POST.get('doi'), "%B %d, %Y")
-    if (request.POST.get('doa') != None and request.POST.get('doa') != ''):
-        eis.date_acceptance = datetime.datetime.strptime(request.POST.get('doa'), "%B %d, %Y")
-    if (request.POST.get('dop') != None and request.POST.get('dop') != ''):
-        eis.date_publication = datetime.datetime.strptime(request.POST.get('dop'), "%B %d, %Y")
-    if (request.POST.get('dos') != None and request.POST.get('dos') != ''):
-        eis.date_submission = datetime.datetime.strptime(request.POST.get('dos'), "%B %d, %Y")
+    if(request.POST.get('doi') != None and request.POST.get('doi') != '' and request.POST.get('doi') != 'None'):
+        try:
+            eis.doi = datetime.datetime.strptime(request.POST.get('doi'), "%B %d, %Y")
+        except:
+            eis.doi = datetime.datetime.strptime(request.POST.get('doi'), "%b. %d, %Y")
+    if (request.POST.get('doa') != None and request.POST.get('doa') != '' and request.POST.get('doa') != 'None'):
+        try:
+            eis.date_acceptance = datetime.datetime.strptime(request.POST.get('doa'), "%B %d, %Y")
+        except:
+            eis.date_acceptance = datetime.datetime.strptime(request.POST.get('doa'), "%b. %d, %Y")
+    if (request.POST.get('dop') != None and request.POST.get('dop') != '' and request.POST.get('dop') != 'None'):
+        try:
+            eis.date_publication = datetime.datetime.strptime(request.POST.get('dop'), "%B %d, %Y")
+        except:
+            eis.date_publication = datetime.datetime.strptime(request.POST.get('dop'), "%b. %d, %Y")
+    if (request.POST.get('dos') != None and request.POST.get('dos') != '' and request.POST.get('dos') != 'None'):
+        try:
+            eis.date_submission = datetime.datetime.strptime(request.POST.get('dos'), "%B %d, %Y")
+        except:
+            eis.date_submission = datetime.datetime.strptime(request.POST.get('dos'), "%b. %d, %Y")
 
     eis.save()
     return redirect('eis:profile')
@@ -557,7 +572,10 @@ def confrence_insert(request):
     print(user)
     pf = user.unique_id
 
-    eis = emp_research_papers()
+    if (request.POST.get('con_id')==None or request.POST.get('con_id')==""):
+        eis = emp_research_papers()
+    else:
+        eis = get_object_or_404(emp_research_papers, id=request.POST.get('con_id'))
     eis.pf_no = pf
     eis.rtype = 'Conference'
     print(eis.pf_no)
@@ -588,14 +606,26 @@ def confrence_insert(request):
     eis.reference_number = request.POST.get('reference_number')
     print(eis.reference_number)
 
-    if (request.POST.get('doi') != None and request.POST.get('doi') != ''):
-        eis.doi = datetime.datetime.strptime(request.POST.get('doi'), "%B %d, %Y")
-    if (request.POST.get('doa') != None and request.POST.get('doa') != ''):
-        eis.date_acceptance = datetime.datetime.strptime(request.POST.get('doa'), "%B %d, %Y")
-    if (request.POST.get('dop') != None and request.POST.get('dop') != ''):
-        eis.date_publication = datetime.datetime.strptime(request.POST.get('dop'), "%B %d, %Y")
-    if (request.POST.get('dos') != None and request.POST.get('dos') != ''):
-        eis.date_submission = datetime.datetime.strptime(request.POST.get('dos'), "%B %d, %Y")
+    if (request.POST.get('doi') != None and request.POST.get('doi') != '' and request.POST.get('doi') != 'None'):
+        try:
+            eis.doi = datetime.datetime.strptime(request.POST.get('doi'), "%B %d, %Y")
+        except:
+            eis.doi = datetime.datetime.strptime(request.POST.get('doi'), "%b. %d, %Y")
+    if (request.POST.get('doa') != None and request.POST.get('doa') != '' and request.POST.get('doa') != 'None'):
+        try:
+            eis.date_acceptance = datetime.datetime.strptime(request.POST.get('doa'), "%B %d, %Y")
+        except:
+            eis.date_acceptance = datetime.datetime.strptime(request.POST.get('doa'), "%b. %d, %Y")
+    if (request.POST.get('dop') != None and request.POST.get('dop') != '' and request.POST.get('dop') != 'None'):
+        try:
+            eis.date_publication = datetime.datetime.strptime(request.POST.get('dop'), "%B %d, %Y")
+        except:
+            eis.date_publication = datetime.datetime.strptime(request.POST.get('dop'), "%b. %d, %Y")
+    if (request.POST.get('dos') != None and request.POST.get('dos') != '' and request.POST.get('dos') != 'None'):
+        try:
+            eis.date_submission = datetime.datetime.strptime(request.POST.get('dos'), "%B %d, %Y")
+        except:
+            eis.date_submission = datetime.datetime.strptime(request.POST.get('dos'), "%b. %d, %Y")
     eis.save()
     return redirect('eis:profile')
 
@@ -794,6 +824,7 @@ def project_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
     print(user)
     pf = user.unique_id
+
 
     eis = emp_research_projects()
     eis.pf_no = pf
