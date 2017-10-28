@@ -35,9 +35,9 @@
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Role</div>
                                     <div class="menu">
-                                        <div class="item" data-value="Training Program" >Convener</div>
-                                        <div class="item" data-value="Workshop" >Co-Convener</div>
-                                        <div class="item" data-value="Short-Term Program">Co-ordinator</div>
+                                        <div class="item" data-value="Convener" >Convener</div>
+                                        <div class="item" data-value="Co-Convener" >Co-Convener</div>
+                                        <div class="item" data-value="Co-ordinator">Co-ordinator</div>
                                         
                                        
                                         
@@ -47,7 +47,7 @@
 
                     <div class="field">
                         <label>Sponsoring Agency</label>
-                        <input placeholder="Sponsoring Agency" type="text" name="sponsoring_agency" id="eventB" required>
+                        <input placeholder="Sponsoring Agency" type="text" name="sponsoring_agency" id="eventC" required>
                     </div>
                 </div>
             </div>
@@ -88,20 +88,20 @@
                      <div class="six wide field">
                             <div class="field">
                                     <label>Venue</label>
-                                    <input placeholder="Venue" type="text"  name="venue"  id="eventC" required>
+                                    <input placeholder="Venue" type="text"  name="venue"  id="eventF" required>
                                 </div>
                         </div>  
 
                             <div class="four wide field">
                               <label>Event Type</label>
                                 <div class="ui fluid search selection dropdown">
-                                    <input type="hidden"  name="type" required>
+                                    <input type="hidden"  name="type" id="eventG" required>
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Event Type</div>
                                     <div class="menu">
                                         <!-- <div class="item" data-value="Training Program" onclick="myFunction1()">Organised</div> -->
                                         <div class="item" data-value="Workshop" onclick="myFunction1()">Workshop</div>
-                                        <div class="item" data-value="Short-Term Program"onclick="myFunction1()">Short-Term Program</div>
+                                        <div class="item" data-value="Short-Term Program" onclick="myFunction1()">Short-Term Program</div>
                                          <div class="item" data-value="Training Program" onclick="myFunction1()">Training Program</div>
                                             <div class="item" data-value="Any Other" onclick="myFunction()">Any Other</div>
                                        
@@ -116,7 +116,11 @@
                 </div>
 
                 <div class="fields">
-                  
+
+                    <div class=" fourteen wide field">
+                          <label>Name</label>
+                          <input placeholder="Name" type="text"  name="name"  id="eventB" required>
+                    </div>
                     
 
                     <div class="two wide field">
@@ -125,6 +129,7 @@
                             Save<i class="ui save icon right floated"></i>
                         </button>
                     </div>
+
                 </div>
 
             </div>
@@ -135,27 +140,28 @@
        <table class="ui fixed sortable celled table">
             <thead>
             <tr>
-                <th class="sorted ascending" style="width: 7%;">Sr.</th>
-                <th class="" style="width: 20%;" >Role</th>
-                <th class="" style="width: 23%;">Sponsoring Agency </th>
-                <th class="" style="width: 10%;">Venue</th>
-                 <th style="width:15%">From-TO</th>
-                <th style="width:15%">Type</th>
-                <th class="" style="width: 10 %;">Action</th>
-            </tr>
+                <th class="sorted ascending" style="width:7%">Sr.</th>
+                <th class="" style="width: 15%">Role</th>
+                <th class="" style="width:23%"> Name </th>
+                <th class="" style="width:25%">Event Details</th>
+                 <th style="width:20%">From-TO</th>
+               
+                <th class="" style="width:10%" >Action</th>       
+   
+                    </tr>
             </thead>
 
 
             <tbody>
             {% for event in events %}
-            <tr id="r1">
-                <td id="event{{ forloop.counter }}Z"><div style="display: none;">{{ event.id }}</div>{{ forloop.counter }}.</td>
+            <tr id="r9">
+            <td id="event{{ forloop.counter }}Z"><div style="display: none;">{{ event.id }}</div>{{ forloop.counter }}.</td>
                 <td id="event{{ forloop.counter }}A">{{ event.role }}</td>
-                <td id="event{{ forloop.counter }}B">{{ event.sponsoring_agency }}</td>
-                <td id="event{{ forloop.counter }}C">{{ event.venue }}</td>
+                <td id="event{{ forloop.counter }}B">{{ event.name }}</td>
+                <td id="event{{ forloop.counter }}C"><b>Sponsoring Agency: </b>{{ event.sponsoring_agency }}<br><b>Venue: </b>{{ event.venue }}
+                <br><b>Type: </b>{{ event.type }}</td>
                 <td id="event{{ forloop.counter }}D">{{ event.start_date }} - {{ event.end_date }}</td>
-                <td>{{ event.type }}</td>
-            <td><a onclick="updateEVENT({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a> <br><a class="centered raised item" href="{% url 'eis:emp_event_organizedDelete' event.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i>
+                <td><a onclick="updateEVENT({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a> <br><a class="centered raised item" href="{% url 'eis:emp_event_organizedDelete' event.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i>
             </a> </td>
             </tr>
             {% endfor %}
@@ -191,8 +197,4 @@
 {% endblock %}
 
 
-<!-- code change starts -->
 
-
-
-<!-- code change ends -->

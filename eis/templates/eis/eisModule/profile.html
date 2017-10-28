@@ -565,6 +565,9 @@
 
                          function updateEVENT(_row){
                          var p = document.getElementById("event"+_row+"Z").innerHTML.search(">");
+                        var pend = document.getElementById("event"+_row+"Z").innerHTML.indexOf("<",5);
+                        document.getElementById("eventZ").value=document.getElementById("event"+_row+"Z").innerHTML.slice(p+1,pend);
+                         var p = document.getElementById("event"+_row+"Z").innerHTML.search(">");
                                 var pend = document.getElementById("event"+_row+"Z").innerHTML.indexOf("<",5);
                                 document.getElementById("eventZ").value=document.getElementById("event"+_row+"Z").innerHTML.slice(p+1,pend);
                         for(var i=0;i<cols.length;i++)  {
@@ -574,6 +577,11 @@
                                    var pos = _temp.search(" - ");
                                    document.getElementById("event"+cols[i]).value=_temp.slice(0, pos);
                                    document.getElementById("eventE").value=_temp.slice(pos+3, _temp.length);
+                                  }else if(i == 2){
+                                  document.getElementById("eventC").value=_temp.slice(_temp.search("</b>")+4, _temp.search("<br>"));
+                                  document.getElementById("eventF").value=_temp.slice(_temp.search("Venue: </b>")+11, _temp.indexOf(("<br>"),_temp.search("Venue: </b>"))).trim();
+                                  document.getElementById("eventG").value=_temp.slice(_temp.lastIndexOf("Type: </b>")+10, _temp.length);
+
                                   }else{
                                     document.getElementById("event"+cols[i]).value=_temp;
                                   }
@@ -645,6 +653,70 @@
                               }
                           }
                       }
+
+                      function updatePUB(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("pub"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("pub"+cols[i]).value=_temp;
+                        }
+                      }
+
+
+
+                       function updateCON(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("con"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("con"+cols[i]).value=_temp;
+                        }
+                      }
+
+
+
+
+
+                        function updateBOOKS(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("books"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("books"+cols[i]).value=_temp;
+                        }
+                      }
+
+                         function updateRESEARCH(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("research"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("research"+cols[i]).value=_temp;
+                        }
+                      }
+
+                         function updateCONSULTANCY(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("consultancy"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("consulatancy"+cols[i]).value=_temp;
+                        }
+                      }
+
+                          function updatePATENT(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("patent"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("patent"+cols[i]).value=_temp;
+                        }
+                      }
+
+
+                          function updateTECH(_row){
+                        for(var i=0;i<cols.length;i++)  {
+                          var _temp=document.getElementById("tech"+_row+cols[i]).innerHTML;
+
+                         document.getElementById("tech"+cols[i]).value=_temp;
+                        }
+                      }
+
     </script>
 
 

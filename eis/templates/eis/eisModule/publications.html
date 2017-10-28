@@ -28,7 +28,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>Author</label>
-                        <input placeholder="Author" type="text" name="authors" required>
+                        <input placeholder="Author" type="text" name="authors"  id="pubA"  required>
                     </div>
                 </div>
             </div>
@@ -37,12 +37,12 @@
                 <label>Journal details</label>
                 <div class="fields">
                     <div class="eight wide field">
-                        <input placeholder="Name of the Journal" type="text" name="name" required>
+                        <input placeholder="Name of the Journal" type="text" name="name"  id="pubC"  required>
                     </div>
 
                     <div class="four wide field">
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="year" required>
+                            <input type="hidden" name="year"  id="pubD"  required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Year</div>
                             <div class="menu">
@@ -73,7 +73,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" name="title" required>
+                            <input placeholder="Title" type="text" name="title"  id="pubB"  required>
                         </div>
                     </div>
 
@@ -180,13 +180,7 @@
         <table class="ui fixed sortable celled table">
             <thead>
             <tr>
-                <!--<th class="sorted ascending">Sr.</th>
-                <th class="">Authors</th>
-                <th class="">Title of Paper</th>
-                <th class="" colspan="2">Journal Details</th>
-                <th class="">Uploaded Document</th>
-                <th class="">Year</th>
-                <th class="">Action</th>-->
+                
                 <th class="sorted ascending" style="width: 7%;">Sr.</th>
                 <th class="" style="width: 20%;" >Authors</th>
                 <th class="" style="width: 20%;">Title of Paper</th>
@@ -201,9 +195,9 @@
             {% for j in journal %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td>{{ j.authors }}</td>
-                <td>{{ j.title_paper }}</td>
-                <td ><b>Name of the Journal:</b> {{ j.name_journal }}
+                <td id="pub{{ forloop.counter }}A">{{ j.authors }}</td>
+                <td id="pub{{ forloop.counter }}B">{{ j.title_paper }}</td>
+                <td id="pub{{ forloop.counter }}C"><b>Name of the Journal:</b> {{ j.name_journal }}
                     <b>Volume No./Issue No.:</b> {{ j.volume_no }} <br>
                                     <b>Page No.:</b> {{ j.page_no }}    <br>
                                     <b>Paper Reference No. :</b> {{ j.reference_number }} <br>
@@ -215,8 +209,8 @@
 
                 </td>
 
-                <td>{{ j.year }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' j.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red"></i></a></td>
+                <td id="pub{{ forloop.counter }}D">{{ j.year }}</td>
+                <td><a onclick="updatePUB({{ forloop.counter }})"> <i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' j.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red"></i></a></td>
             </tr>
 
             {% endfor %}
@@ -258,7 +252,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>Author</label>
-                        <input placeholder="Author" type="text" name="authors" required>
+                        <input placeholder="Author" type="text" name="authors" id="conA"  required>
                     </div>
 
                 </div>
@@ -268,13 +262,13 @@
                 <label>Conference details</label>
                 <div class="fields">
                     <div class="eight wide field">
-                        <input placeholder="Name of the Conference" type="text" name="name" required>
+                        <input placeholder="Name of the Conference" type="text" name="name" id="conC" required>
                     </div>
 
 
                     <div class="four wide field">
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="year" required>
+                            <input type="hidden" name="year" id="conD" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Year</div>
                             <div class="menu">
@@ -305,7 +299,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" name="title" required>
+                            <input placeholder="Title" type="text" name="title" id="conB" required>
                         </div>
                     </div>
 
@@ -422,9 +416,9 @@
             {% for c in conference %}
             <tr>
                    <td>{{ forloop.counter }}.</td>
-                <td>{{ c.authors }}</td>
-                <td>{{ c.title_paper }}</td>
-                <td >
+                <td id="con{{ forloop.counter }}A">{{ c.authors }}</td>
+                <td id="con{{ forloop.counter }}B">{{ c.title_paper }}</td>
+                <td id="con{{ forloop.counter }}C">
                     <b>Name of the Conference:</b> {{ c.name_journal }}  <br>
                     <b>Venue/Host Institute:</b> {{ c.venue }}  <br>
                     <b>Page No.:  </b>   {{ c.page_no }}         <br>
@@ -437,8 +431,8 @@
 
                 </td>
 
-                <td>{{ c.year }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue;"></i><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' c.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i><br>
+                <td id="con{{ forloop.counter }}D">{{ c.year }}</td>
+                <td><a onclick="updateCON({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' c.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i><br>
                 </a> </td>
             </tr>
             {% endfor %}
@@ -476,7 +470,7 @@
                     <div class="field">
                         <label>Published</label>
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="type" required>
+                            <input type="hidden" name="type"  id="booksA" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Published</div>
                             <div class="menu">
@@ -491,7 +485,7 @@
 
                     <div class="field">
                         <label>Co-author</label>
-                        <input placeholder="Co-author" type="text" name="co_authors" required>
+                        <input placeholder="Co-author" type="text" name="co_authors" id="booksE" required>
                     </div>
                 </div>
             </div>
@@ -500,12 +494,12 @@
                 <label>Publisher</label>
                 <div class="fields">
                     <div class="twelve wide field">
-                        <input placeholder="Publisher" type="text" name="publisher" required>
+                        <input placeholder="Publisher" type="text" name="publisher" id="booksC" required>
                     </div>
 
                     <div class="four wide field">
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="year" required>
+                            <input type="hidden" name="year" id="booksD" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Year</div>
                             <div class="menu">
@@ -526,7 +520,7 @@
                     <div class="fourteen wide field">
                         <div class="field">
                             <label>Title</label>
-                            <input placeholder="Title" type="text" name="title" required>
+                            <input placeholder="Title" type="text"  id="booksB"  name="title" required>
                         </div>
                     </div>
 
@@ -569,13 +563,13 @@
             <tbody>
             {% for b in books %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
-                <td>{{ b.p_type }}</td>
-                <td>{{ b.title }}</td>
-                <td>{{ b.publisher }}</td>
-                <td>{{ b.pyear }}</td>
-                <td>{{ b.co_authors }}</td>
-                <td><i class="edit icon" style="font-size:1.3vw;color:blue"></i><br><a class="centered raised item" href="{% url 'eis:emp_published_booksDelete' b.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
+                <td >{{ forloop.counter }}.</td>
+                <td id="books{{ forloop.counter }}A">{{ b.p_type }}</td>
+                <td id="books{{ forloop.counter }}B">{{ b.title }}</td>
+                <td id="books{{ forloop.counter }}C">{{ b.publisher }}</td>
+                <td id="books{{ forloop.counter }}D">{{ b.pyear }}</td>
+                <td id="books{{ forloop.counter }}E">{{ b.co_authors }}</td>
+                <td><a onclick="updateBOOKS({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_published_booksDelete' b.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
             </tr>
 
             {% endfor %}

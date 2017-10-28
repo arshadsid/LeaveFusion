@@ -690,7 +690,7 @@ def event_insert(request):
         print(eis.end_date)
     except:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
-
+    print(request.POST.get('role'))
     eis.save()
     return redirect('eis:profile')
 
