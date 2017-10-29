@@ -51,7 +51,18 @@ class LeaveForm(forms.Form):
         if start_date > end_date or start_date < today or end_date < today \
            or [start_date.year, end_date.year] != [today.year, today.year]:
 
-            raise forms.ValidationError('Invalid Dates')
+           raise forms.ValidationError({'start_date': ['Past Dates or next year dates not allowed',]})
+
+        type_of_leave = self.cleaned_data.get('type_of_leave')
+        if type_of_leave == 'restricted':
+            tmp_date = start_date
+            restricted_holidays = RestrictedHoliday.objects.filter(date__gte=today)
+            # print(restricted_holidays)
+            while tmp_date <= end_date:
+                if not restricted_holidays.filter(date=tmp_date):
+                    raise forms.ValidationError('Choose a restricted holiday')
+                tmp_date = tmp_date + datetime.timedelta(days=1)
+
         valid_dates = self.not_dates_valid(self.user)
         if valid_dates:
             valid_dates[0] = valid_dates[0].strftime('%d/%m/%Y')
@@ -167,7 +178,7 @@ class StaffLeaveForm(LeaveForm):
         super(StaffLeaveForm, self).__init__(*args, **kwargs)
 
         try:
-            USER_CHOICES = tuple((user.username, user.username) \
+            USER_CHOICES = tuple((user.username, '{} {}'.format(user.first_name, user.last_name)) \
                                   for user in User.objects.all() \
                                   if user.extrainfo.user_type == 'staff'\
                                   and user != self.user)
@@ -187,15 +198,24 @@ class StaffLeaveForm(LeaveForm):
 
         today = datetime.datetime.today()
 
-
+        self.user_on_leave(admin_rep)
         # if start_date > end_date or start_date < today or end_date < today:
         #     raise forms.ValidationError('Invalid Dates')
 
-        if admin_rep == self.user:
-            raise forms.ValidationError('Can\'t use yourself as replacement user')
-
         if self.cleaned_data['station_leave'] and not self.cleaned_data['leave_address']:
-            raise forms.ValidationError('Fill Leave Address, if going Out of station')
+            raise forms.ValidationError({'station_leave': ['Fill Leave Address, if going Out of station']})
+
+        type_of_leave = self.cleaned_data.get('type_of_leave')
+        leave_object = LeavesCount.objects.filter(user=self.user).first()#
+        request_leaves = count_work_days(start_date, end_date)
+        remaining_leaves = getattr(leave_object, type_of_leave)
+        # TODO: User must not have leaves in between start_date and end_date
+
+        # type_of_leave = self.cleaned_data.get('type_of_leave')
+
+        if remaining_leaves < request_leaves:
+            raise forms.ValidationError({'type_of_leave': ['You have {} remaining {} leaves'.format(remaining_leaves,
+                                                                                                    type_of_leave)]})
 
         return self.cleaned_data
 

@@ -15,4 +15,4 @@
 ## Contributing  
   * Create a new branch with a related name of the motive i.e. bug/refactor/feature  
   * Create an issue before actually starting to code  
-  * Send a pull request anytime :)  
+  * Send a pull request anytime :)   
