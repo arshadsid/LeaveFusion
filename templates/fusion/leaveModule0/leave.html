@@ -49,12 +49,21 @@
                         <i class="right floated chevron right icon"></i>
                     </a>
 
+<<<<<<< HEAD
                     <a class="item" data-tab="third">
                         Leave Balance
+=======
+                    <!-- <a class="item" data-tab="third">
+                        Leave Balance (Inactive)
+>>>>>>> 90fc59a211d1e5b79c7fbc2585c78c5d7a47e2e7
                         <i class="right floated chevron right icon"></i>
-                    </a>
+                    </a> -->
 
+<<<<<<< HEAD
                     <a class="item" data-tab="fourth">
+=======
+                    <a class="item" id="leave_approve" data-tab="third">
+>>>>>>> 90fc59a211d1e5b79c7fbc2585c78c5d7a47e2e7
                         Approve
                         <i class="right floated chevron right icon"></i>
                     </a>
@@ -123,7 +132,11 @@
 
                     function send_request(type, id){
                         $('#remark-modal.modal').modal('hide');
-                        var remark = $("#remark").val();
+                        if(type == 'reject') var remark = $("#remark").val();
+                        else{
+                            var remark = $('#remark').val();
+                            if(remark.length == 0) remark = '.';
+                        }
                         if(remark.length == 0){
                             $('#remark').css('border', '2px solid red');
                             $('#remark-modal.modal').modal('show');
@@ -148,8 +161,12 @@
                                     if(type=='accept') message = '< Request Accepted >';
                                     else if(type=='reject') message = '< Request Rejected >';
                                     else message = '< Request Forwarded >';
+                                    $("#remark").val('');
                                     $('#response-modal-icon').attr('class', 'checkmark icon green');
                                     $('#response-modal-text').text(message);
+                                    if($('#leave_approve').hasClass('active')){
+                                        $('#leave_approve').click();
+                                    }
                                 }
                                 else{
                                     $('#response-modal-icon').attr('class', 'remove icon red');
@@ -178,10 +195,15 @@
                         var data = $(this).attr('data').split(' ');
                         var id = data[0],
                             process_type = data[1];
-                        $('#if-application').css('display', 'None');
-                        $('#remark-modal.modal').modal('show');
-                        $('#remark').attr('data', id);
-                        $('#process_type').attr('data', process_type);
+                        if(process_type == 'reject'){
+                            $('#if-application').css('display', 'None');
+                            $('#remark-modal.modal').modal('show');
+                            $('#remark').attr('data', id);
+                            $('#process_type').attr('data', process_type);
+                        }
+                        else{
+                            send_request(process_type, id);
+                        }
                     });
 
                     // $(document).on('click', '.rep_reject', function(){
@@ -348,6 +370,7 @@
 
     <script>
         // Script for the Date Picker!
+<<<<<<< HEAD
 
         $('#rangestart').calendar({
             type: 'date',
@@ -356,6 +379,91 @@
         $('#rangeend').calendar({
             type: 'date',
             startCalendar: $('#rangestart')
+=======
+        function addAttr(){
+            $('#rangestart').calendar({
+                type: 'date',
+                endCalendar: $('#rangeend'),
+            });
+            $('#rangeend').calendar({
+                type: 'date',
+                startCalendar: $('#rangestart'),
+            });
+            $('.ui.checkbox')
+                .checkbox()
+            ;
+
+            $('.menu .item')
+                .tab();
+                $('.dropdown')
+                    .dropdown({
+                        on: 'hover'
+                    });
+        }
+        addAttr();
+    </script>
+    <!-- This is for ajax requests -->
+    <script type="text/javascript">
+
+        $('#leave_application').on('click', function(e){
+            // $('#main_active').html('Loading');
+            e.preventDefault();
+            $.ajax({
+                type: 'get',
+                url: '/leave/?cake=form',
+                success: function(data){
+                    // alert(data);
+                    $('#main_active').html(data);
+                    addAttr();
+                    $('#leave_application').addClass('active');
+                    $('#leave_status').removeClass('active');
+                    $('#leave_approve').removeClass('active');
+                },
+                error: function(err){
+                alert(err);
+                }
+            });
+        });
+
+        $('#leave_status').on('click', function(e){
+            // $('#main_active').html('Loading');
+            e.preventDefault();
+            $.ajax({
+                type: 'get',
+                url: '/leave/?cake=status',
+                success: function(data){
+                    // alert(data);
+                    $('#main_active').html(data);
+                    addAttr();
+                    $('#leave_status').addClass('active');
+                    $('#leave_application').removeClass('active');
+                    $('#leave_approve').removeClass('active');
+                },
+                error: function(err){
+                    alert(err);
+                }
+            });
+        });
+
+        $('#leave_approve').on('click', function(e){
+            // $('#main_active').html('Loading');
+            e.preventDefault();
+            $.ajax({
+                type: 'get',
+                url: '/leave/?cake=approve',
+                success: function(data){
+                    // alert(data);
+                    $('#main_active').html(data);
+                    addAttr();
+                    $('#leave_application').removeClass('active');
+                    $('#leave_status').removeClass('active');
+                    $('#leave_approve').addClass('active');
+                },
+                error: function(err){
+                    alert(err);
+                }
+            });
+>>>>>>> 90fc59a211d1e5b79c7fbc2585c78c5d7a47e2e7
         });
     </script>
 {% endblock %}
