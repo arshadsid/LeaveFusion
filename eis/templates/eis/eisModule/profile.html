@@ -766,6 +766,25 @@ function updateTECH(_row){
     }
 }
 
+
+function editSave() {
+    editSave1();
+    setTimeout(editSave2, 500);
+
+}
+
+function editSave1() {
+    document.getElementById("saveAbout").value=document.getElementById("aboutTextarea").value.trim();
+    document.getElementById("saveEdu").value=document.getElementById("educationTextarea").value.trim();
+    document.getElementById("saveInt").value=document.getElementById("interestTextarea").value.trim();
+    document.getElementById("saveContact").value=document.getElementById("contactInput").value.trim();
+}
+
+function editSave2(){
+
+    document.forms["editForm"].submit();
+}
+
     </script>
 
 

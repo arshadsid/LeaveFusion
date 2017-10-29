@@ -1,3 +1,5 @@
+
+
 function editFirst(){
 
     var aboutSpan = $("#aboutSpan").text().trim();
@@ -9,7 +11,9 @@ function editFirst(){
     var buttonValue = $("#editButton").val()
 
     if(buttonValue == "Edit"){
-        $("#editButton").val("Save");
+        $("#saveButton").show();
+        document.getElementById('saveButton').type = 'button';
+        $("#editButton").hide();
 
         $("#contactInput").val(contactSpan);
         $("#contactInput").show();
@@ -56,6 +60,8 @@ function editFirst(){
     }
 
 }
+
+
 
 function editStudent() {
     var aboutSpan = $("#aboutSpan").text().trim();

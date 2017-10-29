@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^emp_techtransferDelete/(?P<pk>[0-9]+)/$', views.emp_techtransferDelete, name='emp_techtransferDelete'),
     url(r'^emp_visitsDelete/(?P<pk>[0-9]+)/$', views.emp_visitsDelete, name='emp_visitsDelete'),
 
+    # edit personal information
+    url(r'^persinfo/$', views.persinfo, name='persinfo'),
 
     # insert
     url(r'^pg/$', views.pg_insert, name='pg_insert'),

@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import csv
+from django.contrib.auth.models import User
 
 from eis import admin
 from user_app.models import ExtraInfo
@@ -292,6 +293,9 @@ def profile(request):
     for r in range(1995, (datetime.datetime.now().year + 1)):
         y.append(r)
 
+    pers = get_object_or_404(faculty_about, user = request.user)
+    print(pers.about)
+
     context = {'user': user,
                'pf':pf,
                'journal':journal,
@@ -313,8 +317,25 @@ def profile(request):
                'keynotes':keynotes,
                'events':events,
                'year_range':y,
+               'pers':pers
                }
     return render(request, 'eis/eisModule/profile.html', context)
+
+# View for editing persnal Information
+def persinfo(request):
+    try:
+        faculty = get_object_or_404(faculty_about, user = request.user)
+    except:
+        faculty = faculty_about()
+        faculty.user=request.user
+    faculty.contact = request.POST.get('saveContact')
+    faculty.about = request.POST.get('saveAbout')
+    faculty.interest = request.POST.get('saveInt')
+    print(request.POST.get('saveInt'))
+    faculty.education = request.POST.get('saveEdu')
+    faculty.save()
+    return redirect('eis:profile')
+
 
 
 # Views for deleting the EIS fields

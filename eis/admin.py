@@ -26,3 +26,5 @@ admin.site.register(emp_session_chair)
 admin.site.register(emp_techtransfer)
 admin.site.register(emp_achievement)
 
+admin.site.register(faculty_about)
+
