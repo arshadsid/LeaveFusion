@@ -1,12 +1,13 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
-from user_app.views import index
+from user_app.views import index, logout
 from django.conf.urls.static import static
 
 urlpatterns = [
 	url(r'^$', index, name='index'),
     url(r'^admin/', admin.site.urls),
+	url(r'^logout', logout, name='logout'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^leave/', include('leave_application.urls', namespace='leave_application')),
     url(r'^profile/', include('user_app.urls', namespace='profile')),

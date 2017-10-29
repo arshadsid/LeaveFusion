@@ -27,3 +27,7 @@ class Attendence(models.Model):
     date = models.DateField()
 
 """
+
+class RestrictedHoliday(models.Model):
+    name = models.CharField(max_length=30, default='')
+    date = models.DateField()

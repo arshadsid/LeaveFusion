@@ -1,4 +1,11 @@
 <div class="ui container">
+    <style>
+        .error{
+            font-weight: bold;
+            color: red;
+            font-style: italic;
+        }
+    </style>
     <div class="ui vertical stripe team segment"
          style="padding-left: 3.5%;
                 padding-right: 3.5%;">
@@ -9,24 +16,16 @@
 
             <div class="ui divider"></div>
             <br>
-            {% if form.errors %}
-                <div class="ui red message">
-                    <ul>
-                        {% if form.non_field_errors %}
-                            <li> <b>Error:</b> {{ form.non_field_errors }}
-                        {% endif %}
-                        {% for field in form %}
-                            {% if field.errors %}
-                                <li> <b> {{ field.label_tag }}</b> {{ field.errors }}
-                            {% endif %}
-                        {% endfor %}
-                    </u>
-                </div>
-            {% endif %}
-            <form class="ui large form" method="POST" action="{% url 'leave_application:apply_for_leave' %}">
+            <form class="ui large form" method="POST" action="{% url 'leave_application:application_form' %}">
                 {% csrf_token %}
                 {% comment %} The ApplyLeave conatianer starts here! {% endcomment %}
                 <div id="applyLeave">
+                    {% for error in form.errors.as_data.start_date %}
+                        <p class="error">{{ error.message }}</p>
+                    {% endfor %}
+                    {% for error in form.errors.as_data.end_date %}
+                        <p class='error'>{{ error.message }}</p>
+                    {% endfor %}
                     {% comment %}The form row starts here!{% endcomment %}
                     <div class="two fields">
                         <div class="field">
@@ -51,8 +50,14 @@
                             </div>
                         </div>
                     </div>
-
+                    {% for error in form.errors.as_data.type_of_leave %}
+                        <p class='error'>{{ error.message }}</p>
+                    {% endfor %}
+                    {% for error in form.errors.as_data.station_leave %}
+                        <p class="error">{{ error.message }}</p>
+                    {% endfor %}
                     <div class="two fields">
+
                         <div class="twelve wide field">
                             {% comment %}The Dropdown field starts here!{% endcomment %}
                             <label>Leave Type</label>
@@ -61,12 +66,11 @@
                                 <!-- <input name="Leave Type" type="hidden"> -->
                                 <input type="hidden" name="type_of_leave" id="id_type_of_leave" required />
                                 <i class="dropdown icon"></i>
-
-                                <div class="default text">Select Leave</div>
+                                <div id="leave-select" class="default text">Select Leave</div>
 
                                 <div class="menu">
                                     {% for value,name in form.fields.type_of_leave.widget.choices %}
-                                        <div class="item" data-value="{{ value }}">
+                                        <div class="item" id="drop-{{ value }}" data-value="{{ value }}">
                                             {{ name }}
                                         </div>
 
@@ -96,20 +100,26 @@
                     </div>
 
                     <div>
+                        {% for error in form.errors.as_data.acad_rep %}
+                            <p class="error">{{ error.message }}</p>
+                        {% endfor %}
+                        {% for error in form.errors.as_data.admin_rep %}
+                            <p class="error">{{ error.message }}</p>
+                        {% endfor %}
                         <div class="fields">
                             {% if form.acad_rep %}
                                 {% comment %}Academic Responsibilities start here!{% endcomment %}
                                 <div class="eight wide field">
                                     <label>Academic Responsibilities:</label>
                                     <div class="ui fluid search selection dropdown">
-                                        <input name="acad_rep" type="hidden" required>
+                                        <input name="acad_rep" id="id-acad-rep" type="hidden" required>
                                         <i class="dropdown icon"></i>
 
-                                        <div class="default text">Select</div>
+                                        <div id="acad-select" class="default text">Select</div>
 
                                         <div class="menu">
                                             {% for value,name in form.fields.acad_rep.widget.choices %}
-                                                <div class="item" data-value="{{ value }}">
+                                                <div class="item" id="acad-{{ value }}" data-value="{{ value }}">
                                                     {{ name }}
                                                 </div>
                                             {% endfor %}
@@ -123,14 +133,14 @@
                                 <div class="eight wide field">
                                     <label>Administrative Responsibilities:</label>
                                     <div class="ui fluid search selection dropdown">
-                                        <input name="admin_rep" type="hidden" required>
+                                        <input name="admin_rep" id="id-admin-rep" type="hidden" required>
                                         <i class="dropdown icon"></i>
 
-                                        <div class="default text">Select</div>
+                                        <div id="admin-select" class="default text">Select</div>
 
                                         <div class="menu">
                                             {% for value,name in form.fields.admin_rep.widget.choices %}
-                                                <div class="item" data-value="{{ value }}">
+                                                <div class="item" id="admin-{{ value }}" data-value="{{ value }}">
                                                     {{ name }}
                                                 </div>
                                             {% endfor %}
@@ -152,7 +162,7 @@
                             <label>Leave Purpose:</label>
                             <div class="ui fluid input">
                                 <!-- <input name="leavePurpose"> -->
-                                <textarea class="ui textarea" rows=3 name="purpose" id="id_purpose" required ></textarea>
+                                <textarea class="ui textarea" rows=3 name="purpose" id="id_purpose" required >{{form.purpose.value | default_if_none:""}}</textarea>
                             </div>
                         </div>
 
@@ -247,10 +257,7 @@
 
     </div>
 
-<<<<<<< HEAD
-=======
     <b><u>NOTE:</u> Leave Balance will be updated once application is accepted. </b>
->>>>>>> 90fc59a211d1e5b79c7fbc2585c78c5d7a47e2e7
 </div>
 
 <script type="text/javascript">
@@ -259,4 +266,29 @@
         var leaveAddress = document.getElementById("leaveAddress");
         leaveAddress.style.display = station_leave.checked ? "block" : "none";
     }
+    $(document).ready(function(){
+        window.history.replaceState(null, null, window.location.pathname);
+        {% if form.acad_rep.value %}
+            var acad = '#acad-{{form.acad_rep.value}}';
+            // console.log($(acad).text());
+            $(acad).addClass('active selected');
+            $('#acad-select').removeClass('default');
+            $('#acad-select').text($(acad).text());
+            $('#id-acad-rep').val('{{form.acad_rep.value}}');
+        {% endif %}
+        {% if form.admin_rep.value %}
+            var admin = '#admin-{{form.admin_rep.value}}';
+            $(admin).addClass('active selected');
+            $('#admin-select').removeClass('default');
+            $('#admin-select').text($(admin).text());
+            $('#id-admin-rep').val('{{form.admin_rep.value}}');
+        {% endif %}
+        {% if form.type_of_leave.value %}
+            var type = '#drop-{{form.type_of_leave.value}}';
+            $(type).addClass('active selected');
+            $('#leave-select').removeClass('default');
+            $('#leave-select').text($(type).text());
+            $('#id_type_of_leave').val('{{form.type_of_leave.value}}');
+        {% endif %}
+    });
 </script>
