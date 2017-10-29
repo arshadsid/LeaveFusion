@@ -54,7 +54,7 @@ class LeaveForm(forms.Form):
         if start_date > end_date or start_date < today or end_date < today \
            or [start_date.year, end_date.year] != [today.year, today.year]:
 
-           raise forms.ValidationError({'start_date': ['Invalid Dates',]})
+           raise forms.ValidationError({'start_date': ['Past Dates or next year dates not allowed',]})
 
         type_of_leave = self.cleaned_data.get('type_of_leave')
         if type_of_leave == 'restricted':
@@ -184,7 +184,7 @@ class StaffLeaveForm(LeaveForm):
         super(StaffLeaveForm, self).__init__(*args, **kwargs)
 
         try:
-            USER_CHOICES = tuple((user.username, user.username) \
+            USER_CHOICES = tuple((user.username, '{} {}'.format(user.first_name, user.last_name)) \
                                   for user in User.objects.all() \
                                   if user.extrainfo.user_type == 'staff'\
                                   and user != self.user)
@@ -204,13 +204,12 @@ class StaffLeaveForm(LeaveForm):
 
         today = datetime.datetime.today()
 
-
+        self.user_on_leave(admin_rep)
         # if start_date > end_date or start_date < today or end_date < today:
         #     raise forms.ValidationError('Invalid Dates')
 
-
         if self.cleaned_data['station_leave'] and not self.cleaned_data['leave_address']:
-            raise forms.ValidationError('Fill Leave Address, if going Out of station')
+            raise forms.ValidationError({'station_leave': ['Fill Leave Address, if going Out of station']})
 
         type_of_leave = self.cleaned_data.get('type_of_leave')
         leave_object = LeavesCount.objects.filter(user=self.user).first()#
@@ -221,8 +220,8 @@ class StaffLeaveForm(LeaveForm):
         # type_of_leave = self.cleaned_data.get('type_of_leave')
 
         if remaining_leaves < request_leaves:
-            raise forms.ValidationError('You have {} remaining {} leaves'.format(remaining_leaves,
-                                                                                 type_of_leave))
+            raise forms.ValidationError({'type_of_leave': ['You have {} remaining {} leaves'.format(remaining_leaves,
+                                                                                                    type_of_leave)]})
 
         return self.cleaned_data
 

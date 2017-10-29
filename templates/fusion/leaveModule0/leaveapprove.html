@@ -44,7 +44,7 @@
                             </span>
                         {% endif %}
                     </td>
-                    <td>{{ req.leave_request.applicant.first_name }}</td>
+                    <td>{{ req.leave_request.applicant.first_name }} {{ req.leave_request.applicant.last_name }}</td>
                     <td>{{ req.leave_request.applicant.email }}</td>
                     <td>{{ req.leave_request.leave.start_date }}</td>
                     <td>{{ req.leave_request.leave.end_date }}</td>
@@ -108,9 +108,11 @@
                             <i class="large green checkmark icon"></i>
                         {% elif req.leave.status == 'rejected' %}
                             <i class="large red remove icon"></i>
+                        {% else %}
+                            <i class="large orange warning icon"</i>
                         {% endif %}
                     </td>
-                    <td>{{ req.applicant.first_name }}</td>
+                    <td>{{ req.applicant.first_name }} {{ req.applicant.last_name }}</td>
                     <td>{{ req.applicant.email }}</td>
                     <td>{{ req.leave.start_date }}</td>
                     <td>{{ req.leave.end_date }}</td>

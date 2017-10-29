@@ -16,10 +16,7 @@
                                                           margin: auto;">
                 <thead>
                 <tr>
-                    <th>
-                        Employee
-                    </th>
-
+                    <th> Applied At </th>
                     <th>
                         Type
                     </th>
@@ -47,6 +44,7 @@
                 {% for leave in user_leaves %}
 
                     <tr>
+                        {% comment %}
                         <td>
                             <h4 class="ui image header">
                                 <img src="{% static 'fusion/img/user.png' %}" class="ui mini rounded image">
@@ -59,7 +57,10 @@
                                 </div>
                             </h4>
                         </td>
-
+                        {% endcomment %}
+                        <td>
+                            {{ leave.timestamp }}
+                        </td>
                         <td>
                             {{ leave.type_of_leave }}
                         </td>

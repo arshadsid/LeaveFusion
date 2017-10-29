@@ -12,6 +12,7 @@ from leave_application.models import (Leave, CurrentLeaveRequest,
 from django.contrib.auth.models import User
 from leave_application.helpers import FormData, get_object_or_none
 from django.db.models import Q
+from django.db import transaction
 
 class LeaveView(View):
 
@@ -128,7 +129,10 @@ class ApplyLeave(View):
             # return render(request, 'fusion/leaveModule0/leave.html', {'message': 'success', 'title': 'Leave', 'action':'Apply'})
         else:
             context = {'form': form, 'title': 'Leave', 'action':'Apply'}
+            leaves_count = LeavesCount.objects.get(user=request.user)
+            context['leaves_count'] = leaves_count
             context.update(GetApplications.get_reps(request))
+            leaves_count = LeavesCount.objects.get(user=request.user)
             return render(request, 'fusion/leaveModule0/leave.html', context)
 
     @classmethod
@@ -280,6 +284,7 @@ class ProcessRequest(View):
 
         return response
 
+    @transaction.atomic
     def create_leave_request(self, cur_leave_request, final, accept=False, remark=''):
         leave_request = LeaveRequest.objects.create(
             leave = cur_leave_request.leave,
@@ -298,7 +303,8 @@ class ProcessRequest(View):
 
             remain = getattr(count, cur_leave_request.leave.type_of_leave)
             required_leaves = cur_leave_request.leave.count_work_days
-
+            # print(required_leaves, remain)
+            # return True
             if remain < required_leaves:
                 cur_leave_request.leave.status = 'rejected'
             else:
@@ -327,6 +333,7 @@ class ProcessRequest(View):
         leave_request.delete()
         return JsonResponse({'response': 'ok'}, status=200)
 
+    @transaction.atomic
     def create_migration(self, leave):
         import datetime
 
@@ -341,11 +348,20 @@ class ProcessRequest(View):
             #     replacer = leave.administrative_replacement,
             #     replacement_type = 'administrative',
             # )
-            r1 = Replacement.objects.create(
-                replacee = leave.applicant,
-                replacer = leave.academic_replacement,
-                replacement_type = 'academic',
-            )
+            if leave.applicant.extrainfo.user_type == 'faculty':
+                r1 = Replacement.objects.create(
+                    replacee = leave.applicant,
+                    replacer = leave.academic_replacement,
+                    replacement_type = 'academic',
+                )
+                LeaveMigration.objects.create(
+                    replacee = leave.applicant,
+                    replacer = leave.academic_replacement,
+                    rep = r1,
+                    start_date = leave.end_date + datetime.timedelta(days=1),
+                    type = 'del',
+                )
+
             r2 = Replacement.objects.create(
                 replacee = leave.applicant,
                 replacer = leave.administrative_replacement,
@@ -353,15 +369,8 @@ class ProcessRequest(View):
             )
             LeaveMigration.objects.create(
                 replacee = leave.applicant,
-                replacer = leave.academic_replacement,
-                replacement = r1,
-                start_date = leave.end_date + datetime.timedelta(days=1),
-                type = 'del',
-            )
-            LeaveMigration.objects.create(
-                replacee = leave.applicant,
                 replacer = leave.administrative_replacement,
-                replacement = r2,
+                rep = r2,
                 start_date = leave.end_date + datetime.timedelta(days=1),
                 type = 'del',
             )
@@ -369,15 +378,15 @@ class ProcessRequest(View):
         else:
             # if leave.start_date not in to_be.migrations.keys():
                 # to_be.migrations[leave.start_date] = []
-
-            LeaveMigration.objects.create(
-                type = 'add',
-                replacee = leave.applicant,
-                replacer = leave.academic_replacement,
-                start_date = leave.start_date,
-                end_date = leave.end_date,
-                replacement_type = 'academic',
-            )
+            if leave.applicant.extrainfo.user_type == 'faculty':
+                LeaveMigration.objects.create(
+                    type = 'add',
+                    replacee = leave.applicant,
+                    replacer = leave.academic_replacement,
+                    start_date = leave.start_date,
+                    end_date = leave.end_date,
+                    replacement_type = 'academic',
+                )
 
             LeaveMigration.objects.create(
                 type = 'add',
