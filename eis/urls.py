@@ -46,5 +46,7 @@ urlpatterns = [
     url(r'^patent_insert/$', views.patent_insert, name='patent_insert'),
     url(r'^transfer_insert/$', views.transfer_insert, name='transfer_insert'),
 
+    # generate report
+    url(r'^report/$', views.generate_report, name='generate_report'),
 
 ]
