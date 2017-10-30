@@ -9,6 +9,8 @@ from PIL import Image
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 
+from leave_application.models import CurrentLeaveRequest
+
 from django.contrib.auth import logout as logout_func
 
 from datetime import date
@@ -53,7 +55,8 @@ def edit_info(request):
 def index(request):
     if request.user.is_authenticated():
         make_migrations()
-        return render(request, 'fusion/dashboard/dashboard.html', {'title':'Home'})
+        count = CurrentLeaveRequest.objects.filter(requested_from=request.user).count()
+        return render(request, 'fusion/dashboard/dashboard.html', {'title':'Home', 'count': count})
     return render(request, 'fusion/general/index1.html')
 
 

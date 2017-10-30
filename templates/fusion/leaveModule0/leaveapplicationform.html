@@ -155,7 +155,9 @@
                     {% comment %}The Resposibilities end here!{% endcomment %}
 
                     <br>
-
+                    {% for error in form.errors.as_data.purpose %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
                     {% comment %}Leave Purpose starts here!{% endcomment %}
                     <div class="fields">
                         <div class="twelve wide field">

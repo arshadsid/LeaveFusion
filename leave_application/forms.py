@@ -81,7 +81,7 @@ class LeaveForm(forms.Form):
             vac_start_date_win = datetime.date(today.year, 12, 1)
             vac_end_date_win = datetime.date(today.year, 12, 31)
             if not ((start_date >= vac_start_date_sum and end_date <= vac_end_date_sum) or (start_date >= vac_start_date_win and end_date <= vac_end_date_win)):
-                raise forms.ValidationError('Vacation Leave can only be taken in vacation time')
+                raise forms.ValidationError({'type_of_leave': ['Vacation Leave can only be taken in vacation time']})
 
     # def get_date_format(self, )
 
