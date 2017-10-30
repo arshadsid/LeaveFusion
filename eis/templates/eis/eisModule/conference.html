@@ -133,9 +133,9 @@
      <div class="ui pointing pagination menu">
                 {% for consymp in consymps %}
                 {% if forloop.counter0|divisibleby:10 %}
-                    <a class="{% if forloop.counter0 == 0 %}active {% endif %}item" data-tab="consymp-{{ forloop.counter0 }}">
-                        {% widthratio forloop.counter 10 1 %}
-                    </a>
+                    <span align="right>"><a class="{% if forloop.counter0 == 0 %}active {% endif %}item" data-tab="consymp-{{ forloop.counter0 }}">
+                        {% widthratio forloop.counter|add:10 10 1 %}
+     </a></span>
                 {% endif %}
                 {% endfor %}
 
@@ -182,24 +182,7 @@
 
             {% if forloop.counter0|add:1|divisibleby:10 %}
              </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="7">
-                    <div class="ui right floated pagination menu">
-                        <a class="icon item">
-                            <i class="left chevron icon"></i>
-                        </a>
-                        <a class="item">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
-                        <a class="icon item">
-                            <i class="right chevron icon"></i>
-                        </a>
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
+
         </table>
             </div>
             {% endif %}
