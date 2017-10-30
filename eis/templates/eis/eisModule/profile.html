@@ -483,6 +483,7 @@ function getData(_row){
     var pend = document.getElementById("s"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("fZ").value=document.getElementById("s"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes3").innerHTML = "<span style='color:red;'>Edit the selected thesis details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("s"+_row+cols[i]).innerHTML;
         if (_temp.search("<b>Name: </b>")==0){
@@ -503,6 +504,7 @@ function updatePHD(_row){
     var pend = document.getElementById("phd"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("phdZ").value=document.getElementById("phd"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes4").innerHTML = "<span style='color:red;'>Edit the selected thesis details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("phd"+_row+cols[i]).innerHTML;
         if (_temp.search("<b>Name: </b>")==0){
@@ -522,6 +524,8 @@ function updateFVISITS(_row){
     var pend = document.getElementById("fvisits"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("fvisitsZ").value=document.getElementById("fvisits"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes1").innerHTML = "<span style='color:red;'>Edit the selected Foreign Visit</span>";
+    document.getElementById("fvisitsA").value = "ai";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("fvisits"+_row+cols[i]).innerHTML;
         if(i==2){
@@ -544,6 +548,7 @@ function updateIVISITS(_row){
     var pend = document.getElementById("ivisits"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("ivisitsZ").value=document.getElementById("ivisits"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes2").innerHTML = "<span style='color:red;'>Edit the selected Indian University Visit</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("ivisits"+_row+cols[i]).innerHTML;
         if(i==1){
@@ -562,6 +567,7 @@ function updateCONF(_row){
     var pend = document.getElementById("conf"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("confZ").value=document.getElementById("conf"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes17").innerHTML = "<span style='color:red;'>Edit the selected conference organized details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("conf"+_row+cols[i]).innerHTML;
         if(i==2){
@@ -583,6 +589,7 @@ function updateEVENT(_row){
     var pend = document.getElementById("event"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("eventZ").value=document.getElementById("event"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes16").innerHTML = "<span style='color:red;'>Edit the selected event organized details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("event"+_row+cols[i]).innerHTML;
         if(i==3){
@@ -604,6 +611,7 @@ function updateLEC(_row){
     var pend = document.getElementById("lec"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("lecZ").value=document.getElementById("lec"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes13").innerHTML = "<span style='color:red;'>Edit the selected expert lecture details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("lec"+_row+cols[i]).innerHTML;
         document.getElementById("lec"+cols[i]).value=_temp;
@@ -615,6 +623,7 @@ function updateSESSION(_row){
     var pend = document.getElementById("session"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("sessionZ").value=document.getElementById("session"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes14").innerHTML = "<span style='color:red;'>Edit the selected session chaired details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("session"+_row+cols[i]).innerHTML;
         if(i==2){
@@ -633,6 +642,7 @@ function updateKEY(_row){
     var pend = document.getElementById("key"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("keyZ").value=document.getElementById("key"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes15").innerHTML = "<span style='color:red;'>Edit the selected keynote address details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("key"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -652,6 +662,7 @@ function updateACH(_row){
     var pend = document.getElementById("ach"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("achZ").value=document.getElementById("ach"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes12").innerHTML = "<span style='color:red;'>Edit the selected achieement details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("ach"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -677,6 +688,7 @@ function updatePUB(_row){
     var pend = document.getElementById("pub"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("pubZ").value=document.getElementById("pub"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes5").innerHTML = "<span style='color:red;'>Edit the selected journal publications details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("pub"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -704,6 +716,7 @@ function updateCON(_row){
     var pend = document.getElementById("con"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("conZ").value=document.getElementById("con"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes6").innerHTML = "<span style='color:red;'>Edit the selected conference publication details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("con"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -728,6 +741,7 @@ function updateBOOKS(_row){
     var pend = document.getElementById("books"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("booksZ").value=document.getElementById("books"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes7").innerHTML = "<span style='color:red;'>Edit the selected published book details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("books"+_row+cols[i]).innerHTML;
         document.getElementById("books"+cols[i]).value=_temp;
@@ -739,6 +753,7 @@ function updateRESEARCH(_row){
     var pend = document.getElementById("research"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("researchZ").value=document.getElementById("research"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes8").innerHTML = "<span style='color:red;'>Edit the selected research project details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("research"+_row+cols[i]).innerHTML;
         if(i==0){
@@ -761,6 +776,7 @@ function updateCONSULTANCY(_row){
     var pend = document.getElementById("consultancy"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("consultancyZ").value=document.getElementById("consultancy"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes9").innerHTML = "<span style='color:red;'>Edit the selected consultancy project details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("consultancy"+_row+cols[i]).innerHTML;
         if(i == 4){
@@ -777,6 +793,7 @@ function updatePATENT(_row){
     var pend = document.getElementById("patent"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("patentZ").value=document.getElementById("patent"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes10").innerHTML = "<span style='color:red;'>Edit the selected patent details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("patent"+_row+cols[i]).innerHTML;
         document.getElementById("patent"+cols[i]).value=_temp;
@@ -789,6 +806,7 @@ function updateTECH(_row){
     var pend = document.getElementById("tech"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("techZ").value=document.getElementById("tech"+_row+"Z").innerHTML.slice(p+1,pend);
     window.location.href="#top";
+    document.getElementById("changes11").innerHTML = "<span style='color:red;'>Edit the selected technology transfer details</span>";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("tech"+_row+cols[i]).innerHTML;
         document.getElementById("tech"+cols[i]).value=_temp;

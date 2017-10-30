@@ -10,7 +10,7 @@
     </div>
 
  <div class="ui active tab segment" data-tab="Conference/Symposium">
-       <h4 class="ui dividing header">Add a Conference/Symposium</h4>
+       <h4 class="ui dividing header" id="changes17">Add a Conference/Symposium</h4>
           <form class="ui form"  method="post" action="{% url 'eis:consym_insert' %}">
             {% csrf_token %}
               <div style="display: none;"> <input type="text" id="confZ" name="conf_id"></div>

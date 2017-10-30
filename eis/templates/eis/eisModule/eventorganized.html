@@ -21,7 +21,7 @@
     {% comment %}The Workshop segment starts here!{% endcomment %}
 
     <div class="ui active tab segment" data-tab="Workshop">
-        <h4 class="ui dividing header">Add a Workshop /Training Program</h4>
+        <h4 class="ui dividing header"  id="changes16">Add a Workshop /Training Program</h4>
         <form class="ui form"  method="post" action="{% url 'eis:event_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="eventZ" name="event_id"></div>

@@ -15,7 +15,7 @@
 
     {% comment %}The PG Thesis supervision segment starts here!{% endcomment %}
     <div class="ui active tab segment" data-tab="PG">
-        <h4 class="ui dividing header">Add a Thesis</h4>
+        <h4 class="ui dividing header" id="changes3">Add a Thesis</h4>
         <form class="ui form" method="post" action="{% url 'eis:pg_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="fZ" name="pg_id"></div>
@@ -134,7 +134,7 @@
 
     {% comment %}The PhD Thesis supervision segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="PhD">
-        <h4 class="ui dividing header">Add a Thesis</h4>
+        <h4 class="ui dividing header"  id="changes4">Add a Thesis</h4>
         <form class="ui form"  method="post" action="{% url 'eis:phd_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="phdZ" name="phd_id"></div>

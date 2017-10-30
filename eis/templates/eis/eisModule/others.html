@@ -22,7 +22,7 @@
 
     {% comment %}The  Achievement segment starts here!{% endcomment %}
     <div class="ui active tab segment" data-tab="research projects">
-        <h4 class="ui dividing header">Add an Achievement</h4>
+        <h4 class="ui dividing header" id="changes12">Add an Achievement</h4>
             <form class="ui form"  method="post" action="{% url 'eis:award_insert' %}">
             {% csrf_token %}
            
@@ -170,7 +170,7 @@
 
     {% comment %}The Expert Lectures segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="Consultancy project">
-        <h4 class="ui dividing header">Add a Expert Lecture/Invited Talks</h4>
+        <h4 class="ui dividing header"  id="changes13">Add a Expert Lecture/Invited Talks</h4>
            <form class="ui form"  method="post" action="{% url 'eis:talk_insert' %}">
                            <div style="display: none;"> <input type="text" id="lecZ" name="lec_id"></div>
             {% csrf_token %}
@@ -292,7 +292,7 @@
 
     {% comment %}The Session chaired starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="patents">
-        <h4 class="ui dividing header">Add a  Session Chaired</h4>
+        <h4 class="ui dividing header" id="changes14">Add a  Session Chaired</h4>
               <form class="ui form"  method="post" action="{% url 'eis:chaired_insert' %}">
             {% csrf_token %}
                               <div style="display: none;"> <input type="text" id="sessionZ" name="ses_id"></div>
@@ -414,7 +414,7 @@
     {% comment %}The Keynote/Planery Address segment starts here!{% endcomment %}
 
     <div class="ui tab segment" data-tab="technology transfer">
-        <h4 class="ui dividing header">Add a Keynote/Planery Address</h4>
+        <h4 class="ui dividing header" id="changes15">Add a Keynote/Planery Address</h4>
           <form class="ui form"  method="post" action="{% url 'eis:keynote_insert' %}">
             {% csrf_token %}
               <div style="display: none;"> <input type="text" id="keyZ" name="keyid"></div>

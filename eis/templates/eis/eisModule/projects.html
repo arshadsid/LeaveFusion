@@ -23,7 +23,7 @@
 
     {% comment %}The  Research Project segment starts here!{% endcomment %}
     <div class="ui active tab segment" data-tab="research projects">
-        <h4 class="ui dividing header">Add a Research Project</h4>
+        <h4 class="ui dividing header" id="changes8">Add a Research Project</h4>
         <form class="ui form"  method="post" action="{% url 'eis:project_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="researchZ" name="project_id"></div>
@@ -196,7 +196,7 @@
 
     {% comment %}The Consultancy Project segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="Consultancy project">
-        <h4 class="ui dividing header">Add a Consultancy Project</h4>
+        <h4 class="ui dividing header"  id="changes9">Add a Consultancy Project</h4>
         <form class="ui form"  method="post" action="{% url 'eis:consult_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="consultancyZ" name="consultancy_id"></div>
@@ -329,7 +329,7 @@
 
     {% comment %}The Patent segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="patents">
-        <h4 class="ui dividing header">Add a  Patent</h4>
+        <h4 class="ui dividing header" id="changes10">Add a  Patent</h4>
         <form class="ui form"  method="post" action="{% url 'eis:patent_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="patentZ" name="patent_id"></div>
@@ -487,7 +487,7 @@
     {% comment %}The Technology segment starts here!{% endcomment %}
 
     <div class="ui tab segment" data-tab="technology transfer">
-        <h4 class="ui dividing header">Add a Technology Transfer</h4>
+        <h4 class="ui dividing header" id="changes11">Add a Technology Transfer</h4>
         <form class="ui form"  method="post" action="{% url 'eis:transfer_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="techZ" name="tech_id"></div>

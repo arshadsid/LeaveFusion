@@ -21,7 +21,7 @@
     {% comment %}The Journal segment starts here!{% endcomment %}
 
     <div class="ui active tab segment" data-tab="journal">
-        <h4 class="ui dividing header">Add a Journal</h4>
+        <h4 class="ui dividing header" id="changes5">Add a Journal</h4>
         <form class="ui form"  method="post" action="{% url 'eis:journal_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="pubZ" name="pub_id"></div>
@@ -246,7 +246,7 @@
     {% comment %}The Conference segment starts here!{% endcomment %}
 
     <div class="ui tab segment" data-tab="conference">
-        <h4 class="ui dividing header">Add a Conference</h4>
+        <h4 class="ui dividing header"  id="changes6">Add a Conference</h4>
        <form class="ui form"  method="post" action="{% url 'eis:confrence_insert' %}">
             {% csrf_token %}
            <div style="display: none;"> <input type="text" id="conZ" name="con_id"></div>
@@ -473,7 +473,7 @@
 
     {% comment %}The Books segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="books">
-        <h4 class="ui dividing header">Add a Book/Book Chapter</h4>
+        <h4 class="ui dividing header" id="changes7">Add a Book/Book Chapter</h4>
         <form class="ui form"  method="post" action="{% url 'eis:book_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="booksZ" name="book_id"></div>
@@ -548,7 +548,6 @@
         </form>
         <br>
         <h4 class="ui dividing header">Report:</h4>
-
         <table class="ui fixed sortable celled table">
             <thead>
             <tr>
@@ -583,10 +582,8 @@
                 <td id="books{{ forloop.counter }}E">{{ b.co_authors }}</td>
                 <td><a onclick="updateBOOKS({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_published_booksDelete' b.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
             </tr>
-
             {% endfor %}
             </tbody>
-
             <tfoot>
             <tr>
                 <th colspan="7">

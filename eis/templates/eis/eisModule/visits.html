@@ -17,7 +17,7 @@
 
     {% comment %}The Foreign Visit segment starts here!{% endcomment %}
     <div class="ui active tab segment" data-tab="foreign">
-        <h4 class="ui dividing header" id="changes">Add a Foreign Visit</h4>
+        <h4 class="ui dividing header" id="changes1">Add a Foreign Visit</h4>
         <form class="ui form" method="post" action="{% url 'eis:fvisit_insert' %}">
             <div style="display: none;"> <input type="text" id="fvisitsZ" name="fvisit_id"></div>
             {% csrf_token %}
@@ -26,7 +26,7 @@
                     <div class="field">
                         <label>Country</label>
                         <div class="ui fluid search selection dropdown">
-                            <input name="country" value="hidden" type="hidden" id="fvisitsA" required>
+                            <input name="country" value="" type="hidden" id="fvisitsA" required>
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Country</div>
                             <div class="menu">
@@ -386,7 +386,7 @@
 
     {% comment %}The Indian University Visit segment starts here!{% endcomment %}
     <div class="ui tab segment" data-tab="indian">
-        <h4 class="ui dividing header">Add an Indian University Visit</h4>
+        <h4 class="ui dividing header" id="changes2">Add an Indian University Visit</h4>
         <form class="ui form" method="post" action="{% url 'eis:ivisit_insert' %}">
             {% csrf_token %}
             <div style="display: none;"> <input type="text" id="ivisitsZ" name="ivisit_id"></div>
