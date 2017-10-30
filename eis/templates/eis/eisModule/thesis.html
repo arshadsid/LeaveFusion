@@ -102,7 +102,7 @@
                 <td id="s{{ forloop.counter }}C">{{ mtech.s_year }}</td>
                 <td id="s{{ forloop.counter }}D">{{ mtech.supervisors }}</td>
 
-                 <td><a onclick="getData({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' mtech.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+                 <td><a onclick="getData({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' mtech.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
             </tr>
 
             {% endfor %}
@@ -230,7 +230,7 @@
                 <td id="phd{{ forloop.counter }}B">{{ phd.title }}</td>
                 <td id="phd{{ forloop.counter }}C">{{ phd.s_year }}</td>
                 <td id="phd{{ forloop.counter }}D">{{ phd.supervisors }}</td>
-                 <td><a onclick="updatePHD({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' phd.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+                 <td><a onclick="updatePHD({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_mtechphd_thesisDelete' phd.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
             </tr>
 
             {% endfor %}

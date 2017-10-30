@@ -138,7 +138,7 @@
                 <td id="ach{{ forloop.counter }}A">{{ award.a_type }}</td>
                 <td id="ach{{ forloop.counter }}B">{{ award.details }}</td>
                 <td id="ach{{ forloop.counter }}C">{% if award.a_day %}{{ award.a_day }} / {% endif %}{% if award.a_month %}{{ award.a_month }} / {% endif %}{% if award.a_year %}{{ award.a_year }}{% endif %}</td>
-                <td><a onclick="updateACH({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i> </a><br><a class="centered raised item" href="{% url 'eis:achievement_delete' award.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
+                <td><a onclick="updateACH({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i> </a><br><a class="centered raised item" href="{% url 'eis:achievement_delete' award.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
 
             </tr>
             {% endfor %}
@@ -262,7 +262,7 @@
                 <td id="lec{{ forloop.counter }}B">{{ talk.title }}</td>
                 <td id="lec{{ forloop.counter }}C">{{ talk.place }}</td>
                 <td id="lec{{ forloop.counter }}D">{{ talk.l_date }}</td>
-                <td><a onclick="updateLEC({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_expert_lecturesDelete' talk.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
+                <td><a onclick="updateLEC({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_expert_lecturesDelete' talk.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
 
             </tr>
             {% endfor %}
@@ -382,7 +382,7 @@
                 <td class=""  id="session{{ forloop.counter }}A">{{ chair.name }}</td>
                 <td class="" id="session{{ forloop.counter }}B">{{ chair.event }}</td>
                 <td id="session{{ forloop.counter }}C">{{ chair.start_date }} - {{ chair.end_date }}</td>
-                <td><a onclick="updateSESSION({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_session_chairDelete' chair.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
+                <td><a onclick="updateSESSION({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_session_chairDelete' chair.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
 
             </tr>
             {% endfor %}
@@ -540,7 +540,7 @@
                 <td id="key{{ forloop.counter }}B" >{{ keynote.title }}</td>
                 <td id="key{{ forloop.counter }}C" ><b>Name:</b>{{ keynote.name }}<br/><b>Venue:</b>{{ keynote.venue }}<br/><b>Page No:</b>{{ keynote.page_no }}<br/><b>ISBN No.:</b>{{ keynote.isbn_no }}</td>
                 <td id="key{{ forloop.counter }}D" >{{ keynote.start_date }}</td>
-                <td><a onclick="updateKEY({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_keynote_addressDelete' keynote.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+                <td><a onclick="updateKEY({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_keynote_addressDelete' keynote.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
 
             </tr>
             {% endfor %}

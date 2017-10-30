@@ -211,7 +211,7 @@
                 </td>
 
                 <td id="pub{{ forloop.counter }}D">{{ j.year }}</td>
-                <td><a onclick="updatePUB({{ forloop.counter }})"> <i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' j.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red"></i></a></td>
+                <td><a onclick="updatePUB({{ forloop.counter }})" onclick="location.href='#top'"> <i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' j.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red"></i></a></td>
             </tr>
 
             {% endfor %}
@@ -443,7 +443,7 @@
                 </td>
 
                 <td id="con{{ forloop.counter }}D">{{ c.year }}</td>
-                <td><a onclick="updateCON({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' c.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i><br>
+                <td><a onclick="updateCON({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_papersDelete' c.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i><br>
                 </a> </td>
             </tr>
             {% endfor %}
@@ -581,7 +581,7 @@
                 <td id="books{{ forloop.counter }}C">{{ b.publisher }}</td>
                 <td id="books{{ forloop.counter }}D">{{ b.pyear }}</td>
                 <td id="books{{ forloop.counter }}E">{{ b.co_authors }}</td>
-                <td><a onclick="updateBOOKS({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_published_booksDelete' b.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
+                <td><a onclick="updateBOOKS({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_published_booksDelete' b.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a></td>
             </tr>
 
             {% endfor %}
@@ -606,5 +606,6 @@
             </tr></tfoot>
         </table>
     </div>
+<a class="" onclick="location.href='#top'">top</a>
     {% comment %}The Books segment ends here!{% endcomment %}
 {% endblock %}

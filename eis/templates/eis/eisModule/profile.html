@@ -6,13 +6,25 @@
 {% block title %}
     Profile
 {% endblock %}
+{% block css %}
+<style>
+
+    #bt:hover {
+        cursor: pointer;
+        border: solid 1px #CCC;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
+        box-shadow: 1px 1px 5px #999;
+        }
+</style>
+    {% endblock %}
 
 
 {% block body %}
     {% block navBar %}
         {% include 'fusion/general/../dashboard/navbar.html' %}
     {% endblock %}
-
+<div id="top"></div>
 
     {% comment %}The grid starts here!{% endcomment %}
     <div class="ui stackable doubling grid">
@@ -192,7 +204,6 @@
             <div class="row">
                 {% comment %}The Modules:{% endcomment %}
                 {% block modules %}
-                    {% include 'fusion/dashboard/modules.html' %}
                 {% endblock %}
             </div>
 
@@ -471,6 +482,7 @@ function getData(_row){
     var p = document.getElementById("s"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("s"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("fZ").value=document.getElementById("s"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("s"+_row+cols[i]).innerHTML;
         if (_temp.search("<b>Name: </b>")==0){
@@ -490,6 +502,7 @@ function updatePHD(_row){
     var p = document.getElementById("phd"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("phd"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("phdZ").value=document.getElementById("phd"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("phd"+_row+cols[i]).innerHTML;
         if (_temp.search("<b>Name: </b>")==0){
@@ -508,6 +521,7 @@ function updateFVISITS(_row){
     var p = document.getElementById("fvisits"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("fvisits"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("fvisitsZ").value=document.getElementById("fvisits"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("fvisits"+_row+cols[i]).innerHTML;
         if(i==2){
@@ -529,6 +543,7 @@ function updateIVISITS(_row){
     var p = document.getElementById("ivisits"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("ivisits"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("ivisitsZ").value=document.getElementById("ivisits"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("ivisits"+_row+cols[i]).innerHTML;
         if(i==1){
@@ -546,6 +561,7 @@ function updateCONF(_row){
     var p = document.getElementById("conf"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("conf"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("confZ").value=document.getElementById("conf"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("conf"+_row+cols[i]).innerHTML;
         if(i==2){
@@ -566,6 +582,7 @@ function updateEVENT(_row){
     var p = document.getElementById("event"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("event"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("eventZ").value=document.getElementById("event"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("event"+_row+cols[i]).innerHTML;
         if(i==3){
@@ -586,6 +603,7 @@ function updateLEC(_row){
     var p = document.getElementById("lec"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("lec"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("lecZ").value=document.getElementById("lec"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("lec"+_row+cols[i]).innerHTML;
         document.getElementById("lec"+cols[i]).value=_temp;
@@ -596,6 +614,7 @@ function updateSESSION(_row){
     var p = document.getElementById("session"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("session"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("sessionZ").value=document.getElementById("session"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("session"+_row+cols[i]).innerHTML;
         if(i==2){
@@ -613,6 +632,7 @@ function updateKEY(_row){
     var p = document.getElementById("key"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("key"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("keyZ").value=document.getElementById("key"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("key"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -631,6 +651,7 @@ function updateACH(_row){
     var p = document.getElementById("ach"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("ach"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("achZ").value=document.getElementById("ach"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("ach"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -655,6 +676,7 @@ function updatePUB(_row){
     var p = document.getElementById("pub"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("pub"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("pubZ").value=document.getElementById("pub"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("pub"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -672,6 +694,7 @@ function updatePUB(_row){
             document.getElementById("pub"+cols[i]).value=_temp;
         }
     }
+
 }
 
 
@@ -680,6 +703,7 @@ function updateCON(_row){
     var p = document.getElementById("con"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("con"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("conZ").value=document.getElementById("con"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("con"+_row+cols[i]).innerHTML;
         if(i == 2){
@@ -703,6 +727,7 @@ function updateBOOKS(_row){
     var p = document.getElementById("books"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("books"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("booksZ").value=document.getElementById("books"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("books"+_row+cols[i]).innerHTML;
         document.getElementById("books"+cols[i]).value=_temp;
@@ -713,6 +738,7 @@ function updateRESEARCH(_row){
     var p = document.getElementById("research"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("research"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("researchZ").value=document.getElementById("research"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("research"+_row+cols[i]).innerHTML;
         if(i==0){
@@ -734,6 +760,7 @@ function updateCONSULTANCY(_row){
     var p = document.getElementById("consultancy"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("consultancy"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("consultancyZ").value=document.getElementById("consultancy"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("consultancy"+_row+cols[i]).innerHTML;
         if(i == 4){
@@ -749,6 +776,7 @@ function updatePATENT(_row){
     var p = document.getElementById("patent"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("patent"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("patentZ").value=document.getElementById("patent"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("patent"+_row+cols[i]).innerHTML;
         document.getElementById("patent"+cols[i]).value=_temp;
@@ -760,6 +788,7 @@ function updateTECH(_row){
     var p = document.getElementById("tech"+_row+"Z").innerHTML.search(">");
     var pend = document.getElementById("tech"+_row+"Z").innerHTML.indexOf("<",5);
     document.getElementById("techZ").value=document.getElementById("tech"+_row+"Z").innerHTML.slice(p+1,pend);
+    window.location.href="#top";
     for(var i=0;i<cols.length;i++)  {
         var _temp=document.getElementById("tech"+_row+cols[i]).innerHTML;
         document.getElementById("tech"+cols[i]).value=_temp;

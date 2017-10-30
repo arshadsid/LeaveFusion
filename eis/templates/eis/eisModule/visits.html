@@ -17,7 +17,7 @@
 
     {% comment %}The Foreign Visit segment starts here!{% endcomment %}
     <div class="ui active tab segment" data-tab="foreign">
-        <h4 class="ui dividing header">Add a Foreign Visit</h4>
+        <h4 class="ui dividing header" id="changes">Add a Foreign Visit</h4>
         <form class="ui form" method="post" action="{% url 'eis:fvisit_insert' %}">
             <div style="display: none;"> <input type="text" id="fvisitsZ" name="fvisit_id"></div>
             {% csrf_token %}
@@ -356,7 +356,7 @@
                 <td id="fvisits{{ forloop.counter }}B">{{ fvisit.place }}</td>
                 <td id="fvisits{{ forloop.counter }}C">{{ fvisit.start_date }} - {{ fvisit.end_date }}</td>
                 <td id="fvisits{{ forloop.counter }}D">{{ fvisit.purpose }}</td>
-                 <td><a onclick="updateFVISITS({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' fvisit.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
+                 <td><a onclick="updateFVISITS({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' fvisit.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
             </tr>  {% endfor %}
 
             </tbody>
@@ -470,7 +470,7 @@
                 <td id="ivisits{{ forloop.counter }}B">{{ ivisit.start_date }} - {{ ivisit.end_date }}</td>
                 <td id="ivisits{{ forloop.counter }}C">{{ ivisit.purpose }}</td>
 
-               <td><a onclick="updateIVISITS({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' ivisit.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
+               <td><a onclick="updateIVISITS({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_visitsDelete' ivisit.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i></a> </td>
             </tr>
 {% endfor %}
 

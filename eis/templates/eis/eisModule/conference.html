@@ -161,7 +161,7 @@
                 <td id="conf{{ forloop.counter }}A">{{ consymp.name }}</td>
                 <td id="conf{{ forloop.counter }}B">{{ consymp.venue }}</td>
                 <td id="conf{{ forloop.counter }}C">{{ consymp.start_date }} - {{ consymp.end_date }}</td>
-                <td ><a onclick="updateCONF({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_confrence_organisedDelete' consymp.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i> </a></td>
+                <td><a onclick="updateCONF({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue" id="bt"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_confrence_organisedDelete' consymp.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;" id="bt"></i> </a></td>
             </tr>
             {% endfor %}
             </tbody>

@@ -161,7 +161,7 @@
                 <td id="event{{ forloop.counter }}C"><b>Sponsoring Agency: </b>{{ event.sponsoring_agency }}<br><b>Venue: </b>{{ event.venue }}
                 <br><b>Type: </b>{{ event.type }}</td>
                 <td id="event{{ forloop.counter }}D">{{ event.start_date }} - {{ event.end_date }}</td>
-                <td><a onclick="updateEVENT({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue"></i></a> <br><a class="centered raised item" href="{% url 'eis:emp_event_organizedDelete' event.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;"></i>
+                <td><a onclick="updateEVENT({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw;color:blue"></i></a> <br><a class="centered raised item" href="{% url 'eis:emp_event_organizedDelete' event.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw;color:red;"></i>
             </a> </td>
             </tr>
             {% endfor %}

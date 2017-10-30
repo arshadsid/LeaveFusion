@@ -164,7 +164,7 @@
                     <b>Status :</b>  {{ project.status }}
 
                 </td>
-                <td> <a onclick="updateRESEARCH({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_projectsDelete' project.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i><br>
+                <td> <a onclick="updateRESEARCH({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_research_projectsDelete' project.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw; color:red;"></i><br>
                 </a>  </td>
             </tr>
             {% endfor %}
@@ -299,7 +299,7 @@
                  <td id="consultancy{{ forloop.counter }}C">{{ consult.client }}</td>
                  <td id="consultancy{{ forloop.counter }}D">{{ consult.financial_outlay }}</td>
                  <td id="consultancy{{ forloop.counter }}E">From: {{ consult.start_date }}<br/>To: {{ consult.end_date }}</td>
-                <td><a onclick="updateCONSULTANCY({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_consultancy_projectsDelete' consult.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
+                <td><a onclick="updateCONSULTANCY({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_consultancy_projectsDelete' consult.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
             </tr>
             {% endfor %}
 
@@ -456,7 +456,7 @@
                  <td id="patent{{ forloop.counter }}C">{{ patent.status }}</td>
                  <td id="patent{{ forloop.counter }}D">{{ patent.p_year }}</td>
                  <td id="patent{{ forloop.counter }}E">{{ patent.earnings }}</td>
-                <td><a onclick="updatePATENT({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_patentsDelete' patent.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
+                <td><a onclick="updatePATENT({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_patentsDelete' patent.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
             </tr>
             {% endfor %}
             </tbody>
@@ -530,7 +530,7 @@
             <tr>
                 <td id="tech{{ forloop.counter }}Z"><div style="display: none;">{{ techtransfer.id }}</div>{{ forloop.counter }}.</td>
                 <td class="" colspan="4" id="tech{{ forloop.counter }}A">{{ techtransfer.details }}</td>
-                <td><a onclick="updateTECH({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_techtransferDelete' techtransfer.id %}"><i class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
+                <td><a onclick="updateTECH({{ forloop.counter }})"><i id="bt" class="edit icon" style="font-size:1.3vw ; color:blue;"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_techtransferDelete' techtransfer.id %}"><i id="bt" class="trash outline icon" style="font-size:1.3vw; color:red;"></i> </a> </td>
             </tr>
             {% endfor %}
             </tbody>
