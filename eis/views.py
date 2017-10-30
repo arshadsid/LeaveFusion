@@ -21,7 +21,6 @@ from .forms import *
 # Main profile landing view
 def profile(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print (user)
     pf = user.unique_id
 
     form = ConfrenceForm()
@@ -297,7 +296,6 @@ def profile(request):
         y.append(r)
 
     pers = get_object_or_404(faculty_about, user = request.user)
-    print(pers.about)
 
     context = {'user': user,
                'pf':pf,
@@ -334,7 +332,6 @@ def persinfo(request):
     faculty.contact = request.POST.get('saveContact')
     faculty.about = request.POST.get('saveAbout')
     faculty.interest = request.POST.get('saveInt')
-    print(request.POST.get('saveInt'))
     faculty.education = request.POST.get('saveEdu')
     faculty.save()
     return redirect('eis:profile')
@@ -416,7 +413,6 @@ def emp_visitsDelete(request, pk):
 # Views for inserting fields in EIS
 def pg_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('pg_id')==None or request.POST.get('pg_id')==""):
@@ -424,25 +420,17 @@ def pg_insert(request):
     else:
         eis = get_object_or_404(emp_mtechphd_thesis, id=request.POST.get('pg_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
-    print("--------------ID-----------: "+request.POST.get('pg_id'))
     eis.title = request.POST.get('title')
-    print(eis.title)
     eis.s_year = request.POST.get('s_year')
-    print(eis.s_year)
     eis.supervisors = request.POST.get('sup')
-    print(eis.supervisors)
     eis.rollno = request.POST.get('roll')
-    print(eis.rollno)
     eis.s_name = request.POST.get('name')
-    print(eis.s_name)
 
     eis.save()
     return redirect('eis:profile')
 
 def phd_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('phd_id')==None or request.POST.get('phd_id')==""):
@@ -451,24 +439,17 @@ def phd_insert(request):
         eis = get_object_or_404(emp_mtechphd_thesis, id=request.POST.get('phd_id'))
     eis.pf_no = pf
     eis.degree_type = 2
-    print(eis.pf_no)
     eis.title = request.POST.get('title')
-    print(eis.title)
     eis.s_year = request.POST.get('s_year')
-    print(eis.s_year)
     eis.supervisors = request.POST.get('sup')
-    print(eis.supervisors)
     eis.rollno = request.POST.get('roll')
-    print(eis.rollno)
     eis.s_name = request.POST.get('name')
-    print(eis.s_name)
 
     eis.save()
     return redirect('eis:profile')
 
 def fvisit_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('fvisit_id')==None or request.POST.get('fvisit_id')==""):
@@ -477,22 +458,15 @@ def fvisit_insert(request):
         eis = get_object_or_404(emp_visits, id=request.POST.get('fvisit_id'))
     eis.pf_no = pf
     eis.v_type = 2
-    print(eis.pf_no)
     eis.country = request.POST.get('country').upper()
-    print(eis.country)
     eis.place = request.POST.get('place')
-    print(eis.place)
     eis.purpose = request.POST.get('purpose')
-    print(eis.purpose)
     try:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-        print(eis.start_date)
     except:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
-        print(eis.start_date)
     try:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-        print(eis.end_date)
     except:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
 
@@ -501,7 +475,6 @@ def fvisit_insert(request):
 
 def ivisit_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('ivisit_id')==None or request.POST.get('ivisit_id')==""):
@@ -510,22 +483,15 @@ def ivisit_insert(request):
         eis = get_object_or_404(emp_visits, id=request.POST.get('ivisit_id'))
     eis.pf_no = pf
     eis.v_type = 1
-    print(eis.pf_no)
     eis.country = request.POST.get('country')
-    print(eis.country)
     eis.place = request.POST.get('place')
-    print(eis.place)
     eis.purpose = request.POST.get('purpose')
-    print(eis.purpose)
     try:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-        print(eis.start_date)
     except:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
-        print(eis.start_date)
     try:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-        print(eis.end_date)
     except:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
 
@@ -534,7 +500,6 @@ def ivisit_insert(request):
 
 def journal_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('pub_id')==None or request.POST.get('pub_id')==""):
@@ -543,29 +508,17 @@ def journal_insert(request):
         eis = get_object_or_404(emp_research_papers, id=request.POST.get('pub_id'))
     eis.pf_no = pf
     eis.rtype = 'Journal'
-    print(eis.pf_no)
     eis.authors = request.POST.get('authors')
-    print('Authors: '+eis.authors)
     eis.title_paper = request.POST.get('title')
-    print('Title: '+eis.title_paper)
     eis.name_journal = request.POST.get('name')
-    print('Journal Name: '+eis.name_journal)
     eis.volume_no = request.POST.get('volume')
-    print('Volume: '+eis.volume_no)
     eis.page_no = request.POST.get('page')
-    print('PAge: '+eis.page_no)
     eis.is_sci = request.POST.get('sci')
-    print('SCI: '+eis.is_sci)
     eis.year = request.POST.get('year')
-    print('Year: '+eis.year)
     eis.doc_id = request.POST.get('doc_id')
-    print('DOC ID: '+str(eis.doc_id))
     eis.doc_description = request.POST.get('doc_description')
-    print('DOC Description: '+str(eis.doc_description))
     eis.status = request.POST.get('status')
-    print('Status: '+eis.status)
     eis.reference_number = request.POST.get('ref')
-    print('Refrence: '+eis.reference_number)
 
     if(request.POST.get('doi') != None and request.POST.get('doi') != '' and request.POST.get('doi') != 'None'):
         try:
@@ -593,7 +546,6 @@ def journal_insert(request):
 
 def confrence_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('con_id')==None or request.POST.get('con_id')==""):
@@ -602,33 +554,19 @@ def confrence_insert(request):
         eis = get_object_or_404(emp_research_papers, id=request.POST.get('con_id'))
     eis.pf_no = pf
     eis.rtype = 'Conference'
-    print(eis.pf_no)
     eis.authors = request.POST.get('authors')
-    print(eis.authors)
     eis.title_paper = request.POST.get('title')
-    print(eis.title_paper)
     eis.name_journal = request.POST.get('name')
-    print(eis.name_journal)
     eis.venue = request.POST.get('venue')
-    print(eis.venue)
     eis.volume_no = request.POST.get('volume')
-    print(eis.volume_no)
     eis.page_no = request.POST.get('page')
-    print(eis.page_no)
     eis.is_sci = request.POST.get('sci')
-    print(eis.is_sci)
     eis.issn_no = request.POST.get('isbn')
-    print(eis.issn_no)
     eis.year = request.POST.get('year')
-    print(eis.year)
     eis.doc_id = request.POST.get('doc_id')
-    print(eis.doc_id)
     eis.doc_description = request.POST.get('doc_description')
-    print(eis.doc_description)
     eis.status = request.POST.get('status')
-    print(eis.status)
     eis.reference_number = request.POST.get('reference_number')
-    print(eis.reference_number)
 
     if (request.POST.get('doi') != None and request.POST.get('doi') != '' and request.POST.get('doi') != 'None'):
         try:
@@ -655,7 +593,6 @@ def confrence_insert(request):
 
 def book_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('book_id')==None or request.POST.get('book_id')==""):
@@ -663,24 +600,17 @@ def book_insert(request):
     else:
         eis = get_object_or_404(emp_published_books, id=request.POST.get('book_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.p_type = request.POST.get('type')
-    print(eis.p_type)
     eis.title = request.POST.get('title')
-    print(eis.title)
     eis.publisher = request.POST.get('publisher')
-    print(eis.publisher)
     eis.pyear = request.POST.get('year')
-    print(eis.pyear)
     eis.co_authors = request.POST.get('co_authors')
-    print(eis.co_authors)
 
     eis.save()
     return redirect('eis:profile')
 
 def consym_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('fvisit_id')==None or request.POST.get('conf_id')==""):
@@ -688,7 +618,6 @@ def consym_insert(request):
     else:
         eis = get_object_or_404(emp_confrence_organised, id=request.POST.get('conf_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.name = request.POST.get('name')
     eis.venue = request.POST.get('venue')
     eis.role1 = request.POST.get('role')
@@ -704,22 +633,17 @@ def consym_insert(request):
         eis.role2 = "Any Other"
     try:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-        print(eis.start_date)
     except:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
-        print(eis.start_date)
     try:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-        print(eis.end_date)
     except:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
-    print("role: "+ eis.role1)
     eis.save()
     return redirect('eis:profile')
 
 def event_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('event_id')==None or request.POST.get('event_id')==""):
@@ -727,7 +651,6 @@ def event_insert(request):
     else:
         eis = get_object_or_404(emp_event_organized, id=request.POST.get('event_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.type = request.POST.get('type')
     if(eis.type == 'Any Other'):
         if(request.POST.get('other')!= None or request.POST.get('other') != ""):
@@ -738,22 +661,17 @@ def event_insert(request):
     eis.role = request.POST.get('role')
     try:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-        print(eis.start_date)
     except:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
-        print(eis.start_date)
     try:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-        print(eis.end_date)
     except:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
-    print(request.POST.get('role'))
     eis.save()
     return redirect('eis:profile')
 
 def award_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('ach_id')==None or request.POST.get('ach_id')==""):
@@ -761,7 +679,6 @@ def award_insert(request):
     else:
         eis = get_object_or_404(emp_achievement, id=request.POST.get('ach_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.a_type = request.POST.get('type')
     if(request.POST.get('a_day') != None and request.POST.get('a_day') != ""):
         eis.a_day = request.POST.get('a_day')
@@ -776,7 +693,6 @@ def award_insert(request):
 
 def talk_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('lec_id')==None or request.POST.get('lec_id')==""):
@@ -784,13 +700,11 @@ def talk_insert(request):
     else:
         eis = get_object_or_404(emp_expert_lectures, id=request.POST.get('lec_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.l_type = request.POST.get('type')
     eis.place = request.POST.get('place')
     eis.title = request.POST.get('title')
     try:
         eis.l_date = datetime.datetime.strptime(request.POST.get('l_date'), "%B %d, %Y")
-        print(eis.l_date)
     except:
         eis.l_date = datetime.datetime.strptime(request.POST.get('l_date'), "%b. %d, %Y")
 
@@ -799,7 +713,6 @@ def talk_insert(request):
 
 def chaired_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('ses_id')==None or request.POST.get('ses_id')==""):
@@ -807,19 +720,15 @@ def chaired_insert(request):
     else:
         eis = get_object_or_404(emp_session_chair, id=request.POST.get('ses_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.event = request.POST.get('event')
     eis.name = request.POST.get('name')
     eis.s_year = request.POST.get('s_year')
     try:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-        print(eis.start_date)
     except:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
-        print(eis.start_date)
     try:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
-        print(eis.end_date)
     except:
         eis.end_date = datetime.datetime.strptime(request.POST.get('end'), "%b. %d, %Y")
 
@@ -828,7 +737,6 @@ def chaired_insert(request):
 
 def keynote_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('keyid')==None or request.POST.get('keyid')==""):
@@ -836,7 +744,6 @@ def keynote_insert(request):
     else:
         eis = get_object_or_404(emp_keynote_address, id=request.POST.get('keyid'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.type = request.POST.get('type')
     eis.name = request.POST.get('name')
     eis.title = request.POST.get('title')
@@ -848,14 +755,12 @@ def keynote_insert(request):
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
     except:
         eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
-    print(eis.start_date)
 
     eis.save()
     return redirect('eis:profile')
 
 def project_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('project_id')==None or request.POST.get('project_id')==""):
@@ -863,7 +768,6 @@ def project_insert(request):
     else:
         eis = get_object_or_404(emp_research_projects, id=request.POST.get('project_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.pi = request.POST.get('pi')
     eis.co_pi = request.POST.get('co_pi')
     eis.title = request.POST.get('title')
@@ -875,7 +779,6 @@ def project_insert(request):
             eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
         except:
             eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
-            print(eis.start_date)
     if (request.POST.get('end') != None and request.POST.get('end') != '' and request.POST.get('end') != 'None'):
         try:
             eis.finish_date = datetime.datetime.strptime(request.POST.get('end'), "%B %d, %Y")
@@ -891,7 +794,6 @@ def project_insert(request):
 
 def consult_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('consultancy_id')==None or request.POST.get('consultancy_id')==""):
@@ -899,7 +801,6 @@ def consult_insert(request):
     else:
         eis = get_object_or_404(emp_consultancy_projects, id=request.POST.get('consultancy_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.consultants = request.POST.get('consultants')
     eis.client = request.POST.get('client')
     eis.title = request.POST.get('title')
@@ -907,7 +808,6 @@ def consult_insert(request):
     if (request.POST.get('start') != None and request.POST.get('start') != '' and request.POST.get('start') != 'None'):
         try:
             eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%B %d, %Y")
-            print(eis.start_date)
         except:
             eis.start_date = datetime.datetime.strptime(request.POST.get('start'), "%b. %d, %Y")
     if (request.POST.get('end') != None and request.POST.get('end') != '' and request.POST.get('end') != 'None'):
@@ -920,7 +820,6 @@ def consult_insert(request):
 
 def patent_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('patent_id')==None or request.POST.get('patent_id')==""):
@@ -928,7 +827,6 @@ def patent_insert(request):
     else:
         eis = get_object_or_404(emp_patents, id=request.POST.get('patent_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.p_no = request.POST.get('p_no')
     eis.earnings = request.POST.get('earnings')
     eis.title = request.POST.get('title')
@@ -939,7 +837,6 @@ def patent_insert(request):
 
 def transfer_insert(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print(user)
     pf = user.unique_id
 
     if (request.POST.get('tech_id')==None or request.POST.get('tech_id')==""):
@@ -947,7 +844,6 @@ def transfer_insert(request):
     else:
         eis = get_object_or_404(emp_techtransfer, id=request.POST.get('tech_id'))
     eis.pf_no = pf
-    print(eis.pf_no)
     eis.details = request.POST.get('details')
     eis.save()
     return redirect('eis:profile')
@@ -1681,7 +1577,6 @@ def render_to_pdf(template_src, context_dict):
 
 def generate_report(request):
     user = get_object_or_404(ExtraInfo, user=request.user)
-    print (user)
     pf = user.unique_id
     start = request.POST.get('syear')
     star_date = start+'-01-01'
@@ -1721,7 +1616,6 @@ def generate_report(request):
         consultancy = ""
         consultancy_req = "0"
 
-    print(request.POST.get('patents_select'))
     if (request.POST.get('patents_select') == "patents"):
         patents = emp_patents.objects.filter(pf_no=pf).filter(p_year__range=[start,end]).order_by('-date_entry')
         patents_req = "1"
@@ -2056,7 +1950,6 @@ def generate_report(request):
         events_req = "0"
 
     pers = get_object_or_404(faculty_about, user = request.user)
-    print(pers.about)
 
     context = {'user': user,
                'pf':pf,

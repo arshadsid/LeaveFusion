@@ -128,6 +128,23 @@
         <br>
         <h4 class="ui dividing header">Report:</h4>
 
+
+
+     <div class="ui pointing pagination menu">
+                {% for consymp in consymps %}
+                {% if forloop.counter0|divisibleby:10 %}
+                    <a class="{% if forloop.counter0 == 0 %}active {% endif %}item" data-tab="consymp-{{ forloop.counter0 }}">
+                        {% widthratio forloop.counter 10 1 %}
+                    </a>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+     {% for consymp in consymps %}
+
+            {% if forloop.counter0|divisibleby:10 %}
+            <div class="ui {% if forloop.counter0 == 0 %}active {% endif %} tab segment" data-tab="consymp-{{ forloop.counter0 }}">
+
         <table class="ui fixed sortable celled table" id="consymp">
             <thead>
             <tr>
@@ -146,9 +163,8 @@
                 <th style="width:10%">Action</th>
             </tr>
             </thead>
-
             <tbody>
-             {% for consymp in consymps %}
+            {% endif %}
             <tr>
                 <td id="conf{{ forloop.counter }}Z"><div style="display: none;">{{ consymp.id }}</div>{{ forloop.counter }}.</td>
                 {% if consymp.role1 == 'Any Other' %}
@@ -163,9 +179,9 @@
                 <td id="conf{{ forloop.counter }}C">{{ consymp.start_date }} - {{ consymp.end_date }}</td>
                 <td><a onclick="updateCONF({{ forloop.counter }})"><i class="edit icon" style="font-size:1.3vw;color:blue" id="bt"></i></a><br><a class="centered raised item" href="{% url 'eis:emp_confrence_organisedDelete' consymp.id %}"><i class="trash outline icon" style="font-size:1.3vw;color:red;" id="bt"></i> </a></td>
             </tr>
-            {% endfor %}
-            </tbody>
 
+            {% if forloop.counter0|add:1|divisibleby:10 %}
+             </tbody>
             <tfoot>
             <tr>
                 <th colspan="7">
@@ -182,8 +198,20 @@
                         </a>
                     </div>
                 </th>
-            </tr></tfoot>
+            </tr>
+            </tfoot>
         </table>
+            </div>
+            {% endif %}
+            {% endfor %}
+     {% if not consymps.all.count|divisibleby:10 %}
+     </tbody>
+        </table>
+            </div>
+ {% endif %}
+
+
+
 
     </div>
     {% endblock %}
