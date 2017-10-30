@@ -157,6 +157,9 @@
                     <br>
 
                     {% comment %}Leave Purpose starts here!{% endcomment %}
+		    {% for error in form.errors.as_data.purpose %}
+                        <p class='error'>{{ error }}</p>
+                    {% endfor %}
                     <div class="fields">
                         <div class="twelve wide field">
                             <label>Leave Purpose:</label>

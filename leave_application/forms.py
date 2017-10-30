@@ -63,7 +63,7 @@ class LeaveForm(forms.Form):
             # print(restricted_holidays)
             while tmp_date <= end_date:
                 if not restricted_holidays.filter(date=tmp_date):
-                    raise forms.ValidationError('Choose a restricted holiday')
+                    raise forms.ValidationError({'type_of_leave': ['Choose a restricted holiday']})
                 tmp_date = tmp_date + datetime.timedelta(days=1)
 
         valid_dates = self.not_dates_valid(self.user)
@@ -81,7 +81,7 @@ class LeaveForm(forms.Form):
             vac_start_date_win = datetime.date(today.year, 12, 1)
             vac_end_date_win = datetime.date(today.year, 12, 31)
             if not ((start_date >= vac_start_date_sum and end_date <= vac_end_date_sum) or (start_date >= vac_start_date_win and end_date <= vac_end_date_win)):
-                raise forms.ValidationError('Vacation Leave can only be taken in vacation time')
+                raise forms.ValidationError({'type_of_leave': ['Vacation Leave can only be taken in vacation time']})
 
     # def get_date_format(self, )
 
