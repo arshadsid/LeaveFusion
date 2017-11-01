@@ -107,7 +107,7 @@
 
 					                </td>
 
-									<td id="pub{{ forloop.counter }}D" ><center>{{ j.year }}</center></td>
+									<td id="pub{{ forloop.counter }}D" ><center>{{ j.a_month }}/{{ j.year }}</center></td>
 					               
 					            </tr>
 
@@ -157,7 +157,7 @@
 
 			                </td>
 
-							<td id="con{{ forloop.counter }}D" ><center>{{ c.year }}</center></td>
+							<td id="con{{ forloop.counter }}D" ><center>{{ c.a_month }}/{{ c.year }}</center></td>
 			                
 			            </tr>
 			            {% endfor %}
@@ -196,7 +196,7 @@
 		                <td id="books{{ forloop.counter }}A" style="padding:10px">{{ b.p_type }}</td>
 		                <td id="books{{ forloop.counter }}B" style="padding:10px">{{ b.title }}</td>
 		                <td id="books{{ forloop.counter }}C" style="padding:10px">{{ b.publisher }}</td>
-						<td id="books{{ forloop.counter }}D"><center>{{ b.pyear }}</center></td>
+						<td id="books{{ forloop.counter }}D"><center>{{ b.a_month }}/{{ b.pyear }}</center></td>
 		                <td id="books{{ forloop.counter }}E" style="padding:10px">{{ b.co_authors }}</td>
 		               
 		            </tr>
@@ -318,7 +318,7 @@
 						<td style=""><center>{{ forloop.counter }}.</center></td>
 		                <td id="phd{{ forloop.counter }}A" style="padding:10px;"> <b>Name: </b>{{ phd.s_name }}<br/><b>Roll No.: </b>{{ phd.rollno }}</td>
 		                <td id="phd{{ forloop.counter }}B" style="padding:10px;">{{ phd.title }}</td>
-						<td id="phd{{ forloop.counter }}C" style="padding:10px;"><center> {{ phd.s_year }}</center></td>
+						<td id="phd{{ forloop.counter }}C" style="padding:10px;"><center> {{ phd.a_month }}/{{ phd.s_year }}</center></td>
 		                <td id="phd{{ forloop.counter }}D" style="padding:10px;"> {{ phd.supervisors }}</td>
 		                 
 		            </tr>
@@ -358,7 +358,7 @@
 								<td style=""><center>{{ forloop.counter }}.</center></td>
 				                <td id="s{{ forloop.counter }}A" style="padding:10px;"><b>Name: </b>{{ mtech.s_name }}<br/><b>Roll No.: </b>{{ mtech.rollno }}</td>
 				                <td id="s{{ forloop.counter }}B" style="padding:10px;"> {{ mtech.title }}</td>
-								<td id="s{{ forloop.counter }}C" style=""> <center>{{ mtech.s_year }}</center></td>
+								<td id="s{{ forloop.counter }}C" style=""> <center>{{ mtech.a_month }}/{{ mtech.s_year }}</center></td>
 				                <td id="s{{ forloop.counter }}D" style="padding:10px;"> {{ mtech.supervisors }}</td>
 
 				            </tr>
@@ -431,7 +431,7 @@
 			                 <td id="patent{{ forloop.counter }}A" style="padding:10px;" >{{ patent.p_no }}</td>
 			                 <td id="patent{{ forloop.counter }}B"style="padding:10px;">{{ patent.title }}</td>
 			                 <td id="patent{{ forloop.counter }}C" style="padding:10px;">{{ patent.status }}</td>
-							<td id="patent{{ forloop.counter }}D" ><center>{{ patent.p_year }}</center></td>
+							<td id="patent{{ forloop.counter }}D" ><center>{{ patent.a_month }}/{{ patent.p_year }}</center></td>
 			                 <td id="patent{{ forloop.counter }}E" style="padding:10px;">{{ patent.earnings }}</td>
 			                
 			            </tr>
