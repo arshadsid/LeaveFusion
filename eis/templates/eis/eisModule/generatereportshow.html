@@ -101,6 +101,7 @@
 					                                    <b>Paper Reference No. :</b> {{ j.reference_number }} <br>
 					                                    <b>Date Of Submission :</b> {{ j.date_submission }}  <br>
 					                                    <b>Date of Publication :</b> {{ j.date_publication }}  <br>
+					                                    <b>Status             :</b> {{ j.status }}  <br>
 					                                    <b>SCI/SCIE        : </b>{{ j.is_sci }} <br>
 					                                    <b>Date of Issuance :</b>  {{ j.doi }}
 
@@ -117,7 +118,8 @@
 
                     <br><br>
 				{% endif %}
-		   {% if confrence_req == "1" %}
+
+		   {% if conference_req == "1" %}
                <div class="row">
 		                <div class="column" style="font-size:20px "><b>Conference Publication - </b></div>
 		         </div>
@@ -150,6 +152,7 @@
 			                    <b>Date of Submission :</b>  {{ c.date_submission }}<br>
 			                    <b>Date Of Acceptance :</b>  {{ c.date_acceptance }} <br>
 			                    <b>Date of Publication : </b> {{ c.date_publication }} <br>
+			                    <b>Status              :</b>  {{ c.status }} <br>
 			                    <b>Conference Date(s)   : </b> {{ c.start_date }} to {{ c.end_date }}<br>
 			                    <b>ISBN No.     :   </b> {{ c.issn_no }}
 
@@ -164,6 +167,7 @@
 
                   <br><br>
 			{% endif %}
+			
 		   {% if books_req == "1" %}
                 <div class="row">
 		                <div class="column" style="font-size:20px "><b>Books/Monographs/Book Chapters/Handlers- </b></div>
@@ -183,7 +187,7 @@
 
 		                <th class="" style="width: 8%;">Year</th>
 		                <th style="width:17%">Co-authors</th>
-		               <!--  <th class="" style="width: 8%;">Action</th> -->
+		               
 		            </tr>
 		            </thead>
 
@@ -191,11 +195,41 @@
 		            {% for b in books %}
 		            <tr>
 						<td ><center>{{ forloop.counter }}.</center></td>
-		                <td id="books{{ forloop.counter }}A" style="padding:10px">{{ b.p_type }}</td>
-		                <td id="books{{ forloop.counter }}B" style="padding:10px">{{ b.title }}</td>
-		                <td id="books{{ forloop.counter }}C" style="padding:10px">{{ b.publisher }}</td>
+		                <td id="books{{ forloop.counter }}A" style="padding:10px">{% if b.p_type %} 
+		                                                                            {{ b.p_type }}
+		                                                                           {% else %} 
+		                                                                              -
+                                                                                     {% endif %}
+
+
+		                 </td>
+		                <td id="books{{ forloop.counter }}B" style="padding:10px">{% if b.title %}
+		                                                                           {{ b.title }}
+		                                                                            {% else %} 
+		                                                                              -
+                                                                                     {% endif %}
+
+
+		                                                                          </td>
+
+		                <td id="books{{ forloop.counter }}C" style="padding:10px">{%if b.publisher %}
+		                                                                           {{ b.publisher }}
+		                                                                            {% else %} 
+		                                                                              -
+                                                                                     {% endif %}
+
+
+		                                                                         </td>
+
 						<td id="books{{ forloop.counter }}D"><center>{{ b.a_month }}/{{ b.pyear }}</center></td>
-		                <td id="books{{ forloop.counter }}E" style="padding:10px">{{ b.co_authors }}</td>
+
+		                <td id="books{{ forloop.counter }}E" style="padding:10px">{% if b.co_authors %}
+		                                                                            {{ b.co_authors }}
+
+                                                                                    {% else %}
+                                                                                        -
+                                                                                     {% endif %}
+		                </td>
 		               
 		            </tr>
 
@@ -233,7 +267,14 @@
 				<td ><center>{{ forloop.counter }}.</center></td>
                 <td id="research{{ forloop.counter }}A" style="padding:10px"> <b>PI: </b>{{ project.pi }} <br/> <b>Co-PI: </b>{{ project.co_pi }}</td>
                 <td id="research{{ forloop.counter }}B" style="padding:10px;">  {{ project.title }}</td>
-                <td id="research{{ forloop.counter }}C" style="padding:10px">  {{ project.funding_agency }}</td>
+
+                <td id="research{{ forloop.counter }}C" style="padding:10px">{% if project.funding_agency  %}
+                                                                                   {{ project.funding_agency  }}  
+                                                                                      {% else %}
+                                                                                        -
+                                                                                     {% endif %}
+
+                </td>
                 <td id="research{{ forloop.counter }}D" style="padding:10px">                     <b>Submission Date:</b> {{ project.date_submission }}  <br>
                    <b>Start Date:</b> {{ project.start_date }}  <br>
                   <b>Expected Finish Date:  </b>   {{ project.finish_date }}         <br>
@@ -274,10 +315,33 @@
 			            {% for consult in consultancy %}
 			            <tr id="r1">
 							<td><center>{{ forloop.counter }}.</center></td>
-			                 <td id="consultancy{{ forloop.counter }}A" style="padding:10px">{{ consult.consultants }}</td>
-			                 <td id="consultancy{{ forloop.counter }}B" style="padding:10px">{{ consult.title }}</td>
-			                 <td id="consultancy{{ forloop.counter }}C" style="padding:10px">{{ consult.client }}</td>
-			                 <td id="consultancy{{ forloop.counter }}D" style="padding:10px">{{ consult.financial_outlay }}</td>
+			                 <td id="consultancy{{ forloop.counter }}A" style="padding:10px">{% if consult.consultants %}
+			                                                                                  {{ consult.consultants }}
+			                                                                                    {% else %}
+                                                                                                  -
+                                                                                               {% endif %}
+			                 </td>
+			                 <td id="consultancy{{ forloop.counter }}B" style="padding:10px">{% if consult.title %}
+			                                                                                 {{ consult.title }}
+			                                                                                   {% else %}
+                                                                                                  -
+                                                                                               {% endif %}
+
+			                 </td>
+			                 <td id="consultancy{{ forloop.counter }}C" style="padding:10px">{% if consult.client  %}
+			                                                                                  {{ consult.client }}
+			                                                                                    {% else %}
+                                                                                                  -
+                                                                                               {% endif %}
+
+			                 </td>
+			                 <td id="consultancy{{ forloop.counter }}D" style="padding:10px"> {% if consult.financial_outlay %}
+			                                                                                   {{ consult.financial_outlay }}
+			                                                                                    {% else %}
+                                                                                                  -
+                                                                                               {% endif %}
+
+			                 </td>
 							<td id="consultancy{{ forloop.counter }}E" ><center>From: {{ consult.start_date }}<br/>To: {{ consult.end_date }}</center></td>
 			              
 			            </tr>
@@ -391,8 +455,21 @@
 			            {% for award in awards %}
 			            <tr>
 							<td style=""><center>{{ forloop.counter }}.</center></td>
-			                <td id="ach{{ forloop.counter }}A" style="padding:10px;"> {{ award.a_type }}</td>
-			                <td id="ach{{ forloop.counter }}B" style="padding:10px;">{{ award.details }}</td>
+			                <td id="ach{{ forloop.counter }}A" style="padding:10px;"> {% if award.a_type %}
+			                                                                           {{ award.a_type }}
+			                                                                            {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+
+			                </td>
+			                <td id="ach{{ forloop.counter }}B" style="padding:10px;"> {% if award.details %}
+			                                                                            {{ award.details }}
+			                                                                            {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+			                                                                            </td>
 							<td id="ach{{ forloop.counter }}C" style=""><center>{% if award.a_day %}{{ award.a_day }} / {% endif %}{% if award.a_month %}{{ award.a_month }} / {% endif %}{% if award.a_year %}{{ award.a_year }}{% endif %}</center></td>
 			               
 
@@ -426,11 +503,40 @@
 			            <tbody>{% for patent in patents %}
 			            <tr>
 							<td><center>{{ forloop.counter }}.</center></td>
-			                 <td id="patent{{ forloop.counter }}A" style="padding:10px;" >{{ patent.p_no }}</td>
-			                 <td id="patent{{ forloop.counter }}B"style="padding:10px;">{{ patent.title }}</td>
-			                 <td id="patent{{ forloop.counter }}C" style="padding:10px;">{{ patent.status }}</td>
+			                 <td id="patent{{ forloop.counter }}A" style="padding:10px;" > {% if patent.p_no %}  
+			                                                                                {{ patent.p_no }}
+			                                                                                  {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+			                                                                           </td>
+
+			                 <td id="patent{{ forloop.counter }}B" style="padding:10px;"> {% if patent.title %}  
+			                                                                               {{ patent.title }}
+			                                                                               {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+			                                                                               </td>
+
+			                 <td id="patent{{ forloop.counter }}C" style="padding:10px;"> {% if patent.status %}   
+			                                                                               {{ patent.status }}
+			                                                                                   {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+			                                                                               </td>
+
 							<td id="patent{{ forloop.counter }}D" ><center>{{ patent.a_month }}/{{ patent.p_year }}</center></td>
-			                 <td id="patent{{ forloop.counter }}E" style="padding:10px;">{{ patent.earnings }}</td>
+
+			                 <td id="patent{{ forloop.counter }}E" style="padding:10px;"> {% if  patent.earnings %}
+			                                                                               {{ patent.earnings }}
+			                                                                                 {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+
+			                                                                               </td>
 			                
 			            </tr>
 			            {% endfor %}
@@ -492,10 +598,39 @@
 		             {% for talk in talks %}
 		            <tr id="r1">
 						<td><center>{{ forloop.counter }}.</center></td>
-		                <td id="lec{{ forloop.counter }}A" style="padding:10px;">{{ talk.l_type }}</td>
-		                <td id="lec{{ forloop.counter }}B" style="padding:10px;">{{ talk.title }}</td>
-		                <td id="lec{{ forloop.counter }}C" style="padding:10px;">{{ talk.place }}</td>
-						<td id="lec{{ forloop.counter }}D"><center>{{ talk.l_date }}</center></td>
+		                <td id="lec{{ forloop.counter }}A" style="padding:10px;">  {% if talk.l_type  %}
+		                                                                            {{ talk.l_type }}
+		                                                                             {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+		                                                                            </td>
+
+		                <td id="lec{{ forloop.counter }}B" style="padding:10px;"> {% if talk.title  %}
+		                                                                            {{ talk.title }}
+		                                                                            {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+		                                                                           </td>
+
+		                <td id="lec{{ forloop.counter }}C" style="padding:10px;"> {% if  talk.place %}
+		                                                                           {{ talk.place }}
+		                                                                           {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+		                                                                        </td>
+
+						<td id="lec{{ forloop.counter }}D"><center> {% if  talk.l_date %}
+
+						                                              {{ talk.l_date }}
+
+						                                               {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+						                                              </center></td>
 
 
 		            </tr>
@@ -532,8 +667,21 @@
 		             {% for keynote in keynotes %}
 		            <tr>
 						<td><center>{{ forloop.counter }}.</center></td>
-						<td id="key{{ forloop.counter }}A" >{{ keynote.type }}</td>
-		                <td id="key{{ forloop.counter }}B"style="padding:10px;" >{{ keynote.title }}</td>
+						<td id="key{{ forloop.counter }}A" >  {% if keynote.type   %} 
+						                                         {{ keynote.type }}
+						                                          {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+						                                         </td>
+
+		                <td id="key{{ forloop.counter }}B" style="padding:10px;" > {% if keynote.title  %}
+		                                                                           {{ keynote.title }}
+		                                                                             {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+		                                                                        </td>
 		                <td id="key{{ forloop.counter }}C" style="padding:10px;"><b>Name:</b>{{ keynote.name }}<br/><b>Venue:</b>{{ keynote.venue }}<br/><b>Page No:</b>{{ keynote.page_no }}<br/><b>ISBN No.:</b>{{ keynote.isbn_no }}</td>
 						<td id="key{{ forloop.counter }}D" ><center>{{ keynote.start_date }}</center></td>
 		          
@@ -568,14 +716,42 @@
 				            <tr>
 								<td><center>{{ forloop.counter }}.</center></td>
 				                {% if consymp.role1 == 'Any Other' %}
-				                    <td style="padding:10px;">{{ consymp.role2 }}</td>
+				                    <td style="padding:10px;"> {% if consymp.role2 %}
+
+				                                                  {{ consymp.role2 }}
+				                                                    {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+				                                                  </td>
+
 				                {% elif consymp.role1 == 'Organised' %}
 				                    <td style="padding:10px;">{{ consymp.role1 }}:<br> {{ consymp.role2 }}</td>
 				                {% else %}
-				                <td style="padding:10px;">{{ consymp.role1 }}</td>
+				                <td style="padding:10px;"> {% if consymp.role1  %}
+  
+				                                             {{ consymp.role1 }}
+				                                              {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+				                                             </td>
 				                {% endif %}
-				                <td id="conf{{ forloop.counter }}A" style="padding:10px;">{{ consymp.name }}</td>
-				                <td id="conf{{ forloop.counter }}B" style="padding:10px;">{{ consymp.venue }}</td>
+				                <td id="conf{{ forloop.counter }}A" style="padding:10px;">{% if consymp.name  %}
+				                                                                         {{ consymp.name }}
+				                                                                          {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+				                                                                         </td>
+
+				                <td id="conf{{ forloop.counter }}B" style="padding:10px;">{% if consymp.venue %}
+				                                                                           {{ consymp.venue }}
+				                                                                            {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+				                                                                           </td>
+
 								<td id="conf{{ forloop.counter }}C"><center>{{ consymp.start_date }} - {{ consymp.end_date }}</center></td>
 				              
 				            </tr>
@@ -608,8 +784,19 @@
 		             {% for chair in chairs %}
 		            <tr>
 						<td><center>{{ forloop.counter }}.</center></td>
-		                <td class=""  id="session{{ forloop.counter }}A" style="padding:10px;">{{ chair.name }}</td>
-		                <td class="" id="session{{ forloop.counter }}B" style="padding:10px;">{{ chair.event }}</td>
+		                <td class=""  id="session{{ forloop.counter }}A" style="padding:10px;"> {% if chair.name %}
+		                                                                                         {{ chair.name }}
+		                                                                                            {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+		                                                                                         </td>
+		                <td class="" id="session{{ forloop.counter }}B" style="padding:10px;">{% if chair.event %}
+		                                                                                             {{ chair.event }}
+		                                                                                              {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+		                                                                                        </td>
 		                <td id="session{{ forloop.counter }}C" style="padding:10px;">{{ chair.start_date }} - {{ chair.end_date }}</td>
 		            
 
@@ -645,9 +832,22 @@
 		                <td id="fvisits{{ forloop.counter }}A"  style="padding:10px;">
 		                    <i class="{{ fvisit.country.lower }} flag"></i>{{ fvisit.countryfull }}
 		                </td>
-		                <td id="fvisits{{ forloop.counter }}B"  style="padding:10px;"> {{ fvisit.place }}</td>
+		                <td id="fvisits{{ forloop.counter }}B"  style="padding:10px;">{% if fvisit.place %}
+                                                                                       {{ fvisit.place }}
+                                                                                         {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+                                                                                       </td>
+
 						<td id="fvisits{{ forloop.counter }}C"  style=""><center> {{ fvisit.start_date }} - {{ fvisit.end_date }}</center></td>
-		                <td id="fvisits{{ forloop.counter }}D"  style="padding:10px;"> {{ fvisit.purpose }}</td>
+		                <td id="fvisits{{ forloop.counter }}D"  style="padding:10px;"> {% if fvisit.purpose %} 
+		                                                                                {{ fvisit.purpose }}
+		                                                                                 {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+		                                                                             </td>
 		              
 		            </tr>  {% endfor %}
 
@@ -679,9 +879,20 @@
 			            {% for ivisit in ivisits %}
 				            <tr id="r1">
 								<td><center>{{ forloop.counter }}.</center></td>
-				                <td id="ivisits{{ forloop.counter }}A" style="padding:10px;">{{ ivisit.place }}</td>
+				                <td id="ivisits{{ forloop.counter }}A" style="padding:10px;">{% if ivisit.place %}  
+				                                                                                 {{ ivisit.place }}
+                                                                                                    {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+				                                                                                 </td>
 								<td id="ivisits{{ forloop.counter }}B" ><center>{{ ivisit.start_date }} - {{ ivisit.end_date }}</center></td>
-				                <td id="ivisits{{ forloop.counter }}C" style="padding:10px;">{{ ivisit.purpose }}</td>
+				                <td id="ivisits{{ forloop.counter }}C" style="padding:10px;">{% if ivisit.purpose %} 
+				                                                                          {{ ivisit.purpose }}
+				                                                                           {% else %}
+                                                                                                 -
+                                                                                              {% endif %}
+
+				                                                                          </td>
 
 				       
 				            </tr>
@@ -696,7 +907,7 @@
 {% if events_req == "1" %}
 
 			             <div class="row" style="font-size:30px">
-		                   <div class="column"><b>Event Organised-  </b></div>
+		                   <div class="column" style="font-size:20px"><b>Event Organised-  </b></div>
 		                 </div>
                       <table class="ui fixed sortable celled table">
 			            <thead>
