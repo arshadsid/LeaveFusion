@@ -177,10 +177,14 @@
         <div class="ui pointing pagination menu">
                 {% for j in journal %}
                 {% if forloop.counter0|divisibleby:10 %}
-                    <span align="right>"><a class="{% if forloop.counter0 == 0 %}active {% endif %}item" data-tab="j-{{ forloop.counter0 }}">
+                    <span align="right"><a class="{% if forloop.counter0 == 0 %}active {% endif %}item" data-tab="j-{{ forloop.counter0 }}">
                         {% widthratio forloop.counter|add:10 10 1 %}
-     </a></span>
+
+     </a></span>{% if forloop.counter0|divisibleby:10 %}
+                        <br>
+                        {% endif %}
                 {% endif %}
+
                 {% endfor %}
 
             </div>
