@@ -295,12 +295,9 @@ def profile(request):
     y=[]
     for r in range(1995, (datetime.datetime.now().year + 1)):
         y.append(r)
-    try:
-        pers = get_object_or_404(faculty_about, user = request.user)
-    except:
-        pers = faculty_about()
-        pers.user = request.user
-        pers.save()
+
+    pers = get_object_or_404(faculty_about, user = request.user)
+
     context = {'user': user,
                'pf':pf,
                'journal':journal,
